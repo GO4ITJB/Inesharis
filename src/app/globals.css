@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased font-light;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-light;
+  }
+
+  h1 {
+    @apply text-4xl lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl lg:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl lg:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl lg:text-2xl;
+  }
+
+  a {
+    @apply transition-colors duration-300;
+  }
+
+  :root {
+    /* Wedding Color Palette */
+    --soft-greige: #D8D3CD;
+    --warm-dust-pink: #D6A9A3;
+    --blush-beige: #EADCD5;
+    --creamy-sand: #F2E7DE;
+    --warm-background: #F6EEE9;
+    --wedding-dark: #6B5B57;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium transition-all duration-200 ease-in-out;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+  }
+
+  /* Wedding-specific styles */
+  .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .elegent-text {
+    @apply tracking-wider font-light;
+  }
+
+  .wedding-button {
+    @apply px-8 py-3 text-sm tracking-wider uppercase font-medium transition-all duration-300 rounded-lg;
+  }
+
+  /* Wedding Color Classes */
+  .bg-wedding-pink {
+    background-color: var(--warm-dust-pink);
+  }
+
+  .bg-wedding-greige {
+    background-color: var(--soft-greige);
+  }
+
+  .bg-wedding-beige {
+    background-color: var(--blush-beige);
+  }
+
+  .bg-wedding-sand {
+    background-color: var(--creamy-sand);
+  }
+
+  .bg-warm-background {
+    background-color: var(--warm-background);
+  }
+
+  .text-wedding-pink {
+    color: var(--warm-dust-pink);
+  }
+
+  .text-wedding-greige {
+    color: var(--soft-greige);
+  }
+
+  .text-wedding-dark {
+    color: var(--wedding-dark);
+  }
+
+  .border-wedding-pink {
+    border-color: var(--warm-dust-pink);
+  }
+
+  .ring-wedding-pink {
+    --tw-ring-color: var(--warm-dust-pink);
+  }
+
+  /* Updated legacy color classes to use new palette */
+  .bg-wedding-gold {
+    background-color: var(--warm-dust-pink);
+  }
+
+  .text-wedding-gold {
+    color: var(--warm-dust-pink);
+  }
+
+  .text-wedding-charcoal {
+    color: var(--wedding-dark);
+  }
+
+  .bg-wedding-cream {
+    background-color: var(--creamy-sand);
+  }
+
+  .border-wedding-gold {
+    border-color: var(--warm-dust-pink);
+  }
+
+  .focus\:ring-wedding-gold:focus {
+    --tw-ring-color: var(--warm-dust-pink);
+  }
+
+  .focus\:border-wedding-gold:focus {
+    border-color: var(--warm-dust-pink);
+  }
+
+  /* Button Styles */
+  .wedding-button-primary {
+    @apply wedding-button bg-wedding-pink text-white inline-block text-center;
+  }
+
+  .wedding-button-secondary {
+    @apply wedding-button bg-wedding-greige text-wedding-dark inline-block text-center;
+  }
+
+  .wedding-button:hover {
+    @apply transform scale-105;
+  }
+
+  /* Form specific styles */
+  .form-container {
+    @apply bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg transition-colors;
+    @apply focus:ring-2 focus:ring-wedding-pink focus:border-wedding-pink;
+  }
+
+  .form-input.error {
+    @apply border-red-500;
+  }
+
+  .progress-bar {
+    @apply w-full bg-gray-200 h-1 rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full transition-all duration-500 ease-out;
+    background: linear-gradient(to right, var(--warm-dust-pink), var(--soft-greige));
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+} 
+
+.c-schedule__item.c-schedule__item--repeating-2 .c-schedule__item__svg {
+  margin-right: 6rem;
+}
+
+.c-schedule__item.c-schedule__item--last .c-schedule__item__svg {
+  margin-right: 15rem;
+}
+
+.c-schedule__item.c-schedule__item--last-2 .c-schedule__item__svg {
+  margin-right: 6rem;
+}
+
+.c-schedule__item.c-schedule__item--repeating .pg-schedule-item__content {
+  margin-left: 2rem;
+}
