@@ -13,24 +13,31 @@ export default function Hero() {
     >
       {/* Video Background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Desktop Video */}
-        <video 
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hidden md:block absolute w-full h-full object-cover"
-          style={{ pointerEvents: 'none' }}
-        >
-          <source src="/sarajevo-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {/* Desktop YouTube Video */}
+        <div className="hidden md:block absolute inset-0 overflow-hidden">
+          <iframe
+            src="https://www.youtube.com/embed/0hLBjYAhUzE?autoplay=1&mute=1&loop=1&playlist=0hLBjYAhUzE&start=1620&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
+            title="Wedding Video Desktop"
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            className="absolute w-full h-full object-cover"
+            style={{ 
+              pointerEvents: 'none',
+              width: '100vw',
+              height: '100vh',
+              transform: 'scale(1.2)',
+              transformOrigin: 'center center',
+              objectFit: 'cover'
+            }}
+          ></iframe>
+        </div>
 
         {/* Mobile YouTube Video */}
         <div className="md:hidden absolute inset-0 overflow-hidden">
           <iframe
             src="https://www.youtube.com/embed/jEcnNoHbnMQ?autoplay=1&mute=1&loop=1&playlist=jEcnNoHbnMQ&start=3&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
-            title="Wedding Video"
+            title="Wedding Video Mobile"
             frameBorder="0"
             allow="autoplay; encrypted-media"
             allowFullScreen
