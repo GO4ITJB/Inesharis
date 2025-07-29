@@ -2,10 +2,17 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import LanguageSelector from './LanguageSelector'
+import { translations, Language } from '@/lib/translations'
 
-export default function Header() {
+interface HeaderProps {
+  language?: Language
+}
+
+export default function Header({ language = 'sv' }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const t = translations[language]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,98 +36,98 @@ export default function Header() {
         : 'bg-transparent'
     }`}>
       <nav className="container mx-auto px-6">
-        <div className="flex justify-center items-center py-6 relative">
+        <div className="flex justify-between items-center py-6 relative">
           {/* Logo/Site Title */}
-          <Link href="/" className={`absolute left-0 text-3xl font-script text-shadow transition-colors duration-300 ${
+          <Link href={language === 'ba' ? '/ba' : '/'} className={`text-3xl font-script text-shadow transition-colors duration-300 ${
             isScrolled ? 'text-wedding-dark' : 'text-white'
           }`}>
             Ines & Haris
           </Link>
           
           {/* Navigation Links - Desktop (Centered) */}
-          <div className="hidden md:flex space-x-8">
+          <div className="menu-desktop menu-none hidden md:flex space-x-8 absolute left-1/2 transform -translate-x-1/2">
             <a href="#our-story" className={`text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
               isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
             }`}>
-              Vår Historia
+              {t.ourStory}
             </a>
             <a href="#run-of-show" className={`text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
               isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
             }`}>
-              Program
+              {t.programNav}
             </a>
             <a href="#venue-accommodations" className={`text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
               isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
             }`}>
-              Plats & Boende
+              {t.venueAccommodation}
             </a>
-            <Link href="/qa" className={`text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
+            <Link href={language === 'ba' ? '/ba/qa' : '/qa'} className={`text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
               isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
             }`}>
-              Frågor & Svar
+              {t.questionsAnswers}
             </Link>
-            <Link href="/rsvp" className={`text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
+            <Link href={language === 'ba' ? '/ba/rsvp' : '/rsvp'} className={`text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
               isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
             }`}>
-              OSA
+              {t.rsvp}
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <button 
-            className={`md:hidden absolute right-0 transition-colors duration-300 ${
-              isScrolled ? 'text-wedding-dark' : 'text-white'
-            }`}
-            onClick={toggleMobileMenu}
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+          {/* Right side: Language Selector + Mobile Menu */}
+          <div className="flex items-center space-x-4">
+            {/* Language Selector */}
+            <LanguageSelector />
+            
+            {/* Mobile menu button */}
+            <button 
+              className={`menu-none md:hidden transition-colors duration-300 ${
+                isScrolled ? 'text-wedding-dark' : 'text-white'
+              }`}
+              onClick={toggleMobileMenu}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-warm-background/95 backdrop-blur-sm rounded-lg mt-4 p-6 shadow-lg">
-            <div className="flex flex-col space-y-4">
-              <a 
-                href="#our-story" 
-                className="text-wedding-dark text-sm tracking-[0.1em] uppercase font-light py-2 hover:text-wedding-pink transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Vår Historia
+          <div className={`md:hidden absolute top-full left-0 right-0 ${
+            isScrolled 
+              ? 'bg-warm-background/95 backdrop-blur-sm shadow-lg' 
+              : 'bg-black/80 backdrop-blur-sm'
+          }`}>
+            <div className="px-6 py-4 space-y-4">
+              <a href="#our-story" className={`block text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
+                isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
+              }`} onClick={toggleMobileMenu}>
+                {t.ourStory}
               </a>
-              <a 
-                href="#run-of-show" 
-                className="text-wedding-dark text-sm tracking-[0.1em] uppercase font-light py-2 hover:text-wedding-pink transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Program
+              <a href="#run-of-show" className={`block text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
+                isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
+              }`} onClick={toggleMobileMenu}>
+                {t.programNav}
               </a>
-              <a 
-                href="#venue-accommodations" 
-                className="text-wedding-dark text-sm tracking-[0.1em] uppercase font-light py-2 hover:text-wedding-pink transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Plats & Boende
+              <a href="#venue-accommodations" className={`block text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
+                isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
+              }`} onClick={toggleMobileMenu}>
+                {t.venueAccommodation}
               </a>
-              <Link 
-                href="/qa" 
-                className="text-wedding-dark text-sm tracking-[0.1em] uppercase font-light py-2 hover:text-wedding-pink transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Frågor & Svar
+              <Link href={language === 'ba' ? '/ba/qa' : '/qa'} className={`block text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
+                isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
+              }`} onClick={toggleMobileMenu}>
+                {t.questionsAnswers}
               </Link>
-              <Link 
-                href="/rsvp" 
-                className="border border-wedding-pink text-wedding-pink px-4 py-3 text-sm tracking-[0.1em] uppercase font-light text-center mt-4 hover:bg-wedding-pink hover:text-white transition-all"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                OSA SENAST 1/8 →
+              <Link href={language === 'ba' ? '/ba/rsvp' : '/rsvp'} className={`block text-sm tracking-[0.1em] uppercase font-light transition-colors duration-300 ${
+                isScrolled ? 'text-wedding-dark hover:text-wedding-pink' : 'text-white'
+              }`} onClick={toggleMobileMenu}>
+                {t.rsvp}
               </Link>
             </div>
           </div>

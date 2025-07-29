@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormData } from '../RSVPForm'
+import { translations, Language } from '@/lib/translations'
 
 interface AttendanceStepProps {
   formData: FormData
@@ -10,13 +11,15 @@ interface AttendanceStepProps {
   isLastStep: boolean
   currentStep: number
   totalSteps: number
+  language?: Language
 }
 
 export default function AttendanceStep({ 
   formData, 
   updateFormData, 
   nextStep, 
-  prevStep 
+  prevStep,
+  language = 'sv' 
 }: AttendanceStepProps) {
   const handleNext = () => {
     // Only proceed to celebration step if attending reception
@@ -34,10 +37,13 @@ export default function AttendanceStep({
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-script text-wedding-dark mb-2">
-          Kommer du?
+          {language === 'sv' ? 'Kommer du?' : 'Hoćete li doći?'}
         </h2>
         <p className="text-gray-600 font-light">
-          Vi hoppas verkligen att du kan vara med på vår stora dag
+          {language === 'sv' 
+            ? 'Vi hoppas verkligen att du kan vara med på vår stora dag'
+            : 'Nadamo se da možete biti s nama na našem velikom danu'
+          }
         </p>
       </div>
 
@@ -46,7 +52,10 @@ export default function AttendanceStep({
         {/* Reception Attendance */}
         <div>
           <h3 className="text-xl font-medium text-wedding-dark mb-4 text-center">
-            Kommer du på bröllopet 18:00 på Hills?
+            {language === 'sv' 
+              ? 'Kommer du på bröllopet 18:00 på Hills?'
+              : 'Hoćete li doći na svadbu u 18:00 u Hills?'
+            }
           </h3>
           <div className="flex space-x-4">
             <button
@@ -58,7 +67,9 @@ export default function AttendanceStep({
                   : 'bg-white text-gray-700 border-gray-300 hover:border-wedding-pink hover:bg-wedding-sand/20'
               }`}
             >
-              <div className="text-lg font-medium">Ja, jag kommer!</div>
+              <div className="text-lg font-medium">
+                {language === 'sv' ? 'Ja, jag kommer!' : 'Da, dolazim!'}
+              </div>
               <div className="text-sm opacity-75">Hills • 18:00</div>
             </button>
             <button
@@ -70,8 +81,12 @@ export default function AttendanceStep({
                   : 'bg-white text-gray-700 border-gray-300 hover:border-wedding-greige hover:bg-wedding-sand/20'
               }`}
             >
-              <div className="text-lg font-medium">Nej tyvärr</div>
-              <div className="text-sm opacity-75">Kan inte delta</div>
+              <div className="text-lg font-medium">
+                {language === 'sv' ? 'Nej tyvärr' : 'Ne, na žalost'}
+              </div>
+              <div className="text-sm opacity-75">
+                {language === 'sv' ? 'Kan inte delta' : 'Ne mogu doći'}
+              </div>
             </button>
           </div>
         </div>
@@ -80,7 +95,10 @@ export default function AttendanceStep({
         {formData.attendingReception && (
           <div className="animate-fadeIn">
             <h3 className="text-xl font-medium text-wedding-dark mb-4 text-center">
-              Kommer du till vigseln i Vijecnica 14:00?
+              {language === 'sv' 
+                ? 'Kommer du till vigseln i Vijecnica 14:00?'
+                : 'Hoćete li doći na vjenčanje u Vijećnicu u 14:00?'
+              }
             </h3>
             <div className="flex space-x-4">
               <button
@@ -92,7 +110,9 @@ export default function AttendanceStep({
                     : 'bg-white text-gray-700 border-gray-300 hover:border-wedding-pink hover:bg-wedding-sand/20'
                 }`}
               >
-                <div className="text-lg font-medium">Ja!</div>
+                <div className="text-lg font-medium">
+                  {language === 'sv' ? 'Ja!' : 'Da!'}
+                </div>
                 <div className="text-sm opacity-75">Vijecnica • 14:00</div>
               </button>
               <button
@@ -104,8 +124,12 @@ export default function AttendanceStep({
                     : 'bg-white text-gray-700 border-gray-300 hover:border-wedding-greige hover:bg-wedding-sand/20'
                 }`}
               >
-                <div className="text-lg font-medium">Bara bröllopet</div>
-                <div className="text-sm opacity-75">Kommer till Hills</div>
+                <div className="text-lg font-medium">
+                  {language === 'sv' ? 'Bara bröllopet' : 'Samo svadba'}
+                </div>
+                <div className="text-sm opacity-75">
+                  {language === 'sv' ? 'Kommer till Hills' : 'Dolazim u Hills'}
+                </div>
               </button>
             </div>
           </div>
@@ -115,7 +139,10 @@ export default function AttendanceStep({
         {!formData.attendingReception && (
           <div className="text-center p-6 bg-wedding-sand/50 rounded-xl border border-wedding-greige/30">
             <p className="text-wedding-dark font-light">
-              Vi förstår! Tack för att du lät oss veta. Vi kommer att sakna dig. ❤️
+              {language === 'sv' 
+                ? 'Vi förstår! Tack för att du lät oss veta. Vi kommer att sakna dig. ❤️'
+                : 'Razumijemo! Hvala što ste nam javili. Nedostajat ćete nam. ❤️'
+              }
             </p>
           </div>
         )}
@@ -127,14 +154,17 @@ export default function AttendanceStep({
           onClick={prevStep}
           className="px-6 py-3 text-wedding-dark hover:text-wedding-pink transition-colors"
         >
-          ← Tillbaka
+          {language === 'sv' ? '← Tillbaka' : '← Nazad'}
         </button>
         <button
           onClick={handleNext}
           className="wedding-button-primary disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={formData.attendingReception === undefined}
         >
-          {formData.attendingReception ? 'Nästa' : 'Skicka RSVP'}
+          {formData.attendingReception 
+            ? (language === 'sv' ? 'Nästa' : 'Sljedeće')
+            : (language === 'sv' ? 'Skicka RSVP' : 'Pošalji RSVP')
+          }
         </button>
       </div>
     </div>

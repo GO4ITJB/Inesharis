@@ -8,12 +8,12 @@ import VenueAccommodations from '@/components/VenueAccommodations'
 export default function Home() {
   return (
     <>
-      <Header />
+      <Header language="sv" />
       <main>
-        <Hero />
-        <OurStory />
+        <Hero language="sv" />
+        {/* <OurStory />
         <RunOfShow />
-        <VenueAccommodations />
+        <VenueAccommodations /> */}
       </main>
     </>
   )

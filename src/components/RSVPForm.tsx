@@ -6,6 +6,7 @@ import GuestInfoStep from './form-steps/GuestInfoStep'
 import AttendanceStep from './form-steps/AttendanceStep'
 import CelebrationStep from './form-steps/CelebrationStep'
 import ConfirmationStep from './form-steps/ConfirmationStep'
+import { Language } from '@/lib/translations'
 
 export interface FormData {
   // Guest Information
@@ -25,7 +26,11 @@ export interface FormData {
   messageToCouple: string
 }
 
-export default function RSVPForm() {
+interface RSVPFormProps {
+  language?: Language
+}
+
+export default function RSVPForm({ language = 'sv' }: RSVPFormProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -64,6 +69,22 @@ export default function RSVPForm() {
     }
   }
 
+  const resetForm = () => {
+    setCurrentStep(0)
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      bringingGuest: false,
+      guestName: '',
+      attendingReception: false,
+      attendingCeremony: false,
+      songRequests: ['', '', ''],
+      dietaryRequirements: '',
+      messageToCouple: ''
+    })
+  }
+
   const getCurrentStepComponent = () => {
     const StepComponent = steps[currentStep].component
     return (
@@ -72,10 +93,12 @@ export default function RSVPForm() {
         updateFormData={updateFormData}
         nextStep={nextStep}
         prevStep={prevStep}
+        resetForm={resetForm}
         isFirstStep={currentStep === 0}
         isLastStep={currentStep === steps.length - 1}
         currentStep={currentStep}
         totalSteps={steps.length}
+        language={language}
       />
     )
   }
@@ -93,7 +116,7 @@ export default function RSVPForm() {
               />
             </div>
             <div className="text-center mt-2 text-sm text-wedding-dark font-light">
-              Steg {currentStep} av {steps.length - 1}
+              {language === 'sv' ? `Steg ${currentStep} av ${steps.length - 1}` : `Korak ${currentStep} od ${steps.length - 1}`}
             </div>
           </div>
         )}

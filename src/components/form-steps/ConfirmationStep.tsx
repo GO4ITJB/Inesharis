@@ -1,18 +1,24 @@
 import React, { useState } from 'react'
 import { FormData } from '../RSVPForm'
+import { translations, Language } from '@/lib/translations'
 
 interface ConfirmationStepProps {
   formData: FormData
+  updateFormData: (data: Partial<FormData>) => void
+  nextStep: () => void
   prevStep: () => void
+  resetForm: () => void
   isFirstStep: boolean
   isLastStep: boolean
   currentStep: number
   totalSteps: number
+  language?: Language
 }
 
 export default function ConfirmationStep({ 
   formData, 
-  prevStep 
+  prevStep,
+  language = 'sv' 
 }: ConfirmationStepProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -41,7 +47,10 @@ export default function ConfirmationStep({
       setIsSubmitted(true)
     } catch (err) {
       console.error('Error submitting RSVP:', err)
-      setError('Failed to submit RSVP. Please try again.')
+      setError(language === 'sv' 
+        ? 'Failed to submit RSVP. Please try again.'
+        : 'Neuspješno slanje RSVP-a. Molimo pokušajte ponovo.'
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -57,7 +66,7 @@ export default function ConfirmationStep({
             </svg>
           </div>
           <h2 className="text-4xl font-script text-wedding-dark mb-4">
-            Något gick fel
+            {language === 'sv' ? 'Något gick fel' : 'Nešto je pošlo po zlu'}
           </h2>
           <p className="text-xl text-gray-600 font-light leading-relaxed mb-6">
             {error}
@@ -66,7 +75,7 @@ export default function ConfirmationStep({
             onClick={() => setError(null)}
             className="wedding-button-primary"
           >
-            Försök igen
+            {language === 'sv' ? 'Försök igen' : 'Pokušaj ponovo'}
           </button>
         </div>
       </div>
@@ -83,16 +92,25 @@ export default function ConfirmationStep({
             </svg>
           </div>
           <h2 className="text-4xl font-script text-wedding-dark mb-4">
-            Tack så mycket!
+            {language === 'sv' ? 'Tack så mycket!' : 'Hvala vam puno!'}
           </h2>
           <p className="text-xl text-wedding-dark font-light leading-relaxed mb-2">
-            Din RSVP har skickats till Ines & Haris
+            {language === 'sv' 
+              ? 'Din RSVP har skickats till Ines & Haris'
+              : 'Vaš RSVP je poslat Ines & Haris-u'
+            }
           </p>
           <p className="text-gray-600 font-light mb-8">
-            Du kommer att få en bekräftelse via e-post inom kort.
+            {language === 'sv' 
+              ? 'Du kommer att få en bekräftelse via e-post inom kort.'
+              : 'Uskoro ćete dobiti potvrdu na e-mail.'
+            }
           </p>
           <p className="text-lg text-wedding-pink font-medium">
-            Vi ser fram emot att fira med dig! 🎉
+            {language === 'sv' 
+              ? 'Vi ser fram emot att fira med dig! 🎉'
+              : 'Radujemo se proslavi s vama! 🎉'
+            }
           </p>
         </div>
       </div>
@@ -104,10 +122,13 @@ export default function ConfirmationStep({
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-script text-wedding-dark mb-2">
-          Bekräfta din RSVP
+          {language === 'sv' ? 'Bekräfta din RSVP' : 'Potvrdite svoj RSVP'}
         </h2>
         <p className="text-gray-600 font-light">
-          Kontrollera att allt stämmer innan du skickar
+          {language === 'sv' 
+            ? 'Kontrollera att allt stämmer innan du skickar'
+            : 'Provjerite da li je sve tačno prije slanja'
+          }
         </p>
       </div>
 
@@ -115,10 +136,12 @@ export default function ConfirmationStep({
       <div className="bg-white/50 backdrop-blur-sm rounded-xl p-8 mb-8">
         {/* Guest Information */}
         <div className="mb-6">
-          <h3 className="font-medium text-wedding-dark mb-4">Gästinformation</h3>
+          <h3 className="font-medium text-wedding-dark mb-4">
+            {language === 'sv' ? 'Gästinformation' : 'Informacije o gostu'}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-gray-600">Namn:</span>
+              <span className="text-gray-600">{language === 'sv' ? 'Namn:' : 'Ime:'}</span>
               <span className="ml-2 font-medium">{formData.name}</span>
             </div>
             <div>
@@ -126,38 +149,54 @@ export default function ConfirmationStep({
               <span className="ml-2 font-medium">{formData.email}</span>
             </div>
             <div>
-              <span className="text-gray-600">Telefon:</span>
-              <span className="ml-2 font-medium">{formData.phone || 'Ej angiven'}</span>
+              <span className="text-gray-600">{language === 'sv' ? 'Telefon:' : 'Telefon:'}</span>
+              <span className="ml-2 font-medium">{formData.phone || (language === 'sv' ? 'Ej angiven' : 'Nije navedeno')}</span>
             </div>
             <div>
-              <span className="text-gray-600">Medföljande gäst:</span>
-              <span className="ml-2 font-medium">{formData.bringingGuest ? formData.guestName : 'Nej'}</span>
+              <span className="text-gray-600">
+                {language === 'sv' ? 'Medföljande gäst:' : 'Gost koji dolazi:'}
+              </span>
+              <span className="ml-2 font-medium">
+                {formData.bringingGuest ? formData.guestName : (language === 'sv' ? 'Nej' : 'Ne')}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Attendance */}
         <div className="mb-6">
-          <h3 className="font-medium text-wedding-dark mb-4">Närvaro</h3>
+          <h3 className="font-medium text-wedding-dark mb-4">
+            {language === 'sv' ? 'Närvaro' : 'Prisustvo'}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div className="flex items-center">
-              <span className="text-gray-600">Bröllop (Hills 18:00):</span>
+              <span className="text-gray-600">
+                {language === 'sv' ? 'Bröllop (Hills 18:00):' : 'Svadba (Hills 18:00):'}
+              </span>
               <span className={`ml-2 px-2 py-1 rounded-full text-xs ${
                 formData.attendingReception 
                   ? 'bg-green-100 text-green-800' 
                   : 'bg-gray-100 text-gray-600'
               }`}>
-                {formData.attendingReception ? '✓ Ja, kommer' : '✗ Kommer ej'}
+                {formData.attendingReception 
+                  ? (language === 'sv' ? '✓ Ja, kommer' : '✓ Da, dolazim')
+                  : (language === 'sv' ? '✗ Kommer ej' : '✗ Ne dolazim')
+                }
               </span>
             </div>
             <div className="flex items-center">
-              <span className="text-gray-600">Vigsel (Vijecnica 14:00):</span>
+              <span className="text-gray-600">
+                {language === 'sv' ? 'Vigsel (Vijecnica 14:00):' : 'Vjenčanje (Vijecnica 14:00):'}
+              </span>
               <span className={`ml-2 px-2 py-1 rounded-full text-xs ${
                 formData.attendingCeremony 
                   ? 'bg-green-100 text-green-800' 
                   : 'bg-gray-100 text-gray-600'
               }`}>
-                {formData.attendingCeremony ? '✓ Ja, kommer' : '○ Bara bröllop'}
+                {formData.attendingCeremony 
+                  ? (language === 'sv' ? '✓ Ja, kommer' : '✓ Da, dolazim')
+                  : (language === 'sv' ? '○ Bara bröllop' : '○ Samo svadba')
+                }
               </span>
             </div>
           </div>
@@ -166,11 +205,15 @@ export default function ConfirmationStep({
         {/* Additional Information */}
         {(formData.songRequests?.some(song => song) || formData.dietaryRequirements || formData.messageToCouple) && (
           <div>
-            <h3 className="font-medium text-wedding-dark mb-4">Ytterligare information</h3>
+            <h3 className="font-medium text-wedding-dark mb-4">
+              {language === 'sv' ? 'Ytterligare information' : 'Dodatne informacije'}
+            </h3>
             <div className="space-y-3">
               {formData.songRequests.some(song => song.trim()) && (
                 <div>
-                  <span className="font-medium">Låtönskningar:</span>
+                  <span className="font-medium">
+                    {language === 'sv' ? 'Låtönskningar:' : 'Zahtjevi za pjesme:'}
+                  </span>
                   <ul className="list-disc list-inside mt-1 space-y-1">
                     {formData.songRequests.filter(song => song.trim()).map((song, index) => (
                       <li key={index} className="text-gray-700">{song}</li>
@@ -181,13 +224,17 @@ export default function ConfirmationStep({
               
               {formData.dietaryRequirements && (
                 <p>
-                  <span className="font-medium">Specialkost:</span> {formData.dietaryRequirements}
+                  <span className="font-medium">
+                    {language === 'sv' ? 'Specialkost:' : 'Posebna ishrana:'}
+                  </span> {formData.dietaryRequirements}
                 </p>
               )}
               
               {formData.messageToCouple && (
                 <div>
-                  <span className="font-medium">Meddelande:</span>
+                  <span className="font-medium">
+                    {language === 'sv' ? 'Meddelande:' : 'Poruka:'}
+                  </span>
                   <p className="mt-1 italic text-gray-700">"{formData.messageToCouple}"</p>
                 </div>
               )}
@@ -203,7 +250,7 @@ export default function ConfirmationStep({
           className="px-6 py-3 text-wedding-dark hover:text-wedding-pink transition-colors"
           disabled={isSubmitting}
         >
-          ← Tillbaka
+          {language === 'sv' ? '← Tillbaka' : '← Nazad'}
         </button>
         <button
           onClick={handleSubmit}
@@ -216,10 +263,10 @@ export default function ConfirmationStep({
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Skickar...
+              {language === 'sv' ? 'Skickar...' : 'Šalje se...'}
             </>
           ) : (
-            'Skicka RSVP'
+            language === 'sv' ? 'Skicka RSVP' : 'Pošalji RSVP'
           )}
         </button>
       </div>

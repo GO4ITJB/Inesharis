@@ -3,9 +3,15 @@
 import React from 'react'
 import Link from 'next/link'
 import CountdownTimer from './CountdownTimer'
+import { translations, Language } from '@/lib/translations'
 
-export default function Hero() {
-  const weddingDate = new Date('2026-07-25T18:00:00')
+interface HeroProps {
+  language?: Language
+}
+
+export default function Hero({ language = 'sv' }: HeroProps) {
+  const weddingDate = new Date('2026-07-25T15:00:00')
+  const t = translations[language]
 
   return (
     <section 
@@ -55,50 +61,52 @@ export default function Hero() {
       </div>
 
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/40 z-5"></div>
 
       {/* Content */}
       <div className="relative z-10 px-4">
         {/* Save Our Date */}
         <div className="mb-8">
           <p className="text-sm tracking-widest uppercase mb-4 font-light text-shadow">
-            Spara Datumet
+            {t.saveTheDate}
           </p>
         </div>
 
         {/* Main Title */}
         <div className="mb-8">
           <h1 className="text-6xl md:text-8xl font-script mb-6 text-shadow-lg">
-            Vi Ska
-          </h1>
-          <h1 className="text-6xl md:text-8xl font-script text-shadow-lg">
-            Gifta Oss!
+            {t.weAreGettingMarried}
           </h1>
         </div>
 
         {/* Wedding Date */}
-        <div className="mb-12">
-          <p className="text-lg tracking-wider uppercase font-light text-shadow">
-            Lördag, 21 Augusti 2026
+        <div className="mb-8">
+          <p className="text-xl md:text-2xl font-light tracking-wide text-shadow">
+            {t.weddingDate}
           </p>
         </div>
 
-        {/* Call to Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-16">
-          <Link href="/rsvp" className="wedding-button-primary">
-            OSA NU
-            <span className="ml-2 text-xs">→</span>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link 
+            href={language === 'ba' ? '/ba/rsvp' : '/rsvp'}
+            className="wedding-button-primary px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all duration-300 hover:scale-105"
+          >
+            {t.rsvpNow} →
           </Link>
-          <button className="wedding-button-secondary">
-            BOKA HOTELL
-            <span className="ml-2 text-xs">→</span>
-          </button>
+          
+          <a 
+            href="#venue-accommodations"
+            className="wedding-button-secondary px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all duration-300 hover:scale-105"
+          >
+            {t.bookHotel}
+          </a>
         </div>
       </div>
 
       {/* Countdown Timer */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CountdownTimer targetDate={weddingDate} />
+        <CountdownTimer targetDate={weddingDate} language={language} />
       </div>
     </section>
   )

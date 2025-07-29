@@ -1,21 +1,15 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { translations, Language } from '@/lib/translations'
 
 interface CountdownTimerProps {
   targetDate: Date
+  language?: Language
 }
 
-interface TimeLeft {
-  months: number
-  days: number
-  hours: number
-  minutes: number
-  seconds: number
-}
-
-export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+export default function CountdownTimer({ targetDate, language = 'sv' }: CountdownTimerProps) {
+  const [timeLeft, setTimeLeft] = useState({
     months: 0,
     days: 0,
     hours: 0,
@@ -23,23 +17,45 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
     seconds: 0
   })
 
+  const t = translations[language]
+
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const difference = +targetDate - +new Date()
+      const now = new Date()
+      const target = new Date(targetDate)
       
-      if (difference > 0) {
-        const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30))
-        const days = Math.floor((difference / (1000 * 60 * 60 * 24)) % 30)
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
-        const minutes = Math.floor((difference / 1000 / 60) % 60)
-        const seconds = Math.floor((difference / 1000) % 60)
+      if (target > now) {
+        // Calculate months and days more accurately
+        let months = (target.getFullYear() - now.getFullYear()) * 12
+        months += (target.getMonth() - now.getMonth())
+        
+        // Create a date that's 'months' months from now
+        const monthsFromNow = new Date(now)
+        monthsFromNow.setMonth(monthsFromNow.getMonth() + months)
+        
+        // If the target date is before this calculated date, reduce months by 1
+        if (target < monthsFromNow) {
+          months--
+          monthsFromNow.setMonth(monthsFromNow.getMonth() - 1)
+        }
+        
+        // Calculate remaining days
+        const days = Math.floor((target.getTime() - monthsFromNow.getTime()) / (1000 * 60 * 60 * 24))
+        
+        // Calculate hours, minutes, seconds for the current day
+        const difference = target.getTime() - now.getTime()
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000)
 
         setTimeLeft({ months, days, hours, minutes, seconds })
+      } else {
+        setTimeLeft({ months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 })
       }
     }
 
     calculateTimeLeft()
-    const timer = setInterval(calculateTimeLeft, 1000)
+    const timer = setInterval(calculateTimeLeft, 1000) // Update every second
 
     return () => clearInterval(timer)
   }, [targetDate])
@@ -54,7 +70,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
               {timeLeft.months.toString().padStart(2, '0')}
             </div>
             <div className="text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.2em] uppercase text-gray-600 font-light">
-              Månader
+              {t.months}
             </div>
           </div>
 
@@ -64,7 +80,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
               {timeLeft.days.toString().padStart(2, '0')}
             </div>
             <div className="text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.2em] uppercase text-gray-600 font-light">
-              Dagar
+              {t.days}
             </div>
           </div>
 
@@ -74,7 +90,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
               {timeLeft.hours.toString().padStart(2, '0')}
             </div>
             <div className="text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.2em] uppercase text-gray-600 font-light">
-              Timmar
+              {t.hours}
             </div>
           </div>
 
@@ -84,7 +100,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
               {timeLeft.minutes.toString().padStart(2, '0')}
             </div>
             <div className="text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.2em] uppercase text-gray-600 font-light">
-              Minuter
+              {t.minutes}
             </div>
           </div>
 
@@ -94,7 +110,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
               {timeLeft.seconds.toString().padStart(2, '0')}
             </div>
             <div className="text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.2em] uppercase text-gray-600 font-light">
-              Sekunder
+              {t.seconds}
             </div>
           </div>
         </div>

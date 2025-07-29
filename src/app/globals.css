@@ -225,3 +225,7 @@
 .c-schedule__item.c-schedule__item--repeating .pg-schedule-item__content {
   margin-left: 2rem;
 }
+
+.menu-none {
+  display: none !important;
+}

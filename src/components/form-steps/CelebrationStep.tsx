@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormData } from '../RSVPForm'
+import { translations, Language } from '@/lib/translations'
 
 interface CelebrationStepProps {
   formData: FormData
@@ -10,13 +11,15 @@ interface CelebrationStepProps {
   isLastStep: boolean
   currentStep: number
   totalSteps: number
+  language?: Language
 }
 
 export default function CelebrationStep({ 
   formData, 
   updateFormData, 
   nextStep, 
-  prevStep 
+  prevStep,
+  language = 'sv' 
 }: CelebrationStepProps) {
   const updateSongRequest = (index: number, value: string) => {
     const newSongRequests = [...formData.songRequests]
@@ -29,10 +32,13 @@ export default function CelebrationStep({
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-script text-wedding-dark mb-2">
-          Låt oss fira!
+          {language === 'sv' ? 'Låt oss fira!' : 'Hajde da slavimo!'}
         </h2>
         <p className="text-gray-600 font-light">
-          Hjälp oss att göra kvällen perfekt med din input
+          {language === 'sv' 
+            ? 'Hjälp oss att göra kvällen perfekt med din input'
+            : 'Pomozite nam da učinimo veče savršenim s vašim savetima'
+          }
         </p>
       </div>
 
@@ -41,10 +47,16 @@ export default function CelebrationStep({
         {/* Song Requests */}
         <div>
           <label className="block text-lg font-medium text-wedding-dark mb-4 text-center">
-            Vilka 3 låtar kommer få dig att dansa? 🎵
+            {language === 'sv' 
+              ? 'Vilka 3 låtar kommer få dig att dansa? 🎵'
+              : 'Koje 3 pjesme će vas najerati da plešete? 🎵'
+            }
           </label>
           <p className="text-sm text-gray-600 text-center mb-6">
-            Berätta vilka låtar som garanterat får dig upp på dansgolvet!
+            {language === 'sv' 
+              ? 'Berätta vilka låtar som garanterat får dig upp på dansgolvet!'
+              : 'Recite nam koje pjesme će vas garantovano izvesti na podij za ples!'
+            }
           </p>
           <div className="space-y-4">
             {[0, 1, 2].map((index) => (
@@ -54,7 +66,10 @@ export default function CelebrationStep({
                   value={formData.songRequests[index]}
                   onChange={(e) => updateSongRequest(index, e.target.value)}
                   className="form-input"
-                  placeholder={`Låt ${index + 1} - Artist & låttitel`}
+                  placeholder={language === 'sv' 
+                    ? `Låt ${index + 1} - Artist & låttitel`
+                    : `Pjesma ${index + 1} - Izvođač i naziv`
+                  }
                 />
               </div>
             ))}
@@ -64,16 +79,22 @@ export default function CelebrationStep({
         {/* Dietary Requirements */}
         <div>
           <label className="block text-lg font-medium text-wedding-dark mb-4 text-center">
-            Specialkost? 🍽️
+            {language === 'sv' ? 'Specialkost? 🍽️' : 'Posebna ishrana? 🍽️'}
           </label>
           <p className="text-sm text-gray-600 text-center mb-4">
-            Har du några allergier eller specialkost vi bör veta om?
+            {language === 'sv' 
+              ? 'Har du några allergier eller specialkost vi bör veta om?'
+              : 'Imate li neke alergije ili posebne prehrambene potrebe koje trebamo znati?'
+            }
           </p>
           <textarea
             value={formData.dietaryRequirements}
             onChange={(e) => updateFormData({ dietaryRequirements: e.target.value })}
             className="form-input resize-none"
-            placeholder="Vegetarian, glutenfri, allergier, etc..."
+            placeholder={language === 'sv' 
+              ? 'Vegetarian, glutenfri, allergier, etc...'
+              : 'Vegetarijanska, bezglutenska, alergije, itd...'
+            }
             rows={3}
           />
         </div>
@@ -81,16 +102,22 @@ export default function CelebrationStep({
         {/* Message to Couple */}
         <div>
           <label className="block text-lg font-medium text-wedding-dark mb-4 text-center">
-            Meddelande till paret? 💌
+            {language === 'sv' ? 'Meddelande till paret? 💌' : 'Poruka za par? 💌'}
           </label>
           <p className="text-sm text-gray-600 text-center mb-4">
-            Vill du skicka ett särskilt meddelande till Ines & Haris?
+            {language === 'sv' 
+              ? 'Vill du skicka ett särskilt meddelande till Ines & Haris?'
+              : 'Želite li poslati posebnu poruku za Ines i Haris?'
+            }
           </p>
           <textarea
             value={formData.messageToCouple}
             onChange={(e) => updateFormData({ messageToCouple: e.target.value })}
             className="form-input resize-none"
-            placeholder="Skriv ditt meddelande här..."
+            placeholder={language === 'sv' 
+              ? 'Skriv ditt meddelande här...'
+              : 'Napišite svoju poruku ovdje...'
+            }
             rows={4}
           />
         </div>
@@ -102,13 +129,13 @@ export default function CelebrationStep({
           onClick={prevStep}
           className="px-6 py-3 text-wedding-dark hover:text-wedding-pink transition-colors"
         >
-          ← Tillbaka
+          {language === 'sv' ? '← Tillbaka' : '← Nazad'}
         </button>
         <button
           onClick={nextStep}
           className="wedding-button-primary"
         >
-          Nästa
+          {language === 'sv' ? 'Nästa' : 'Sljedeće'}
         </button>
       </div>
     </div>
