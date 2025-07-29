@@ -10,10 +10,5 @@
       "src": "/wp/(.*)",
       "dest": "https://inesharis.se/wp/$1"
     }
-  ],
-  "env": {
-    "WORDPRESS_API_URL": "@wordpress_api_url",
-    "WORDPRESS_GRAPHQL_URL": "@wordpress_graphql_url", 
-    "NEXT_PUBLIC_WORDPRESS_URL": "@next_public_wordpress_url"
-  }
+  ]
 } 
