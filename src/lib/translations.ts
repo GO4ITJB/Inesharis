@@ -132,7 +132,7 @@ export const translations = {
     yourName: "Vaše ime *",
     emailAddress: "E-mail adresa *",
     phoneNumber: "Broj telefona (opcionalno)",
-    howManyGuests: "Koliko gostiju dovedete?",
+    howManyGuests: "Dolazis li s nekim?",
     guestOptions: {
       0: "Samo ja (1 osoba)",
       1: "Ja + 1 gost (2 osobe)",

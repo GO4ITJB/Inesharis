@@ -37,7 +37,7 @@ export default function CelebrationStep({
         <p className="text-gray-600 font-light">
           {language === 'sv' 
             ? 'Hjälp oss att göra kvällen perfekt med din input'
-            : 'Pomozite nam da učinimo veče savršenim s vašim savetima'
+            : 'Pomozite nam da učinimo veče savršenim s vašim savjetima'
           }
         </p>
       </div>
