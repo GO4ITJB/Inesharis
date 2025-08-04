@@ -13,8 +13,8 @@ export interface FormData {
   name: string
   email: string
   phone: string
-  bringingGuest: boolean
-  guestName?: string
+  numberOfGuests: number // 0-5 additional guests
+  guestNames: string[] // Names for each additional guest
   
   // Attendance
   attendingReception: boolean
@@ -36,8 +36,8 @@ export default function RSVPForm({ language = 'sv' }: RSVPFormProps) {
     name: '',
     email: '',
     phone: '',
-    bringingGuest: false,
-    guestName: '',
+    numberOfGuests: 0,
+    guestNames: [],
     attendingReception: false,
     attendingCeremony: false,
     songRequests: ['', '', ''],
@@ -75,8 +75,8 @@ export default function RSVPForm({ language = 'sv' }: RSVPFormProps) {
       name: '',
       email: '',
       phone: '',
-      bringingGuest: false,
-      guestName: '',
+      numberOfGuests: 0,
+      guestNames: [],
       attendingReception: false,
       attendingCeremony: false,
       songRequests: ['', '', ''],

@@ -152,12 +152,15 @@ export default function ConfirmationStep({
               <span className="text-gray-600">{language === 'sv' ? 'Telefon:' : 'Telefon:'}</span>
               <span className="ml-2 font-medium">{formData.phone || (language === 'sv' ? 'Ej angiven' : 'Nije navedeno')}</span>
             </div>
-            <div>
+            <div className="flex justify-between items-center py-2 text-sm">
               <span className="text-gray-600">
-                {language === 'sv' ? 'Medföljande gäst:' : 'Gost koji dolazi:'}
+                {language === 'sv' ? 'Tar med gäst:' : 'Dovodite gosta:'}
               </span>
-              <span className="ml-2 font-medium">
-                {formData.bringingGuest ? formData.guestName : (language === 'sv' ? 'Nej' : 'Ne')}
+              <span className="font-medium text-wedding-dark">
+                {formData.numberOfGuests > 0 
+                  ? formData.guestNames.filter(name => name.trim()).join(', ') || `${formData.numberOfGuests} ${language === 'sv' ? 'gäster' : 'gosta'}`
+                  : (language === 'sv' ? 'Nej' : 'Ne')
+                }
               </span>
             </div>
           </div>

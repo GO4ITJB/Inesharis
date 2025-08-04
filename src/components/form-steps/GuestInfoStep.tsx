@@ -37,8 +37,11 @@ export default function GuestInfoStep({
       newErrors.email = language === 'sv' ? 'Ogiltig e-postadress' : 'Neispravna e-mail adresa'
     }
 
-    if (formData.bringingGuest && !formData.guestName?.trim()) {
-      newErrors.guestName = language === 'sv' ? 'Gästens namn krävs' : 'Ime gosta je obavezno'
+    // Validate guest names if guests are selected
+    for (let i = 0; i < formData.numberOfGuests; i++) {
+      if (!formData.guestNames[i]?.trim()) {
+        newErrors[`guest${i}`] = language === 'sv' ? 'Gästens namn krävs' : 'Ime gosta je obavezno'
+      }
     }
 
     setErrors(newErrors)
@@ -46,6 +49,22 @@ export default function GuestInfoStep({
     if (Object.keys(newErrors).length === 0) {
       nextStep()
     }
+  }
+
+  const updateGuestCount = (count: number) => {
+    const newGuestNames = Array(count).fill('').map((_, index) => 
+      formData.guestNames[index] || ''
+    )
+    updateFormData({ 
+      numberOfGuests: count, 
+      guestNames: newGuestNames 
+    })
+  }
+
+  const updateGuestName = (index: number, name: string) => {
+    const newGuestNames = [...formData.guestNames]
+    newGuestNames[index] = name
+    updateFormData({ guestNames: newGuestNames })
   }
 
   return (
@@ -68,7 +87,7 @@ export default function GuestInfoStep({
         {/* Name */}
         <div>
           <label className="block text-sm font-medium text-wedding-dark mb-2">
-            {language === 'sv' ? 'Ditt namn *' : 'Vaše ime *'}
+            {t.yourName}
           </label>
           <input
             type="text"
@@ -83,7 +102,7 @@ export default function GuestInfoStep({
         {/* Email */}
         <div>
           <label className="block text-sm font-medium text-wedding-dark mb-2">
-            {language === 'sv' ? 'E-postadress *' : 'E-mail adresa *'}
+            {t.emailAddress}
           </label>
           <input
             type="email"
@@ -98,7 +117,7 @@ export default function GuestInfoStep({
         {/* Phone */}
         <div>
           <label className="block text-sm font-medium text-wedding-dark mb-2">
-            {language === 'sv' ? 'Telefonnummer (valfritt)' : 'Broj telefona (opcionalno)'}
+            {t.phoneNumber}
           </label>
           <input
             type="tel"
@@ -112,66 +131,59 @@ export default function GuestInfoStep({
         {/* Guest Selection */}
         <div>
           <label className="block text-sm font-medium text-wedding-dark mb-4">
-            {language === 'sv' ? 'Kommer du med någon?' : 'Dovodite li nekoga?'}
+            {t.howManyGuests}
           </label>
-          <div className="flex space-x-4">
-            <button
-              type="button"
-              onClick={() => updateFormData({ bringingGuest: false, guestName: '' })}
-              className={`flex-1 py-3 px-4 rounded-lg border transition-all ${
-                !formData.bringingGuest
-                  ? 'bg-wedding-pink text-white border-wedding-pink'
-                  : 'bg-white text-gray-700 border-gray-300 hover:border-wedding-pink'
-              }`}
-            >
-              {language === 'sv' ? 'Nej, bara jag' : 'Ne, samo ja'}
-            </button>
-            <button
-              type="button"
-              onClick={() => updateFormData({ bringingGuest: true })}
-              className={`flex-1 py-3 px-4 rounded-lg border transition-all ${
-                formData.bringingGuest
-                  ? 'bg-wedding-pink text-white border-wedding-pink'
-                  : 'bg-white text-gray-700 border-gray-300 hover:border-wedding-pink'
-              }`}
-            >
-              {language === 'sv' ? 'Ja, med gäst' : 'Da, sa gostom'}
-            </button>
-          </div>
+          <select
+            value={formData.numberOfGuests}
+            onChange={(e) => updateGuestCount(parseInt(e.target.value))}
+            className="w-full py-3 px-4 rounded-lg border border-gray-300 bg-white text-gray-700 focus:border-wedding-pink focus:ring-2 focus:ring-wedding-pink/20 transition-all"
+          >
+            {Object.entries(t.guestOptions).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {/* Guest Name (conditional) */}
-        {formData.bringingGuest && (
-          <div>
-            <label className="block text-sm font-medium text-wedding-dark mb-2">
-              {language === 'sv' ? 'Gästens namn *' : 'Ime gosta *'}
-            </label>
-            <input
-              type="text"
-              value={formData.guestName || ''}
-              onChange={(e) => updateFormData({ guestName: e.target.value })}
-              className={`form-input ${errors.guestName ? 'error' : ''}`}
-              placeholder={language === 'sv' ? 'Gästens förnamn och efternamn' : 'Ime i prezime gosta'}
-            />
-            {errors.guestName && <p className="text-red-500 text-sm mt-1">{errors.guestName}</p>}
+        {/* Guest Names (conditional) */}
+        {formData.numberOfGuests > 0 && (
+          <div className="space-y-4">
+            {Array.from({ length: formData.numberOfGuests }).map((_, index) => (
+              <div key={index}>
+                <label className="block text-sm font-medium text-wedding-dark mb-2">
+                  {t.guestNameLabel} {index + 1} *
+                </label>
+                <input
+                  type="text"
+                  value={formData.guestNames[index] || ''}
+                  onChange={(e) => updateGuestName(index, e.target.value)}
+                  className={`form-input ${errors[`guest${index}`] ? 'error' : ''}`}
+                  placeholder={t.guestNamePlaceholder}
+                />
+                {errors[`guest${index}`] && <p className="text-red-500 text-sm mt-1">{errors[`guest${index}`]}</p>}
+              </div>
+            ))}
           </div>
         )}
-      </div>
 
-      {/* Navigation */}
-      <div className="flex justify-between pt-8 mt-8 border-t border-wedding-greige/40">
-        <button
-          onClick={prevStep}
-          className="px-6 py-3 text-wedding-dark hover:text-wedding-pink transition-colors"
-        >
-          {language === 'sv' ? '← Tillbaka' : '← Nazad'}
-        </button>
-        <button
-          onClick={validateAndNext}
-          className="wedding-button-primary"
-        >
-          {language === 'sv' ? 'Nästa' : 'Sljedeće'}
-        </button>
+        {/* Navigation Buttons */}
+        <div className="flex justify-between pt-6">
+          <button
+            type="button"
+            onClick={prevStep}
+            className="wedding-button-secondary"
+          >
+            {t.back}
+          </button>
+          <button
+            type="button"
+            onClick={validateAndNext}
+            className="wedding-button-primary"
+          >
+            {t.next}
+          </button>
+        </div>
       </div>
     </div>
   )

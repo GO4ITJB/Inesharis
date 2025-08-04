@@ -42,13 +42,20 @@ export const translations = {
     
     // Guest Info
     guestInformation: "Gästinformation",
-    yourName: "Ditt namn",
-    emailAddress: "E-postadress",
-    phoneNumber: "Telefonnummer",
-    bringingGuest: "Tar du med dig en gäst?",
-    yes: "JA",
-    no: "NEJ",
-    guestName: "Gästens namn",
+    yourName: "Ditt namn *",
+    emailAddress: "E-postadress *",
+    phoneNumber: "Telefonnummer (valfritt)",
+    howManyGuests: "Hur många kommer med dig?",
+    guestOptions: {
+      0: "Bara jag (1 person)",
+      1: "Jag + 1 gäst (2 personer)",
+      2: "Jag + 2 gäster (3 personer)",
+      3: "Jag + 3 gäster (4 personer)",
+      4: "Jag + 4 gäster (5 personer)",
+      5: "Jag + 5 gäster (6 personer)"
+    },
+    guestNameLabel: "Gäst",
+    guestNamePlaceholder: "Gästens namn",
     next: "NÄSTA",
     back: "TILLBAKA",
     
@@ -121,15 +128,21 @@ export const translations = {
     sarajevoBosnia: "Sarajevo, Bosna i Hercegovina",
     letsStart: "POČNIMO",
     
-    // Guest Info
-    guestInformation: "Informacije o gostu",
-    yourName: "Vaše ime",
-    emailAddress: "E-mail adresa",
-    phoneNumber: "Broj telefona",
-    bringingGuest: "Dovodite li gosta?",
-    yes: "DA",
-    no: "NE",
-    guestName: "Ime gosta",
+    // Guest Info Step
+    yourName: "Vaše ime *",
+    emailAddress: "E-mail adresa *",
+    phoneNumber: "Broj telefona (opcionalno)",
+    howManyGuests: "Koliko gostiju dovedete?",
+    guestOptions: {
+      0: "Samo ja (1 osoba)",
+      1: "Ja + 1 gost (2 osobe)",
+      2: "Ja + 2 gosta (3 osobe)",
+      3: "Ja + 3 gosta (4 osobe)",
+      4: "Ja + 4 gosta (5 osoba)",
+      5: "Ja + 5 gosta (6 osoba)"
+    },
+    guestNameLabel: "Gost",
+    guestNamePlaceholder: "Ime gosta",
     next: "SLJEDEĆE",
     back: "NAZAD",
     
