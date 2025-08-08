@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Hero from '@/components/Hero'
 import Header from '@/components/Header'
-import OurStory from '@/components/OurStory'
+import AnimatedTravelSchedule from '@/components/OurStory'
 import RunOfShow from '@/components/RunOfShow'
 import VenueAccommodations from '@/components/VenueAccommodations'
 import { detectBrowserLanguage, getLanguageFromPath, saveLanguagePreference } from '@/lib/languageDetection'
@@ -43,9 +43,9 @@ export default function Home() {
       <Header language="sv" />
       <main>
         <Hero language="sv" />
-        <OurStory language="sv" />
-        <RunOfShow language="sv" />
-        <VenueAccommodations language="sv" />
+        <AnimatedTravelSchedule />
+        <RunOfShow />
+        <VenueAccommodations />
       </main>
     </>
   )

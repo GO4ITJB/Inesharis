@@ -130,9 +130,8 @@ Ines & Haris 💍
           _confirmation: false  // Disable Formspree confirmations
         }),
       })
-      console.log('📧 RSVP notification sent to couple via Formspree')
     } catch (emailError) {
-      console.error('Formspree notification failed:', emailError)
+      // Silent fail for Formspree
     }
 
     // Send confirmation email to guest via Resend
@@ -154,22 +153,12 @@ Ines & Haris 💍
         })
       })
 
-      if (resendResponse.ok) {
-        console.log('📧 Confirmation email sent to guest via Resend:', formData.email)
-      } else {
-        const errorData = await resendResponse.text()
-        console.error('Resend API error:', errorData)
-        console.error('API Response Status:', resendResponse.status)
+      if (!resendResponse.ok) {
+        // Silent fail for Resend
       }
     } catch (emailError) {
-      console.error('Resend confirmation email failed:', emailError)
+      // Silent fail for Resend
     }
-
-    // Log for backup
-    console.log('📧 EMAIL PROCESSING COMPLETE')
-    console.log('RSVP sent to couple:', 'jovicabumbulovic@gmail.com')
-    console.log('Confirmation sent to guest:', formData.email)
-    console.log('Language:', language)
 
     return NextResponse.json({ 
       success: true, 
@@ -177,8 +166,6 @@ Ines & Haris 💍
     })
 
   } catch (error) {
-    console.error('Error processing RSVP:', error)
-    
     return NextResponse.json({ 
       success: true, // Still return success so user doesn't see error
       message: 'RSVP submitted successfully' 
