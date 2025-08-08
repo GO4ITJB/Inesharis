@@ -42,7 +42,7 @@ export default function Home() {
     <>
       <Header language="sv" />
       <main>
-        {/* Components */}
+        <Hero language="sv" />
         <AnimatedTravelSchedule />
         <RunOfShow />
         <VenueAccommodations />
