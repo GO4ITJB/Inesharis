@@ -43,9 +43,9 @@ export default function Home() {
       <Header language="sv" />
       <main>
         <Hero language="sv" />
-        {/* <OurStory language="sv" />
+        <OurStory language="sv" />
         <RunOfShow language="sv" />
-        <VenueAccommodations language="sv" /> */}
+        <VenueAccommodations language="sv" />
       </main>
     </>
   )
