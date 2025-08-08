@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import React from 'react'
 
 interface VenueInfo {
   name: string
@@ -62,29 +61,24 @@ const taxiCompanies: TaxiCompany[] = [
 ]
 
 const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed?: boolean }) => {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(cardRef, { once: true, margin: "-100px" })
+  const cardRef = React.useRef<HTMLDivElement>(null)
+  const isInView = false // Removed framer-motion useInView
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
       className="max-w-2xl mx-auto"
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      // Removed framer-motion motion components
     >
       {/* Map Card */}
-      <motion.div
+      <div
         className="bg-white rounded-3xl shadow-xl overflow-hidden relative"
-        whileHover={{ y: -8, scale: 1.02 }}
-        transition={{ duration: 0.3 }}
+        // Removed framer-motion motion components
       >
         {/* Google Maps - Larger Height */}
-        <motion.div
+        <div
           className="relative h-[32rem] overflow-hidden"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          // Removed framer-motion motion components
         >
           <iframe
             src={venue.mapUrl}
@@ -99,19 +93,17 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
           
           {/* Gradient overlay for glassmorphism readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 pointer-events-none" />
-        </motion.div>
+        </div>
 
         {/* Pink Only Glassmorphism Location Info Card - Overlaid */}
-        <motion.div
+        <div
           className="absolute bottom-0 left-0 right-0 p-5 backdrop-blur-xl rounded-t-3xl shadow-lg"
           style={{
             background: 'linear-gradient(135deg, rgba(214, 169, 163, 0.9), rgba(214, 169, 163, 0.8))',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
           }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          // Removed framer-motion motion components
         >
           {/* Header with pin icon */}
           <div className="flex items-start justify-between mb-2">
@@ -130,7 +122,7 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
             </div>
             
             {/* Share/Directions button */}
-            <motion.a
+            <a
               href={venue.directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -141,14 +133,10 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
                 WebkitBackdropFilter: 'blur(10px)',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
               }}
-              whileHover={{ 
-                scale: 1.1,
-                background: 'rgba(255, 255, 255, 0.25)'
-              }}
-              whileTap={{ scale: 0.95 }}
+              // Removed framer-motion motion components
             >
               <i className="fas fa-external-link-alt text-xs text-white"></i>
-            </motion.a>
+            </a>
           </div>
 
           {/* Address */}
@@ -168,7 +156,7 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
 
           {/* Action buttons */}
           <div className="flex space-x-2">
-            <motion.a
+            <a
               href={venue.directionsUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -179,16 +167,13 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
                 WebkitBackdropFilter: 'blur(10px)',
                 border: '1px solid rgba(255, 255, 255, 0.3)',
               }}
-              whileHover={{
-                background: 'rgba(255, 255, 255, 0.3)',
-                scale: 1.02
-              }}
+              // Removed framer-motion motion components
             >
               Directions
-            </motion.a>
+            </a>
 
             {venue.phone && (
-              <motion.a
+              <a
                 href={`tel:${venue.phone}`}
                 className="flex-1 text-center text-white py-2 px-2 rounded-lg text-xs font-medium transition-all duration-300"
                 style={{
@@ -197,17 +182,14 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
                   WebkitBackdropFilter: 'blur(10px)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                 }}
-                whileHover={{
-                  background: 'rgba(255, 255, 255, 0.2)',
-                  scale: 1.02
-                }}
+                // Removed framer-motion motion components
               >
                 Call
-              </motion.a>
+              </a>
             )}
 
             {venue.website && (
-              <motion.a
+              <a
                 href={venue.website}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -218,24 +200,21 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
                   WebkitBackdropFilter: 'blur(10px)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                 }}
-                whileHover={{
-                  background: 'rgba(255, 255, 255, 0.2)',
-                  scale: 1.02
-                }}
+                // Removed framer-motion motion components
               >
                 Website
-              </motion.a>
+              </a>
             )}
           </div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   )
 }
 
 export default function VenueAccommodations() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
+  const ref = React.useRef<HTMLDivElement>(null)
+  const isInView = false // Removed framer-motion useInView
 
   return (
     <section id="venue-accommodations" ref={ref} className="relative z-[5] py-20 bg-wedding-beige text-wedding-dark shadow-lg">
@@ -243,36 +222,29 @@ export default function VenueAccommodations() {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <motion.div 
+        {/* Removed framer-motion motion components */}
+        <div 
           className="text-center mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          // Removed framer-motion motion components
         >
-          <motion.div
+          <div
             className="inline-block mb-8"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
+            // Removed framer-motion motion components
           >
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mb-6"></div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-script text-wedding-dark mb-4">
               Plats & Boende
             </h2>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mx-auto"></div>
-          </motion.div>
+          </div>
           
-          <motion.p 
+          <p 
             className="text-lg md:text-xl text-wedding-dark/70 font-light max-w-2xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
+            // Removed framer-motion motion components
           >
             Allt du behöver veta om vår plats och var du kan bo i vackra Sarajevo.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Venue Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-3 mb-24">
@@ -284,19 +256,16 @@ export default function VenueAccommodations() {
         </div>
 
         {/* Transportation Section */}
-        <motion.div
+        {/* Removed framer-motion motion components */}
+        <div
           className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          // Removed framer-motion motion components
         >
           {/* Transportation Header */}
-          <motion.div 
+          {/* Removed framer-motion motion components */}
+          <div 
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+            // Removed framer-motion motion components
           >
             <h3 className="text-4xl lg:text-5xl font-script text-wedding-dark mb-4">
               Getting Around
@@ -305,19 +274,15 @@ export default function VenueAccommodations() {
             <p className="text-wedding-dark/70 max-w-lg mx-auto">
               Reliable transportation options to get you to and from our celebration.
             </p>
-          </motion.div>
+          </div>
 
           {/* Taxi Companies */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {taxiCompanies.map((taxi, index) => (
-              <motion.div
+              <div
                 key={index}
                 className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-wedding-pink/10 text-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5, scale: 1.02 }}
+                // Removed framer-motion motion components
               >
                 <div className="text-wedding-pink text-2xl mb-4">
                   <i className="fas fa-taxi"></i>
@@ -334,17 +299,15 @@ export default function VenueAccommodations() {
                 >
                   {taxi.phone}
                 </a>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Additional Transportation Info */}
-          <motion.div
+          {/* Removed framer-motion motion components */}
+          <div
             className="mt-12 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            viewport={{ once: true }}
+            // Removed framer-motion motion components
           >
             <div className="bg-wedding-sand/30 rounded-2xl p-8 border border-wedding-pink/20">
               <h4 className="text-xl font-script text-wedding-dark mb-4">
@@ -371,16 +334,14 @@ export default function VenueAccommodations() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Travel Tips */}
-        <motion.div
+        {/* Removed framer-motion motion components */}
+        <div
           className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
+          // Removed framer-motion motion components
         >
           <div className="bg-wedding-sand/30 rounded-2xl p-8 border border-wedding-pink/20">
             <h4 className="text-xl font-script text-wedding-dark mb-4">
@@ -409,7 +370,7 @@ export default function VenueAccommodations() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
