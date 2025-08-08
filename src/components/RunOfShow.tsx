@@ -1,7 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import React from 'react'
 
 interface TimelineEvent {
   time: string
@@ -73,56 +72,38 @@ const FontAwesomeIcon = ({ type }: { type: string }) => {
 }
 
 export default function RunOfShow() {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   return (
-    <section id="run-of-show" ref={ref} className="relative z-[5] py-20 bg-wedding-sand text-wedding-dark shadow-lg">
+    <section id="run-of-show" className="relative z-[5] py-20 bg-wedding-sand text-wedding-dark shadow-lg">
 
       
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Section Header */}
-        <motion.div 
+        <div 
           className="text-center mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 1, ease: "easeOut" }}
         >
-          <motion.div
+          <div
             className="inline-block mb-8"
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
           >
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mb-6"></div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-script text-wedding-dark mb-4">
               Program
             </h2>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mx-auto"></div>
-          </motion.div>
+          </div>
           
-          <motion.p 
+          <p 
             className="text-lg md:text-xl text-wedding-dark/70 font-light max-w-2xl mx-auto leading-relaxed mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
           >
             Här är allt du behöver veta om vår speciella dags program.
-          </motion.p>
+          </p>
           
-          <motion.div 
+          <div 
             className="text-wedding-pink font-medium text-lg tracking-wider"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            viewport={{ once: true }}
           >
             September 21, 2024
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Timeline */}
         <div className="max-w-4xl mx-auto">
@@ -135,12 +116,9 @@ export default function RunOfShow() {
               {weddingSchedule.map((event, index) => {
                 const isLeft = index % 2 === 0;
                 return (
-                  <motion.div
+                  <div
                     key={index}
                     className="relative flex items-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     {/* Center connecting dot */}
                     <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-wedding-pink rounded-full border-4 border-white shadow-lg z-10"></div>
@@ -202,7 +180,7 @@ export default function RunOfShow() {
                         </div>
                       </>
                     )}
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
