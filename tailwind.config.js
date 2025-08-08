@@ -7,9 +7,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        'coterie': ['Coterie', 'serif'],
-      },
       colors: {
         'wedding-pink': '#D6A9A3',
         'wedding-dark': '#6B5B57',
