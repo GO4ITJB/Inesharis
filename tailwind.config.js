@@ -8,22 +8,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'script': ['Dancing Script', 'cursive'],
-        'sans': ['Inter', 'sans-serif'],
+        'coterie': ['Coterie', 'serif'],
       },
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-        },
-        wedding: {
-          gold: '#d4af37',
-          cream: '#f8f6f0',
-          sage: '#9caf88',
-          charcoal: '#2c2c2c',
-        }
+        'wedding-pink': '#D6A9A3',
+        'wedding-dark': '#6B5B57',
+        'wedding-greige': '#D8D3CD',
+        'warm-background': '#F6EEE9',
       },
       typography: {
         DEFAULT: {

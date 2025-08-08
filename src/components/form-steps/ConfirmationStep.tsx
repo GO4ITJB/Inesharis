@@ -34,7 +34,10 @@ export default function ConfirmationStep({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          language: language // Add language for confirmation email
+        })
       })
 
       if (!response.ok) {
