@@ -115,28 +115,33 @@ S ljubavlju,
 Ines & Haris 💍
     `
 
-    // Send RSVP notification to couple via Formspree (keep existing working system)
+    // Send RSVP notification to couple via Resend
     try {
-      await fetch('https://formspree.io/f/xnnzvkpr', {
+      const coupleResponse = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          from: 'Ines & Haris <noreply@inesharis.se>',
+          to: 'jovicabumbulovic@gmail.com', // Couple's email
           subject: `New RSVP from ${formData.name}`,
-          message: coupleEmailContent,
-          _replyto: formData.email,
-          _autoresponse: false, // Disable Formspree auto-replies
-          _confirmation: false  // Disable Formspree confirmations
-        }),
+          text: coupleEmailContent,
+          html: `<pre style="font-family: Arial, sans-serif; white-space: pre-wrap; line-height: 1.4;">${coupleEmailContent}</pre>`
+        })
       })
+
+      if (!coupleResponse.ok) {
+        // Silent fail for couple notification
+      }
     } catch (emailError) {
-      // Silent fail for Formspree
+      // Silent fail for couple notification
     }
 
     // Send confirmation email to guest via Resend
     try {
-      const resendResponse = await fetch('https://api.resend.com/emails', {
+      const guestResponse = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
@@ -153,11 +158,11 @@ Ines & Haris 💍
         })
       })
 
-      if (!resendResponse.ok) {
-        // Silent fail for Resend
+      if (!guestResponse.ok) {
+        // Silent fail for guest confirmation
       }
     } catch (emailError) {
-      // Silent fail for Resend
+      // Silent fail for guest confirmation
     }
 
     return NextResponse.json({ 
