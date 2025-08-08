@@ -1,5 +1,99 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+// Helper function to create ICS calendar content
+function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendingCeremony: boolean, attendingReception: boolean) {
+  const ceremonyDate = new Date('2026-07-25T15:00:00+02:00') // 3 PM Sarajevo time
+  const ceremonyEndDate = new Date('2026-07-25T16:30:00+02:00') // 4:30 PM Sarajevo time
+  const receptionDate = new Date('2026-07-25T17:00:00+02:00') // 5 PM Sarajevo time
+  const receptionEndDate = new Date('2026-07-25T23:00:00+02:00') // 11 PM Sarajevo time
+  
+  const events = []
+
+  // Ceremony event (if attending)
+  if (attendingCeremony) {
+    const ceremonyTitle = language === 'sv' 
+      ? 'Ines & Haris - Vigsel' 
+      : 'Ines & Haris - Vjenčanje'
+    
+    const ceremonyDescription = language === 'sv' 
+      ? `Välkommen till Ines & Haris vigsel!\n\nPlats: Vijecnica, Sarajevo\nAdress: Obala Kulina bana bb, 71000 Sarajevo, Bosnien\n\nVi ser fram emot att dela detta ögonblick med dig! 💕`
+      : `Dobrodošli na Ines & Haris vjenčanje!\n\nMjesto: Vijecnica, Sarajevo\nAdresa: Obala Kulina bana bb, 71000 Sarajevo, Bosna i Hercegovina\n\nRadujemo se da podijelimo ovaj trenutak s vama! 💕`
+
+    const ceremonyIcs = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Ines & Haris Wedding//Wedding Ceremony//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:REQUEST',
+      'BEGIN:VEVENT',
+      `UID:${Date.now()}-ceremony@inesharis.se`,
+      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `DTSTART:${ceremonyDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `DTEND:${ceremonyEndDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `SUMMARY:${ceremonyTitle}`,
+      `DESCRIPTION:${ceremonyDescription.replace(/\n/g, '\\n')}`,
+      `LOCATION:Vijecnica, Obala Kulina bana bb, 71000 Sarajevo, Bosnia and Herzegovina`,
+      'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
+      `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${guestName}`,
+      'BEGIN:VALARM',
+      'TRIGGER:-PT1H',
+      'ACTION:DISPLAY',
+      `DESCRIPTION:${ceremonyTitle}`,
+      'END:VALARM',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n')
+
+    events.push({
+      filename: language === 'sv' ? 'Ines-Haris-Vigsel.ics' : 'Ines-Haris-Vjencanje.ics',
+      content: Buffer.from(ceremonyIcs).toString('base64')
+    })
+  }
+
+  // Reception event (if attending)
+  if (attendingReception) {
+    const receptionTitle = language === 'sv' 
+      ? 'Ines & Haris - Mottagning' 
+      : 'Ines & Haris - Svadba'
+    
+    const receptionDescription = language === 'sv' 
+      ? `Välkommen till Ines & Haris mottagning!\n\nPlats: [Reception venue]\nAdress: [Reception address]\n\nVi ser fram emot att fira med dig! 💕`
+      : `Dobrodošli na Ines & Haris svadbu!\n\nMjesto: [Reception venue]\nAdresa: [Reception address]\n\nRadujemo se proslavi s vama! 💕`
+
+    const receptionIcs = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Ines & Haris Wedding//Wedding Reception//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:REQUEST',
+      'BEGIN:VEVENT',
+      `UID:${Date.now()}-reception@inesharis.se`,
+      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `DTSTART:${receptionDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `DTEND:${receptionEndDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `SUMMARY:${receptionTitle}`,
+      `DESCRIPTION:${receptionDescription.replace(/\n/g, '\\n')}`,
+      `LOCATION:[Reception venue], [Reception address]`,
+      'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
+      `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${guestName}`,
+      'BEGIN:VALARM',
+      'TRIGGER:-PT1H',
+      'ACTION:DISPLAY',
+      `DESCRIPTION:${receptionTitle}`,
+      'END:VALARM',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n')
+
+    events.push({
+      filename: language === 'sv' ? 'Ines-Haris-Mottagning.ics' : 'Ines-Haris-Svadba.ics',
+      content: Buffer.from(receptionIcs).toString('base64')
+    })
+  }
+
+  return events
+}
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json()
@@ -58,7 +152,6 @@ Tack så mycket för din RSVP till Ines & Haris bröllop! 💕
 
 === DIN RSVP BEKRÄFTELSE ===
 Datum: 25 Juli 2026
-Plats: Sarajevo, Bosnien
 
 Din information:
 • Namn: ${formData.name}
@@ -78,6 +171,8 @@ ${formData.songRequests?.filter(Boolean).length > 0
 ${formData.dietaryRequirements ? `Kostpreferenser: ${formData.dietaryRequirements}` : ''}
 ${formData.messageToCouple ? `Ditt meddelande: ${formData.messageToCouple}` : ''}
 
+📅 Kalenderinbjudan bifogas - lägg till i din kalender!
+
 Vi ser fram emot att fira med dig!
 
 Med kärlek,
@@ -89,7 +184,6 @@ Hvala ti puno na RSVP za Ines & Haris vjenčanje! 💕
 
 === VAŠA RSVP POTVRDA ===
 Datum: 25. juli 2026
-Mjesto: Sarajevo, Bosna i Hercegovina
 
 Vaše informacije:
 • Ime: ${formData.name}
@@ -109,11 +203,21 @@ ${formData.songRequests?.filter(Boolean).length > 0
 ${formData.dietaryRequirements ? `Dijetetske potrebe: ${formData.dietaryRequirements}` : ''}
 ${formData.messageToCouple ? `Vaša poruka: ${formData.messageToCouple}` : ''}
 
+📅 Pozivnica za kalendar je priložena - dodajte u svoj kalendar!
+
 Radujemo se proslavi s vama!
 
 S ljubavlju,
 Ines & Haris 💍
     `
+
+    // Create calendar invitations based on attendance
+    const calendarEvents = createCalendarInvite(
+      language, 
+      formData.email, 
+      formData.attendingCeremony, 
+      formData.attendingReception
+    )
 
     // Send RSVP notification to couple via Resend
     try {
@@ -139,7 +243,7 @@ Ines & Haris 💍
       // Silent fail for couple notification
     }
 
-    // Send confirmation email to guest via Resend
+    // Send confirmation email to guest via Resend (with calendar attachments)
     try {
       const guestResponse = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -154,7 +258,8 @@ Ines & Haris 💍
             ? 'RSVP Bekräftelse - Ines & Haris Bröllop 💕' 
             : 'RSVP Potvrda - Ines & Haris Vjenčanje 💕',
           text: confirmationContent,
-          html: `<pre style="font-family: Arial, sans-serif; white-space: pre-wrap; line-height: 1.4;">${confirmationContent}</pre>`
+          html: `<pre style="font-family: Arial, sans-serif; white-space: pre-wrap; line-height: 1.4;">${confirmationContent}</pre>`,
+          attachments: calendarEvents
         })
       })
 
