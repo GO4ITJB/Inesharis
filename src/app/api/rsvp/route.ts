@@ -57,8 +57,8 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       : 'Ines & Haris - Svadba'
     
     const receptionDescription = language === 'sv' 
-      ? `Välkommen till Ines & Haris mottagning!\n\nPlats: [Reception venue]\nAdress: [Reception address]\n\nVi ser fram emot att fira med dig! 💕`
-      : `Dobrodošli na Ines & Haris svadbu!\n\nMjesto: [Reception venue]\nAdresa: [Reception address]\n\nRadujemo se proslavi s vama! 💕`
+      ? `Välkommen till Ines & Haris mottagning!\n\nPlats: Butmirska cesta 18, Ilidža\nAdress: Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnien\n\nVi ser fram emot att fira med dig! 💕`
+      : `Dobrodošli na Ines & Haris svadbu!\n\nMjesto: Butmirska cesta 18, Ilidža\nAdresa: Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosna i Hercegovina\n\nRadujemo se proslavi s vama! 💕`
 
     const receptionIcs = [
       'BEGIN:VCALENDAR',
@@ -73,7 +73,7 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       `DTEND:${receptionEndDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `SUMMARY:${receptionTitle}`,
       `DESCRIPTION:${receptionDescription.replace(/\n/g, '\\n')}`,
-      `LOCATION:[Reception venue], [Reception address]`,
+      `LOCATION:Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnia and Herzegovina`,
       'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
       `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${guestName}`,
       'BEGIN:VALARM',
