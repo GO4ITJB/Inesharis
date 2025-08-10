@@ -4,6 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Custom Properties for Wedding Colors */
+:root {
+  --soft-greige: #D8D3CD;
+  --warm-dust-pink: #D6A9A3;
+  --blush-beige: #EADCD5;
+  --creamy-sand: #F2E7DE;
+  --warm-background: #F6EEE9;
+  --wedding-dark: #6B5B57;
+  --wedding-pink: #D6A9A3;
+  --wedding-greige: #D8D3CD;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -36,16 +48,6 @@
   a {
     @apply transition-colors duration-300;
   }
-
-  :root {
-    /* Wedding Color Palette */
-    --soft-greige: #D8D3CD;
-    --warm-dust-pink: #D6A9A3;
-    --blush-beige: #EADCD5;
-    --creamy-sand: #F2E7DE;
-    --warm-background: #F6EEE9;
-    --wedding-dark: #6B5B57;
-  }
 }
 
 @layer components {
@@ -67,6 +69,10 @@
 
   /* Wedding-specific styles */
   .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .font-coterie {
     font-family: 'Dancing Script', cursive;
   }
 
