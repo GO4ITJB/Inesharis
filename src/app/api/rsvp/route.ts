@@ -229,7 +229,7 @@ Ines & Haris 💍
         },
         body: JSON.stringify({
           from: 'Ines & Haris <noreply@inesharis.se>',
-          to: 'jovicabumbulovic@gmail.com', // Couple's email
+          to: 'harismehmedagic@live.se', // Couple's email
           subject: `New RSVP from ${formData.name}`,
           text: coupleEmailContent,
           html: `<pre style="font-family: Arial, sans-serif; white-space: pre-wrap; line-height: 1.4;">${coupleEmailContent}</pre>`

@@ -3,7 +3,7 @@ export const translations = {
     // Hero Section
     saveTheDate: "Spara Datumet",
     weAreGettingMarried: "Vi Ska Gifta Oss!",
-    weddingDate: "Fredag, 25 Juli 2026",
+    weddingDate: "Lördag, 25 Juli 2026",
     rsvpNow: "OSA NU",
     bookHotel: "BOKA HOTELL",
     
@@ -91,7 +91,7 @@ export const translations = {
     // Hero Section
     saveTheDate: "Zapamti Datum",
     weAreGettingMarried: "Vjenčavamo Se!",
-    weddingDate: "Petak, 25. juli 2026",
+    weddingDate: "Subota, 25. juli 2026",
     rsvpNow: "POTVRDI DOLAZAK",
     bookHotel: "REZERVIŠI HOTEL",
     
