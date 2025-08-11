@@ -43,9 +43,9 @@ export default function Home() {
       <Header language="sv" />
       <main>
         <Hero language="sv" />
-        {/* <AnimatedTravelSchedule />
+        <AnimatedTravelSchedule />
         <RunOfShow />
-        <VenueAccommodations /> */}
+        <VenueAccommodations />
       </main>
     </>
   )
