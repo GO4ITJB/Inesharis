@@ -9,8 +9,10 @@ module.exports = {
     extend: {
       colors: {
         'wedding-pink': '#D6A9A3',
-        'wedding-dark': '#6B5B57',
+        'wedding-dark': '#D6A9A3',
+        'wedding-brown': '#6B5B57',
         'wedding-greige': '#D8D3CD',
+        'wedding-sand': '#F2E7DE',
         'warm-background': '#F6EEE9',
       },
       typography: {

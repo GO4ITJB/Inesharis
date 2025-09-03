@@ -10,8 +10,9 @@ export const translations = {
     // Navigation
     ourStory: "Vår Historia",
     programNav: "Program",
-    venueAccommodation: "Plats & Boende",
-    questionsAnswers: "Frågor & Svar",
+    venueAccommodation: "Hotell & boende",
+    questionsAnswers: "FAQ",
+    thingsToDoSarajevo: "Att göra i Sarajevo",
     rsvp: "OSA",
     
     // Our Story
@@ -90,7 +91,7 @@ export const translations = {
   ba: {
     // Hero Section
     saveTheDate: "Zapamti Datum",
-    weAreGettingMarried: "Vjenčavamo Se!",
+    weAreGettingMarried: "Vjencajemo  Se!",
     weddingDate: "Subota, 25. juli 2026",
     rsvpNow: "POTVRDI DOLAZAK",
     bookHotel: "REZERVIŠI HOTEL",
@@ -98,8 +99,9 @@ export const translations = {
     // Navigation
     ourStory: "Naša Priča",
     programNav: "Program",
-    venueAccommodation: "Lokacija i Smještaj",
-    questionsAnswers: "Pitanja i Odgovori",
+    venueAccommodation: "Hoteli i smještaj",
+    questionsAnswers: "Često postavljana pitanja",
+    thingsToDoSarajevo: "Šta da radite u Sarajevu",
     rsvp: "POTVRDI",
     
     // Our Story  

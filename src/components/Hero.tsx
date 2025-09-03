@@ -96,7 +96,7 @@ export default function Hero({ language = 'sv' }: HeroProps) {
           </Link>
           
           <a 
-            href="#venue-accommodations"
+            href="#rekommenderade-hotell"
             className="wedding-button-secondary px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all duration-300 hover:scale-105"
           >
             {t.bookHotel}

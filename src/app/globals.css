@@ -235,3 +235,7 @@
 .menu-none {
   display: none !important;
 }
+
+.max-w-4xl {
+  max-width: 68rem;
+}
