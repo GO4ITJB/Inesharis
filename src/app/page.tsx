@@ -47,13 +47,13 @@ export default function Home() {
       <Header language="sv" />
       <main>
         <Hero language="sv" />
-        <AnimatedTravelSchedule />
-        <FAQ />
-        <VenueAccommodations />
-        <ThingsToDoSarajevo />
+        <AnimatedTravelSchedule language="sv" />
+        <FAQ language="sv" />
+        <VenueAccommodations language="sv" />
+        <ThingsToDoSarajevo language="sv" />
         {/* <RunOfShow /> */}
       </main>
-      <Footer />
+              <Footer language="sv" />
     </>
   )
 } 

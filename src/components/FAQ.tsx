@@ -2,42 +2,21 @@
 
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { translations, Language } from '@/lib/translations'
 
 interface FAQItem {
   question: string
   answer: string
+  hasClickableLink?: boolean
+  linkText?: string
+  linkHref?: string
 }
 
-const faqData: FAQItem[] = [
-  {
-    question: "Hur tar jag mig till Sarajevo och när går flygen?",
-    answer: "Sarajevo flygplats ligger ett stenkast från Hotel Hills och smidigast är att ta ett direktflyg med Ryanair eller Wizzair från valfri svensk stad. Avgångar finns flera gånger i veckan, men även fre-sön eller fre-mån. Försök gärna att boka i tid för bästa pris."
-  },
-  {
-    question: "Vart bör jag bo i Sarajevo?",
-    answer: "Under bröllopsnatten så rekommenderar vi att ni checkar in på Hotel Hills för komplett komfort, men absolut inget måste. Klicka här för mer info."
-  },
-  {
-    question: "Hur tar jag mig runt i Sarajevo?",
-    answer: "Taxi är billigt och absolut smidigast pga. trafiken. Spårvagnar och buss finns likaså. Zuti taxi är bäst, därefter crveni taxi. Be om pris innan eller taxameter."
-  },
-  {
-    question: "Klädkod?",
-    answer: "Klänning för damer och finbyxor, skjorta och kavaj för herrar. Kostym om möjligt. Vi kommer att ha rosa tema, så vill du göra oss extra glada så spexa gärna till det med rosa outfit eller detaljer, men absolut inget måste."
-  },
-  {
-    question: "Hur funkar det med presenter/gåvor?",
-    answer: "Kutym är att man ger brudparet valfri summa i ett kuvert där man skickar med sina skrivna önskningar och det lämnas under kvällen i anvisad box. Detta som en lyckönskning för dess gemensamma framtid."
-  },
-  {
-    question: "Kommer man ha ceremoniell utsmyckning eller corsage?",
-    answer: "Ja, vid entrén så kommer varje gäst att få likt en corsage och kutym är att ge en mindre symbolisk summa för utsmyckningen."
-  },
-  {
-    question: "Vad bör jag se och göra i Sarajevo dagarna innan och efter bröllopet?",
-    answer: "Sarajevo är en fantastisk stad med dess kulturliv och vi har försökt att sammanfatta det på sida 5, längre ner."
-  }
-]
+interface FAQProps {
+  language?: Language
+}
+
+
 
 const FAQItem = ({ item }: { item: FAQItem }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -63,24 +42,14 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
       {isOpen && (
         <div className="pb-8 mt-2">
           <div className="text-wedding-brown/80 leading-relaxed">
-            {item.question === "Vart bör jag bo i Sarajevo?" ? (
+            {item.hasClickableLink ? (
               <>
-                Under bröllopsnatten så rekommenderar vi att ni checkar in på Hotel Hills för komplett komfort, men absolut inget måste.{' '}
+                {item.answer}{' '}
                 <a 
-                  href="#rekommenderade-hotell" 
+                  href={item.linkHref} 
                   className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
                 >
-                  Klicka här för mer info
-                </a>.
-              </>
-            ) : item.question === "Hur tar jag mig runt i Sarajevo?" ? (
-              <>
-                Taxi är billigt och absolut smidigast pga. trafiken. Spårvagnar och buss finns likaså. Zuti taxi är bäst, därefter crveni taxi. Be om pris innan eller taxameter.{' '}
-                <a 
-                  href="#transport" 
-                  className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
-                >
-                  Se transportinfo
+                  {item.linkText}
                 </a>.
               </>
             ) : (
@@ -93,7 +62,41 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
   )
 }
 
-export default function FAQ() {
+export default function FAQ({ language = 'sv' }: FAQProps) {
+  const t = translations[language]
+  
+  const faqData: FAQItem[] = [
+    {
+      question: t.faqQuestions.travel.question,
+      answer: t.faqQuestions.travel.answer
+    },
+    {
+      question: t.faqQuestions.accommodation.question,
+      answer: t.faqQuestions.accommodation.answer,
+      hasClickableLink: true,
+      linkText: t.clickHereForMoreInfo,
+      linkHref: "#rekommenderade-hotell"
+    },
+    {
+      question: t.faqQuestions.transport.question,
+      answer: t.faqQuestions.transport.answer,
+      hasClickableLink: true,
+      linkText: t.seeTransportInfo,
+      linkHref: "#transport"
+    },
+    {
+      question: t.faqQuestions.dressCode.question,
+      answer: t.faqQuestions.dressCode.answer
+    },
+    {
+      question: t.faqQuestions.gifts.question,
+      answer: t.faqQuestions.gifts.answer
+    },
+    {
+      question: t.faqQuestions.corsage.question,
+      answer: t.faqQuestions.corsage.answer
+    }
+  ]
   return (
     <section id="faq" className="relative z-[5] py-20 bg-white text-wedding-dark">
       <div className="container mx-auto px-6 relative z-10">
@@ -132,13 +135,13 @@ export default function FAQ() {
           <div className="inline-block">
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mb-6"></div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-script text-wedding-brown mb-4">
-              Vanliga Frågor
+              {t.faqTitle}
             </h2>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mx-auto"></div>
           </div>
           
           <p className="text-lg md:text-xl text-wedding-brown/70 font-light max-w-2xl mx-auto leading-relaxed mt-8">
-            Här hittar du svar på de vanligaste frågorna om vårt bröllop
+            {t.faqDescription}
           </p>
         </div>
 
@@ -154,7 +157,7 @@ export default function FAQ() {
         {/* Additional Note */}
         <div className="text-center mt-12">
           <p className="text-wedding-brown/60 font-light italic">
-            Har du fler frågor? Tveka inte att kontakta oss!
+            {t.faqNote}
           </p>
         </div>
       </div>

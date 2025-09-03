@@ -2,38 +2,39 @@
 
 import React from 'react'
 import { GiPartyPopper } from 'react-icons/gi'
+import { translations, Language } from '@/lib/translations'
 
 interface TimelineEvent {
   time: string
-  event: string
-  description?: string
+  eventKey: string
+  descriptionKey: string
   iconType: 'guests' | 'groom' | 'bride' | 'rasams' | 'dinner' | 'dances'
   symbols?: string[]
 }
 
-const weddingSchedule: TimelineEvent[] = [
+const weddingScheduleStructure: TimelineEvent[] = [
   {
     time: "",
-    event: "VIGSEL",
-    description: "14:00-15:00 – Vigsel vid Sarajevo City Hall",
+    eventKey: "ceremony",
+    descriptionKey: "ceremony",
     iconType: "bride"
   },
   {
     time: "",
-    event: "FRI TID",
-    description: "15:00-18:00 – Fri tid, förberedelse inför kvällen",
+    eventKey: "freeTime",
+    descriptionKey: "freeTime",
     iconType: "guests"
   },
   {
     time: "",
-    event: "VÄLKOMNANDE",
-    description: "18:00 – Välkomnande till bröllopslokalen – Hotel Hills Sarajevo, första våningen",
+    eventKey: "welcome",
+    descriptionKey: "welcome",
     iconType: "groom"
   },
   {
     time: "",
-    event: "FEST & FIRANDE",
-    description: "18:00-02:00 – Släpp loss med oss och fira in vår dag. Mat, glädje, dans och kärlek!",
+    eventKey: "celebration",
+    descriptionKey: "celebration",
     iconType: "dances"
   }
 ]
@@ -77,7 +78,21 @@ const CelebrationDescription = () => {
   )
 }
 
-export default function RunOfShow() {
+interface RunOfShowProps {
+  language?: Language
+}
+
+export default function RunOfShow({ language = 'sv' }: RunOfShowProps) {
+  const t = translations[language]
+  
+  // Generate wedding schedule from translations
+  const weddingSchedule = weddingScheduleStructure.map(item => ({
+    time: item.time,
+    event: t.schedule[item.eventKey as keyof typeof t.schedule].title,
+    description: t.schedule[item.descriptionKey as keyof typeof t.schedule].description,
+    iconType: item.iconType,
+    symbols: item.symbols
+  }))
   return (
     <section id="run-of-show" className="relative z-[5] mt-[100vh] py-20 bg-wedding-sand text-wedding-dark shadow-lg">
 
@@ -324,7 +339,7 @@ export default function RunOfShow() {
           >
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mb-6"></div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-script text-wedding-brown mb-4">
-              Program
+              {t.programTitle}
             </h2>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mx-auto"></div>
           </div>
@@ -332,19 +347,19 @@ export default function RunOfShow() {
           <p 
             className="text-lg md:text-xl text-wedding-brown/70 font-light max-w-2xl mx-auto leading-relaxed mb-4"
           >
-            Tidslinje för dagen lördagen 25 juli 2026
+            {t.programDescription}
           </p>
           
           <div 
             className="text-wedding-pink font-medium text-lg tracking-wider mb-4"
           >
-            Lördag 25 juli 2026
+            {t.weddingDate}
           </div>
           
           <div 
             className="text-sm text-wedding-brown/60 font-light max-w-3xl mx-auto leading-relaxed"
           >
-            <p className="mb-2">Klänning för damer, finbyxor, skjorta och kavaj för herrar.</p>
+            <p className="mb-2">{t.dressCodeDescription}</p>
             {/* <p>Släpp loss med oss och fira in vår dag. Mat, glädje, dans och kärlek!</p> */}
           </div>
         </div>

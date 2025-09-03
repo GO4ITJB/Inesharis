@@ -21,12 +21,12 @@ export default function BosnianHome() {
       <Header language="ba" />
       <main>
         <Hero language="ba" />
-        <AnimatedTravelSchedule />
-        <FAQ />
-        <VenueAccommodations />
-        <ThingsToDoSarajevo />
+        <AnimatedTravelSchedule language="ba" />
+        <FAQ language="ba" />
+        <VenueAccommodations language="ba" />
+        <ThingsToDoSarajevo language="ba" />
       </main>
-      <Footer />
+              <Footer language="ba" />
     </>
   )
 } 

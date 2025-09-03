@@ -1,12 +1,13 @@
 'use client'
 
 import React from 'react'
+import { translations, Language } from '@/lib/translations'
 
 interface VenueInfo {
   name: string
   address: string
   city: string
-  description: string
+  descriptionKey: string
   mapUrl: string
   directionsUrl: string
   phone?: string
@@ -24,7 +25,7 @@ const weddingVenue: VenueInfo = {
   name: "Vijecnica",
   address: "Obala Kulina bana bb",
   city: "71000 Sarajevo, Bosnia and Herzegovina", 
-  description: "Historiskt stadshus där vår vigsel kommer att äga rum. En vacker symbol för kärlek och kulturarv.",
+  descriptionKey: "vijecnica",
   mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sVijecnica!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
   directionsUrl: "https://maps.google.com/?q=Vijecnica,Sarajevo",
   image: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npjFpKweuDrWMXOALLOJsbLXni6ZEshC5Jv7H4niKzuDOpA5zYGOpSHpS-Uy4UoojFBi6arGDOzij6JVjY09X4APosAZNy03ZL94JJfogbnh4Rw2iSgpm__I0W4IKjU_02Y2KPT=s294-w294-h220-n-k-no"
@@ -35,7 +36,7 @@ const recommendedHotels: VenueInfo[] = [
     name: "Hotel Europe Sarajevo",
     address: "Vladislava Skarića 5",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
-    description: "Centralt precis i stadskärnan. Eleganta boenden i hjärtat av staden.",
+    descriptionKey: "europe",
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+Europe+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Hotel+Europe+Sarajevo",
     website: "https://www.hoteleuropegroup.ba/en/europe",
@@ -45,7 +46,7 @@ const recommendedHotels: VenueInfo[] = [
     name: "Hotel President",
     address: "Bazardžani 1",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
-    description: "Centralt och bra hotell i stadskärnan. Modern komfort i stadens centrum.",
+    descriptionKey: "president",
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+President+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Hotel+President+Sarajevo",
     website: "https://hotelpresident.ba/",
@@ -55,7 +56,7 @@ const recommendedHotels: VenueInfo[] = [
     name: "Courtyard by Marriott Sarajevo",
     address: "Skenderija 43",
     city: "71000 Sarajevo, Bosnia and Herzegovina", 
-    description: "5-6 min bilfärd från stadskärnan. Internationell standard med utmärkta bekvämligheter.",
+    descriptionKey: "courtyard",
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sCourtyard+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Courtyard+by+Marriott+Sarajevo",
     website: "https://www.marriott.com/en-us/hotels/sjjcy-courtyard-sarajevo/overview/",
@@ -65,7 +66,7 @@ const recommendedHotels: VenueInfo[] = [
     name: "Swissôtel Sarajevo",
     address: "Vrbanja 1",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
-    description: "7 min från stadskärnan. Lyxhotell med förstklassiga bekvämligheter och service.",
+    descriptionKey: "swissotel",
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sSwissotel+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Swissotel+Sarajevo",
     website: "https://www.swissotel.com/hotels/sarajevo/",
@@ -75,7 +76,7 @@ const recommendedHotels: VenueInfo[] = [
     name: "Mövenpick Hotel Sarajevo",
     address: "Trg djece Sarajeva 4",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
-    description: "Ligger strax efter Swissôtel. Förstklassigt läge med exceptionell service.",
+    descriptionKey: "movenpick",
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sMövenpick+Hotel+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Mövenpick+Hotel+Sarajevo",
     website: "https://all.accor.com/hotel/B1F7/index.en.shtml",
@@ -85,7 +86,7 @@ const recommendedHotels: VenueInfo[] = [
     name: "Hotel Hills Sarajevo",
     address: "Butmirska Cesta bb",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
-    description: "Där bröllopet kommer vara. Ligger 20 min utanför stadskärnan, men bo gärna där under bröllopsnatten.",
+    descriptionKey: "hills",
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+Hills+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Hotel+Hills+Sarajevo",
     website: "https://hotelhills.ba/",
@@ -95,7 +96,7 @@ const recommendedHotels: VenueInfo[] = [
     name: "Malak Regency",
     address: "Butmirska Cesta 18",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
-    description: "En bit utanför stan ut mot bröllopet. Bekvämt läge nära bröllopslokalen.",
+    descriptionKey: "malak",
     mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sMalak+Regency!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Malak+Regency+Sarajevo",
     website: "https://www.malakregency.com/",
@@ -116,7 +117,8 @@ const taxiCompanies: TaxiCompany[] = [
   }
 ]
 
-const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed?: boolean }) => {
+const VenueCard = ({ venue, language, isReversed = false }: { venue: VenueInfo; language: Language; isReversed?: boolean }) => {
+  const t = translations[language]
   return (
     <div className="rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative h-full flex flex-col"
          style={{
@@ -137,7 +139,7 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
         {/* Venue type badge */}
         <div className="absolute top-4 left-4">
           <span className="bg-wedding-pink/90 text-white text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm">
-            {venue.name === "Vijecnica" ? "Vigsellokal" : "Hotell"}
+            {venue.name === "Vijecnica" ? t.ceremonyVenue : t.hotel}
           </span>
         </div>
 
@@ -174,7 +176,7 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
 
         {/* Description */}
         <p className="text-wedding-brown/80 text-sm leading-relaxed mb-4 flex-grow">
-          {venue.description}
+          {t.hotelDescriptions[venue.descriptionKey as keyof typeof t.hotelDescriptions]}
         </p>
 
         {/* Action Buttons */}
@@ -197,14 +199,14 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
               target="_blank"
               rel="noopener noreferrer"
               className="text-wedding-pink hover:text-wedding-brown text-sm transition-colors"
-                              title="Få vägbeskrivning"
+              title={t.getDirections}
             >
               <i className="fas fa-directions text-xs mr-1"></i>
-              Vägbeskrivning
+              {t.getDirections}
             </a>
           </div>
 
-          {/* Besök Webbsida */}
+          {/* Visit Website */}
           {venue.website && (
             <a
               href={venue.website}
@@ -212,7 +214,7 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
               rel="noopener noreferrer"
               className="bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
             >
-              Besök Webbsida
+              {t.viewWebsite}
             </a>
           )}
         </div>
@@ -221,7 +223,12 @@ const VenueCard = ({ venue, isReversed = false }: { venue: VenueInfo; isReversed
   )
 }
 
-export default function VenueAccommodations() {
+interface VenueAccommodationsProps {
+  language?: Language
+}
+
+export default function VenueAccommodations({ language = 'sv' }: VenueAccommodationsProps) {
+  const t = translations[language]
   const ref = React.useRef<HTMLDivElement>(null)
   const isInView = false // Removed framer-motion useInView
 
@@ -242,7 +249,7 @@ export default function VenueAccommodations() {
           >
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mb-6"></div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-script text-wedding-brown mb-4">
-              Plats & Boende
+              {t.venueTitle}
             </h2>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mx-auto"></div>
           </div>
@@ -251,7 +258,7 @@ export default function VenueAccommodations() {
             className="text-lg md:text-xl text-wedding-brown/70 font-light max-w-2xl mx-auto leading-relaxed"
             // Removed framer-motion motion components
           >
-            Allt du behöver veta om vår plats och var du kan bo i vackra Sarajevo.
+            {t.venueDescription}
           </p>
         </div>
 
@@ -259,18 +266,18 @@ export default function VenueAccommodations() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex justify-center mb-16">
             <div className="w-full lg:w-1/2">
-              <VenueCard venue={weddingVenue} />
+              <VenueCard venue={weddingVenue} language={language} />
             </div>
           </div>
 
           {/* Hotels Section */}
           <div id="rekommenderade-hotell" className="mb-16">
             <h3 className="text-3xl md:text-4xl font-script text-wedding-brown mb-8 text-center">
-              Rekommenderade Hotell
+              {t.recommendedHotels}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recommendedHotels.map((hotel, index) => (
-                <VenueCard key={index} venue={hotel} />
+                <VenueCard key={index} venue={hotel} language={language} />
               ))}
             </div>
           </div>
@@ -289,11 +296,11 @@ export default function VenueAccommodations() {
             // Removed framer-motion motion components
           >
             <h3 id="transport" className="text-4xl lg:text-5xl font-script text-wedding-brown mb-4">
-              Transport
+              {t.transportation}
             </h3>
             <div className="w-16 h-px bg-wedding-pink mx-auto mb-6"></div>
             <p className="text-wedding-brown/70 max-w-lg mx-auto">
-              Pålitliga transportalternativ för att ta dig till och från vårt firande.
+              {t.transportDescription}
             </p>
           </div>
 
@@ -332,25 +339,25 @@ export default function VenueAccommodations() {
           >
             <div className="bg-wedding-sand/30 rounded-2xl p-8 border border-wedding-pink/20">
               <h4 className="text-xl font-script text-wedding-brown mb-4">
-                Resetips
+                {t.travelTips}
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                 <div>
                   <div className="flex items-center mb-2">
                     <i className="fas fa-car text-wedding-pink mr-3"></i>
-                    <span className="font-medium text-wedding-brown">Parkering</span>
+                    <span className="font-medium text-wedding-brown">{t.parking}</span>
                   </div>
                   <p className="text-wedding-brown/70 text-sm">
-                    Begränsad parkering nära lokalen. Vi rekommenderar att använda taxi.
+                    {t.parkingInfo}
                   </p>
                 </div>
                 <div>
                   <div className="flex items-center mb-2">
                     <i className="fas fa-clock text-wedding-pink mr-3"></i>
-                    <span className="font-medium text-wedding-brown">Restid</span>
+                    <span className="font-medium text-wedding-brown">{t.travelTime}</span>
                   </div>
                   <p className="text-wedding-brown/70 text-sm">
-                    Hotell till lokal är ungefär 10-15 minuter med bil.
+                    {t.travelTimeInfo}
                   </p>
                 </div>
               </div>

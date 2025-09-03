@@ -1,8 +1,14 @@
 'use client'
 
 import React from 'react'
+import { translations, Language } from '@/lib/translations'
 
-export default function Footer() {
+interface FooterProps {
+  language?: Language
+}
+
+export default function Footer({ language = 'sv' }: FooterProps) {
+  const t = translations[language]
   // Scroll to top smoothly
   const scrollToTop = () => {
     window.scrollTo({
@@ -22,24 +28,24 @@ export default function Footer() {
               Ines & Haris
             </h3>
             <p className="text-sm leading-relaxed opacity-70">
-              Vi ser fram emot att fira vår kärlek tillsammans med er i vackra Sarajevo.
+              {t.footerDescription}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="text-center">
             <h4 className="text-lg font-semibold mb-3">
-              Snabblänkar
+              {t.quickLinks}
             </h4>
             <div className="space-y-2">
               <a href="#faq" className="block opacity-70 hover:opacity-100 transition-opacity text-sm">
-                FAQ
+                {t.faqLink}
               </a>
               <a href="#rekommenderade-hotell" className="block opacity-70 hover:opacity-100 transition-opacity text-sm">
-                Hotell
+                {t.hotellLink}
               </a>
               <a href="#transport" className="block opacity-70 hover:opacity-100 transition-opacity text-sm">
-                Transport
+                {t.transportLink}
               </a>
             </div>
           </div>
@@ -47,13 +53,13 @@ export default function Footer() {
           {/* Wedding Date */}
           <div className="text-center md:text-right">
             <h4 className="text-lg font-semibold mb-3">
-              Bröllopsdag
+              {t.weddingDateFooter}
             </h4>
             <p className="text-sm mb-1 opacity-70">
-              Lördag, 25 Juli 2026
+              {t.weddingDateText}
             </p>
             <p className="text-sm opacity-70">
-              Sarajevo, Bosnia and Herzegovina
+              {t.weddingLocation}
             </p>
           </div>
         </div>
@@ -63,7 +69,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Copyright */}
             <p className="text-xs text-center md:text-left opacity-60">
-              © 2026 Ines & Haris. Med kärlek från Sarajevo.
+              {t.copyrightText}
             </p>
 
             {/* Back to Top Button */}
@@ -72,7 +78,7 @@ export default function Footer() {
               className="bg-wedding-pink hover:bg-wedding-pink/90 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 flex items-center gap-2 shadow-lg text-sm"
             >
               <i className="fas fa-arrow-up text-xs"></i>
-              Tillbaka till toppen
+              {t.backToTop}
             </button>
           </div>
         </div>
