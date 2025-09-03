@@ -107,10 +107,12 @@ const taxiCompanies: TaxiCompany[] = [
   {
     name: "Žuti Taxi",
     phone: "+387 33 663 555",
+    description: "",
   },
   {
     name: "Crveni Taxi",
     phone: "+387 33 468 728",
+    description: "",
   }
 ]
 
