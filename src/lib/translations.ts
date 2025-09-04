@@ -22,7 +22,6 @@ export const translations = {
     // Run of Show
     programTitle: "Program",
     programDescription: "Tidslinje för dagen lördagen 25 juli 2026",
-    weddingDate: "Lördag 25 juli 2026",
     dressCodeDescription: "Klänning för damer, finbyxor, skjorta och kavaj för herrar.",
     
     // Wedding Schedule
@@ -45,10 +44,6 @@ export const translations = {
       }
     },
     
-    // Venue
-    venueAccommodations: "Plats & Boende",
-    venueDescription: "Allt du behöver veta om vår plats och var du kan bo i vackra Sarajevo.",
-    
     // Time units
     months: "MÅNADER",
     days: "DAGAR", 
@@ -57,7 +52,7 @@ export const translations = {
     seconds: "SEKUNDER",
 
     // RSVP Form
-    welcome: "Välkommen!",
+    rsvpWelcome: "Välkommen!",
     welcomeMessage: "Vi är så glada att du vill vara med och fira vår stora dag",
     weddingEventDate: "25 Juli 2026",
     sarajevoBosnia: "Sarajevo, Bosnien",
@@ -267,7 +262,6 @@ export const translations = {
     // Run of Show
     programTitle: "Program",
     programDescription: "Raspored za dan subotu 25. juli 2026",
-    weddingDate: "Subota 25. juli 2026",
     dressCodeDescription: "Haljina za dame, elegantne pantalone, košulja i sako za muškarce.",
     
     // Wedding Schedule
@@ -290,10 +284,6 @@ export const translations = {
       }
     },
     
-    // Venue
-    venueAccommodations: "Lokacija i Smještaj", 
-    venueDescription: "Sve što trebate znati o našoj lokaciji i gdje se možete odsjesti u prekrasnom Sarajevu.",
-    
     // Time units
     months: "MJESECI",
     days: "DANI",
@@ -302,7 +292,7 @@ export const translations = {
     seconds: "SEKUNDI",
 
     // RSVP Form
-    welcome: "Dobrodošli!",
+    rsvpWelcome: "Dobrodošli!",
     welcomeMessage: "Presretni smo što želite da budete dio našeg velikog dana",
     weddingEventDate: "25. juli 2026",
     sarajevoBosnia: "Sarajevo, Bosna i Hercegovina",

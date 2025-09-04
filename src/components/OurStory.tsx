@@ -66,7 +66,19 @@ const FontAwesomeIcon = ({ type }: { type: string }) => {
   )
 }
 
-const CelebrationDescription = () => {
+const CelebrationDescription = ({ language = 'sv' }: { language?: Language }) => {
+  if (language === 'ba') {
+    return (
+      <div className="text-sm leading-relaxed text-wedding-brown/80 font-light">
+        18:00-02:00 – Opustite se s nama <i className="fas fa-champagne-glasses text-wedding-pink mx-1"></i> i proslavite naš dan. 
+        <i className="fas fa-utensils text-wedding-pink mx-1"></i> Hrana, 
+        <i className="fas fa-music text-wedding-pink mx-1"></i> muzika, 
+        <GiPartyPopper className="inline text-wedding-pink mx-1" style={{ fontSize: '1.2rem' }} /> ples i 
+        <i className="fas fa-heart text-wedding-pink mx-1"></i> ljubav!
+      </div>
+    )
+  }
+  
   return (
     <div className="text-sm leading-relaxed text-wedding-brown/80 font-light">
       18:00-02:00 – Släpp loss med oss <i className="fas fa-champagne-glasses text-wedding-pink mx-1"></i> och fira in vår dag. 
@@ -396,8 +408,8 @@ export default function RunOfShow({ language = 'sv' }: RunOfShowProps) {
                                 {event.event}
                               </div>
                               {event.description && (
-                                event.event === "FEST & FIRANDE" ? (
-                                  <CelebrationDescription />
+                                event.event === "FEST & FIRANDE" || event.event === "SLAVLJE I PROSLAVA" ? (
+                                  <CelebrationDescription language={language} />
                                 ) : (
                                   <div className="text-sm leading-relaxed text-wedding-brown/80 font-light">
                                     {event.description}
@@ -426,8 +438,8 @@ export default function RunOfShow({ language = 'sv' }: RunOfShowProps) {
                                 {event.event}
                               </div>
                               {event.description && (
-                                event.event === "FEST & FIRANDE" ? (
-                                  <CelebrationDescription />
+                                event.event === "FEST & FIRANDE" || event.event === "SLAVLJE I PROSLAVA" ? (
+                                  <CelebrationDescription language={language} />
                                 ) : (
                                   <div className="text-sm leading-relaxed text-wedding-brown/80 font-light">
                                     {event.description}

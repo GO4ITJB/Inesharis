@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { translations, Language } from '@/lib/translations'
 
 interface FAQItem {
@@ -32,9 +32,9 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
         </h3>
         <div className="flex-shrink-0 text-wedding-pink">
           {isOpen ? (
-            <ChevronUp className="w-5 h-5" />
+            <FaChevronUp className="w-5 h-5" />
           ) : (
-            <ChevronDown className="w-5 h-5" />
+            <FaChevronDown className="w-5 h-5" />
           )}
         </div>
       </button>
