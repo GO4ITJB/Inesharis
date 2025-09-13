@@ -1,35 +1,49 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { translations, Language } from '@/lib/translations'
+import React from "react";
+import { translations, Language } from "@/lib/translations";
 
 interface VenueInfo {
-  name: string
-  address: string
-  city: string
-  descriptionKey: string
-  mapUrl: string
-  directionsUrl: string
-  phone?: string
-  website?: string
-  image: string
+  name: string;
+  address: string;
+  city: string;
+  descriptionKey: string;
+  mapUrl: string;
+  directionsUrl: string;
+  phone?: string;
+  website?: string;
+  image: string;
 }
 
 interface TaxiCompany {
-  name: string
-  phone: string
-  description: string
+  name: string;
+  phone: string;
+  description: string;
 }
 
 const weddingVenue: VenueInfo = {
   name: "Vijecnica",
   address: "Obala Kulina bana bb",
-  city: "71000 Sarajevo, Bosnia and Herzegovina", 
+  city: "71000 Sarajevo, Bosnia and Herzegovina",
   descriptionKey: "vijecnica",
-  mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sVijecnica!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+  mapUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sVijecnica!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
   directionsUrl: "https://maps.google.com/?q=Vijecnica,Sarajevo",
-  image: "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npjFpKweuDrWMXOALLOJsbLXni6ZEshC5Jv7H4niKzuDOpA5zYGOpSHpS-Uy4UoojFBi6arGDOzij6JVjY09X4APosAZNy03ZL94JJfogbnh4Rw2iSgpm__I0W4IKjU_02Y2KPT=s294-w294-h220-n-k-no"
-}
+  image:
+    "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npjFpKweuDrWMXOALLOJsbLXni6ZEshC5Jv7H4niKzuDOpA5zYGOpSHpS-Uy4UoojFBi6arGDOzij6JVjY09X4APosAZNy03ZL94JJfogbnh4Rw2iSgpm__I0W4IKjU_02Y2KPT=s294-w294-h220-n-k-no",
+};
+
+const hillsVenue: VenueInfo = {
+  name: "Hotel Hills Sarajevo",
+  address: "Butmirska Cesta bb",
+  city: "71000 Sarajevo, Bosnia and Herzegovina",
+  descriptionKey: "hills",
+  mapUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+Hills+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+  directionsUrl: "https://maps.google.com/?q=Hotel+Hills+Sarajevo",
+  website: "https://hotelhills.ba/",
+  image: "/nocna-hotel-hills-1920x1080-1.jpg",
+};
 
 const recommendedHotels: VenueInfo[] = [
   {
@@ -37,72 +51,74 @@ const recommendedHotels: VenueInfo[] = [
     address: "Vladislava Skarića 5",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "europe",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+Europe+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+    mapUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+Europe+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Hotel+Europe+Sarajevo",
     website: "https://www.hoteleuropegroup.ba/en/europe",
-    image: "https://lh3.googleusercontent.com/p/AF1QipNBt8Ff96Huz8Dp5A8jun6-5Kf0pFF-AWq8JtmK=s680-w680-h510-rw"
+    image:
+      "https://lh3.googleusercontent.com/p/AF1QipNBt8Ff96Huz8Dp5A8jun6-5Kf0pFF-AWq8JtmK=s680-w680-h510-rw",
   },
   {
     name: "Hotel President",
     address: "Bazardžani 1",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "president",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+President+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+    mapUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+President+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Hotel+President+Sarajevo",
     website: "https://hotelpresident.ba/",
-    image: "https://lh3.googleusercontent.com/p/AF1QipNTKqnNJzDUF8768BG-iEZyUh0utevTeEMgrkpf=s680-w680-h510-rw"
+    image:
+      "https://lh3.googleusercontent.com/p/AF1QipNTKqnNJzDUF8768BG-iEZyUh0utevTeEMgrkpf=s680-w680-h510-rw",
   },
   {
     name: "Courtyard by Marriott Sarajevo",
     address: "Skenderija 43",
-    city: "71000 Sarajevo, Bosnia and Herzegovina", 
+    city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "courtyard",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sCourtyard+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+    mapUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sCourtyard+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Courtyard+by+Marriott+Sarajevo",
-    website: "https://www.marriott.com/en-us/hotels/sjjcy-courtyard-sarajevo/overview/",
-    image: "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627563262.jpg?k=dbf4c2e56d82348b632445007a341fcec260a6ebce2bb2e10b0808ee97dfb0a1&o="
+    website:
+      "https://www.marriott.com/en-us/hotels/sjjcy-courtyard-sarajevo/overview/",
+    image:
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/627563262.jpg?k=dbf4c2e56d82348b632445007a341fcec260a6ebce2bb2e10b0808ee97dfb0a1&o=",
   },
   {
     name: "Swissôtel Sarajevo",
     address: "Vrbanja 1",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "swissotel",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sSwissotel+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+    mapUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sSwissotel+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Swissotel+Sarajevo",
     website: "https://www.swissotel.com/hotels/sarajevo/",
-    image: "https://www.swissotel.com/assets/0/92/2119/6442451096/6442451139/6442451141/6442451931/27b70826-6f38-4c86-a57a-34adff38d841.jpg"
+    image:
+      "https://www.swissotel.com/assets/0/92/2119/6442451096/6442451139/6442451141/6442451931/27b70826-6f38-4c86-a57a-34adff38d841.jpg",
   },
   {
     name: "Mövenpick Hotel Sarajevo",
     address: "Trg djece Sarajeva 4",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "movenpick",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sMövenpick+Hotel+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+    mapUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sMövenpick+Hotel+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Mövenpick+Hotel+Sarajevo",
     website: "https://all.accor.com/hotel/B1F7/index.en.shtml",
-    image: "https://www.ahstatic.com/photos/b1f7_ho_02_p_1024x768.jpg"
-  },
-  {
-    name: "Hotel Hills Sarajevo",
-    address: "Butmirska Cesta bb",
-    city: "71000 Sarajevo, Bosnia and Herzegovina",
-    descriptionKey: "hills",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+Hills+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
-    directionsUrl: "https://maps.google.com/?q=Hotel+Hills+Sarajevo",
-    website: "https://hotelhills.ba/",
-    image: "/nocna-hotel-hills-1920x1080-1.jpg"
+    image: "https://www.ahstatic.com/photos/b1f7_ho_02_p_1024x768.jpg",
   },
   {
     name: "Malak Regency",
     address: "Butmirska Cesta 18",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "malak",
-    mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sMalak+Regency!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
+    mapUrl:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sMalak+Regency!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
     directionsUrl: "https://maps.google.com/?q=Malak+Regency+Sarajevo",
     website: "https://www.malakregency.com/",
-    image: "https://lh3.googleusercontent.com/p/AF1QipOLWgN4NsEw9ewfkhHqeP28gkr8u16ORXz7JYrR=s680-w680-h510-rw"
-  }
-]
+    image:
+      "https://lh3.googleusercontent.com/p/AF1QipOLWgN4NsEw9ewfkhHqeP28gkr8u16ORXz7JYrR=s680-w680-h510-rw",
+  },
+];
 
 const taxiCompanies: TaxiCompany[] = [
   {
@@ -114,19 +130,30 @@ const taxiCompanies: TaxiCompany[] = [
     name: "Crveni Taxi",
     phone: "+387 33 468 728",
     description: "",
-  }
-]
+  },
+];
 
-const VenueCard = ({ venue, language, isReversed = false }: { venue: VenueInfo; language: Language; isReversed?: boolean }) => {
-  const t = translations[language]
+const VenueCard = ({
+  venue,
+  language,
+  isReversed = false,
+}: {
+  venue: VenueInfo;
+  language: Language;
+  isReversed?: boolean;
+}) => {
+  const t = translations[language];
   return (
-    <div className="rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative h-full flex flex-col"
-         style={{
-           background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(254, 245, 242, 0.9))',
-           backdropFilter: 'blur(20px)',
-           WebkitBackdropFilter: 'blur(20px)',
-           border: '1px solid rgba(214, 169, 163, 0.2)',
-         }}>
+    <div
+      className="rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group relative h-full flex flex-col"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(254, 245, 242, 0.9))",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        border: "1px solid rgba(214, 169, 163, 0.2)",
+      }}
+    >
       {/* Hotel Image */}
       <div className="relative h-48 overflow-hidden">
         <img
@@ -135,11 +162,15 @@ const VenueCard = ({ venue, language, isReversed = false }: { venue: VenueInfo; 
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
-        
+
         {/* Venue type badge */}
         <div className="absolute top-4 left-4">
           <span className="bg-wedding-pink/90 text-white text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm">
-            {venue.name === "Vijecnica" ? t.ceremonyVenue : t.hotel}
+            {venue.name === "Vijecnica"
+              ? t.ceremonyVenue
+              : venue.name === "Hotel Hills Sarajevo"
+              ? "Bröllopslokal & Hotel"
+              : t.hotel}
           </span>
         </div>
 
@@ -176,13 +207,17 @@ const VenueCard = ({ venue, language, isReversed = false }: { venue: VenueInfo; 
 
         {/* Description */}
         <p className="text-wedding-brown/80 text-sm leading-relaxed mb-4 flex-grow">
-          {t.hotelDescriptions[venue.descriptionKey as keyof typeof t.hotelDescriptions]}
+          {
+            t.hotelDescriptions[
+              venue.descriptionKey as keyof typeof t.hotelDescriptions
+            ]
+          }
         </p>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-2 border-t border-wedding-sand/50 mt-auto">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-0 pt-2 border-t border-wedding-sand/50 mt-auto">
           {/* Contact Info */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center justify-center md:justify-start space-x-3">
             {venue.phone && (
               <a
                 href={`tel:${venue.phone}`}
@@ -193,7 +228,7 @@ const VenueCard = ({ venue, language, isReversed = false }: { venue: VenueInfo; 
                 <span className="sr-only">Phone</span>
               </a>
             )}
-            
+
             <a
               href={venue.directionsUrl}
               target="_blank"
@@ -212,7 +247,7 @@ const VenueCard = ({ venue, language, isReversed = false }: { venue: VenueInfo; 
               href={venue.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+              className="bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 text-center"
             >
               {t.viewWebsite}
             </a>
@@ -220,26 +255,30 @@ const VenueCard = ({ venue, language, isReversed = false }: { venue: VenueInfo; 
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 interface VenueAccommodationsProps {
-  language?: Language
+  language?: Language;
 }
 
-export default function VenueAccommodations({ language = 'sv' }: VenueAccommodationsProps) {
-  const t = translations[language]
-  const ref = React.useRef<HTMLDivElement>(null)
-  const isInView = false // Removed framer-motion useInView
+export default function VenueAccommodations({
+  language = "sv",
+}: VenueAccommodationsProps) {
+  const t = translations[language];
+  const ref = React.useRef<HTMLDivElement>(null);
+  const isInView = false; // Removed framer-motion useInView
 
   return (
-    <section id="venue-accommodations" ref={ref} className="relative z-[5] py-20 bg-wedding-beige text-wedding-brown shadow-lg">
-
-
+    <section
+      id="venue-accommodations"
+      ref={ref}
+      className="relative z-[5] py-20 bg-wedding-beige text-wedding-brown shadow-lg"
+    >
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         {/* Removed framer-motion motion components */}
-        <div 
+        <div
           className="text-center mb-24"
           // Removed framer-motion motion components
         >
@@ -253,8 +292,8 @@ export default function VenueAccommodations({ language = 'sv' }: VenueAccommodat
             </h2>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mx-auto"></div>
           </div>
-          
-          <p 
+
+          <p
             className="text-lg md:text-xl text-wedding-brown/70 font-light max-w-2xl mx-auto leading-relaxed"
             // Removed framer-motion motion components
           >
@@ -264,9 +303,17 @@ export default function VenueAccommodations({ language = 'sv' }: VenueAccommodat
 
         {/* Venue Cards Grid */}
         <div className="max-w-4xl mx-auto px-6">
-          <div className="flex justify-center mb-16">
+          {/* Ceremony Venue */}
+          <div className="flex justify-center mb-8">
             <div className="w-full lg:w-1/2">
               <VenueCard venue={weddingVenue} language={language} />
+            </div>
+          </div>
+
+          {/* Wedding Venue & Hotel */}
+          <div className="flex justify-center mb-16">
+            <div className="w-full lg:w-1/2">
+              <VenueCard venue={hillsVenue} language={language} />
             </div>
           </div>
 
@@ -283,6 +330,97 @@ export default function VenueAccommodations({ language = 'sv' }: VenueAccommodat
           </div>
         </div>
 
+        {/* All Venues Map Section */}
+        <div className="max-w-6xl mx-auto px-6 mb-16">
+          <div className="text-center mb-12">
+            <h3 className="text-4xl lg:text-5xl font-script text-wedding-brown mb-4">
+              {language === 'sv' ? 'Karta över alla platser' : 'Mapa svih lokacija'}
+            </h3>
+            <div className="w-16 h-px bg-wedding-pink mx-auto mb-6"></div>
+            <p className="text-wedding-brown/70 max-w-2xl mx-auto">
+              {language === 'sv' 
+                ? 'Se alla våra rekommenderade hotell, bröllopslokaler och ceremoniplats på en karta'
+                : 'Pogledajte sve naše preporučene hotele, wedding lokacije i ceremonijalno mjesto na mapi'
+              }
+            </p>
+          </div>
+          
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-wedding-pink/10">
+            <div className="relative w-full h-96 md:h-[500px] rounded-xl overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed/v1/search?key=YOUR_API_KEY&q=hotels+sarajevo&center=43.8563,18.4131&zoom=13"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="All Wedding Venues Map"
+              ></iframe>
+              
+              {/* Alternative: Simple Google Maps link */}
+              <div className="absolute inset-0 flex items-center justify-center bg-wedding-sand/20 backdrop-blur-sm">
+                <div className="text-center p-6">
+                  <h4 className="text-lg font-semibold text-wedding-brown mb-4">
+                    {language === 'sv' ? 'Visa alla platser på kartan' : 'Prikaži sva mjesta na mapi'}
+                  </h4>
+                  <a
+                    href="https://www.google.com/maps/dir/43.8591,18.4341/43.8182,18.3540/43.8564,18.4131/43.8587,18.4095/43.8520,18.4125/43.8577,18.4219/43.8591,18.4270/43.8160,18.3580/@43.8376,18.3941,13z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-wedding-pink hover:bg-wedding-pink/90 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300"
+                  >
+                    <i className="fas fa-map-marked-alt"></i>
+                    {language === 'sv' ? 'Öppna i Google Maps' : 'Otvori u Google Maps'}
+                  </a>
+                  <p className="text-sm text-wedding-brown/70 mt-2">
+                    {language === 'sv' 
+                      ? 'Se alla våra rekommenderade platser med vägbeskrivningar'
+                      : 'Pogledajte sva naša preporučena mjesta sa uputstvima'
+                    }
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Map Legend */}
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                <span>Vijecnica (Ceremoni)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                <span>Hotel Hills (Bröllop)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                <span>Hotel Europe</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-orange-500 rounded-full"></div>
+                <span>Hotel President</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
+                <span>Courtyard Marriott</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                <span>Swissôtel</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-pink-500 rounded-full"></div>
+                <span>Mövenpick</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-gray-500 rounded-full"></div>
+                <span>Malak Regency</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Transportation Section */}
         {/* Removed framer-motion motion components */}
         <div
@@ -291,11 +429,14 @@ export default function VenueAccommodations({ language = 'sv' }: VenueAccommodat
         >
           {/* Transportation Header */}
           {/* Removed framer-motion motion components */}
-          <div 
+          <div
             className="text-center mb-16"
             // Removed framer-motion motion components
           >
-            <h3 id="transport" className="text-4xl lg:text-5xl font-script text-wedding-brown mb-4">
+            <h3
+              id="transport"
+              className="text-4xl lg:text-5xl font-script text-wedding-brown mb-4"
+            >
               {t.transportation}
             </h3>
             <div className="w-16 h-px bg-wedding-pink mx-auto mb-6"></div>
@@ -344,17 +485,30 @@ export default function VenueAccommodations({ language = 'sv' }: VenueAccommodat
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                 <div>
                   <div className="flex items-center mb-2">
-                    <i className="fas fa-car text-wedding-pink mr-3"></i>
-                    <span className="font-medium text-wedding-brown">{t.parking}</span>
+                    <i className="fas fa-car text-wedding-pink mr-3 text-lg"></i>
+                    <span className="font-semibold text-lg text-wedding-brown">
+                      {t.parking}
+                    </span>
                   </div>
-                  <p className="text-wedding-brown/70 text-sm">
-                    {t.parkingInfo}
-                  </p>
+                  <div className="text-wedding-brown/80 text-base leading-relaxed space-y-1">
+                    <p>
+                      <span className="font-medium">Vigsellokalen:</span>{" "}
+                      Begränsad parkering, parkera gärna i närheten då det är
+                      centralt.
+                    </p>
+                    <p>
+                      <span className="font-medium">Bröllopslokalen:</span> Fri
+                      parkering för bröllopsgäster precis utanför hotellet.
+                      Lämna biljetten i receptionen.
+                    </p>
+                  </div>
                 </div>
                 <div>
                   <div className="flex items-center mb-2">
                     <i className="fas fa-clock text-wedding-pink mr-3"></i>
-                    <span className="font-medium text-wedding-brown">{t.travelTime}</span>
+                    <span className="font-medium text-wedding-brown">
+                      {t.travelTime}
+                    </span>
                   </div>
                   <p className="text-wedding-brown/70 text-sm">
                     {t.travelTimeInfo}
@@ -364,9 +518,7 @@ export default function VenueAccommodations({ language = 'sv' }: VenueAccommodat
             </div>
           </div>
         </div>
-
-
       </div>
     </section>
-  )
-} 
+  );
+}

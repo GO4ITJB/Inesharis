@@ -1,115 +1,207 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { translations, Language } from '@/lib/translations'
+import React, { useState } from "react";
+import { translations, Language } from "@/lib/translations";
 
 interface Attraction {
-  id: number
-  key: string
-  mapUrl?: string
+  id: number;
+  key: string;
+  mapUrl?: string;
 }
 
 interface Restaurant {
-  id: number
-  key: string
+  id: number;
+  key: string;
 }
 
 interface ShoppingCenter {
-  id: number
-  name: string
-  description: string
-  mapUrl: string
+  id: number;
+  name: string;
+  description: string;
+  mapUrl: string;
 }
 
 const attractionsStructure: Attraction[] = [
   {
     id: 1,
     key: "bascarsija",
-    mapUrl: "https://maps.google.com/?q=Baščaršija,Sarajevo"
+    mapUrl: "https://maps.google.com/?q=Baščaršija,Sarajevo",
   },
   {
     id: 2,
     key: "sebilj",
-    mapUrl: "https://maps.google.com/?q=Sebilj,Baščaršija,Sarajevo"
+    mapUrl: "https://maps.google.com/?q=Sebilj,Baščaršija,Sarajevo",
   },
   {
     id: 3,
     key: "shops",
-    mapUrl: "https://maps.google.com/?q=Baščaršija+shops,Sarajevo"
+    mapUrl: "https://maps.google.com/?q=Baščaršija+shops,Sarajevo",
   },
   {
     id: 4,
     key: "mosque",
-    mapUrl: "https://maps.google.com/?q=Gazi+Husrev-beg+Mosque,Sarajevo"
+    mapUrl: "https://maps.google.com/?q=Gazi+Husrev-beg+Mosque,Sarajevo",
   },
   {
     id: 5,
     key: "cathedral",
-    mapUrl: "https://maps.google.com/?q=Sacred+Heart+Cathedral,Sarajevo"
-  }
-]
+    mapUrl: "https://maps.google.com/?q=Sacred+Heart+Cathedral,Sarajevo",
+  },
+];
 
 const restaurantsStructure: Restaurant[] = [
   {
     id: 1,
-    key: "zeljo"
+    key: "zeljo",
   },
   {
     id: 2,
-    key: "burek"
+    key: "burek",
   },
   {
     id: 3,
-    key: "baklava"
+    key: "baklava",
   },
   {
     id: 4,
-    key: "badem"
+    key: "badem",
   },
   {
     id: 5,
-    key: "coffee"
-  }
-]
+    key: "coffee",
+  },
+];
 
 const shoppingCenters: ShoppingCenter[] = [
   {
     id: 1,
     name: "BBI Centar (Aria Centar)",
-    description: "Sarajevos största och modernaste köpcentrum med över 130 butiker fördelade på 6 våningar. Här hittar du internationella märken som H&M, Zara, Reserved samt lokala butiker. Centrumet har också restauranger, kaféer och en biograf. Ligger centralt och är lätt att nå med kollektivtrafik.",
-    mapUrl: "https://maps.google.com/?q=BBI+Centar,Sarajevo"
+    description:
+      "Sarajevos största och modernaste köpcentrum med över 130 butiker fördelade på 6 våningar. Här hittar du internationella märken som H&M, Zara, Reserved samt lokala butiker. Centrumet har också restauranger, kaféer och en biograf. Ligger centralt och är lätt att nå med kollektivtrafik.",
+    mapUrl: "https://maps.google.com/?q=BBI+Centar,Sarajevo",
   },
   {
     id: 2,
     name: "SCC Sarajevo (Sarajevo City Center)",
-    description: "Ett populärt köpcentrum med bra utbud av mode, elektronik och vardagsvaror. Mindre än BBI men fortfarande mycket välutrustat med kända märken och en bra matavdelning. Har även kafé och restauranger. Bra parkeringsmöjligheter och centralt beläget.",
-    mapUrl: "https://maps.google.com/?q=SCC+Sarajevo,Sarajevo"
-  }
-]
+    description:
+      "Ett populärt köpcentrum med bra utbud av mode, elektronik och vardagsvaror. Mindre än BBI men fortfarande mycket välutrustat med kända märken och en bra matavdelning. Har även kafé och restauranger. Bra parkeringsmöjligheter och centralt beläget.",
+    mapUrl: "https://maps.google.com/?q=SCC+Sarajevo,Sarajevo",
+  },
+];
 
 interface ThingsToDoSarajevoProps {
-  language?: Language
+  language?: Language;
 }
 
-export default function ThingsToDoSarajevo({ language = 'sv' }: ThingsToDoSarajevoProps) {
-  const t = translations[language]
-  
+// Accordion Card Component
+const AccordionCard = ({
+  id,
+  name,
+  description,
+  mapUrl,
+  isOpen,
+  onToggle,
+  openInGoogleMapsText,
+}: {
+  id: number;
+  name: string;
+  description: string;
+  mapUrl?: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  openInGoogleMapsText: string;
+}) => {
+  return (
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+      <button
+        onClick={onToggle}
+        className="w-full p-6 text-left focus:outline-none md:pointer-events-none"
+      >
+        <div className="flex items-center justify-center gap-4 md:justify-start">
+          <div className="flex-shrink-0 w-8 h-8 bg-wedding-pink text-white rounded-full flex items-center justify-center text-sm font-semibold">
+            {id}
+          </div>
+          <div className="flex-grow md:flex-grow-0">
+            <div className="flex items-center justify-between">
+              <h4 className="text-lg font-semibold text-gray-800">{name}</h4>
+              <i
+                className={`fas ${
+                  isOpen ? "fa-chevron-up" : "fa-chevron-down"
+                } text-wedding-pink text-sm md:hidden transition-transform duration-300 ml-4`}
+              ></i>
+            </div>
+          </div>
+        </div>
+      </button>
+
+      <div
+        className={`transition-all duration-300 ${
+          isOpen
+            ? "px-6 pb-6 max-h-96 opacity-100"
+            : "max-h-0 opacity-0 overflow-hidden md:px-6 md:pb-6 md:max-h-none md:opacity-100 md:overflow-visible"
+        }`}
+      >
+        <div className="text-center md:ml-12 md:text-left">
+          <p className="text-gray-600 text-sm leading-relaxed mb-3">
+            {description}
+          </p>
+          {mapUrl && (
+            <a
+              href={mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+              title={openInGoogleMapsText}
+            >
+              <i className="fas fa-map-marker-alt text-xs"></i>
+              {openInGoogleMapsText}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default function ThingsToDoSarajevo({
+  language = "sv",
+}: ThingsToDoSarajevoProps) {
+  const t = translations[language];
+
+  // State to track which cards are open
+  const [openCards, setOpenCards] = useState<Set<string>>(new Set());
+
+  const toggleCard = (cardId: string) => {
+    const newOpenCards = new Set(openCards);
+    if (newOpenCards.has(cardId)) {
+      newOpenCards.delete(cardId);
+    } else {
+      newOpenCards.add(cardId);
+    }
+    setOpenCards(newOpenCards);
+  };
+
   // Generate attractions data from translations
-  const attractions = attractionsStructure.map(item => ({
+  const attractions = attractionsStructure.map((item) => ({
     id: item.id,
     name: t.attractionsData[item.key as keyof typeof t.attractionsData].name,
-    description: t.attractionsData[item.key as keyof typeof t.attractionsData].description,
-    mapUrl: item.mapUrl
-  }))
-  
-  // Generate restaurants data from translations  
-  const restaurants = restaurantsStructure.map(item => ({
+    description:
+      t.attractionsData[item.key as keyof typeof t.attractionsData].description,
+    mapUrl: item.mapUrl,
+  }));
+
+  // Generate restaurants data from translations
+  const restaurants = restaurantsStructure.map((item) => ({
     id: item.id,
     name: t.restaurantsData[item.key as keyof typeof t.restaurantsData].name,
-    description: t.restaurantsData[item.key as keyof typeof t.restaurantsData].description
-  }))
+    description:
+      t.restaurantsData[item.key as keyof typeof t.restaurantsData].description,
+  }));
   return (
-    <section id="things-to-do" className="relative z-[5] py-20 bg-wedding-sand text-wedding-dark shadow-lg">
+    <section
+      id="things-to-do"
+      className="relative z-[5] py-20 bg-wedding-sand text-wedding-dark shadow-lg"
+    >
       <div className="container mx-auto px-6 max-w-4xl">
         {/* Header */}
         <div className="text-center mb-12">
@@ -129,38 +221,21 @@ export default function ThingsToDoSarajevo({ language = 'sv' }: ThingsToDoSaraje
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {attractions.map((attraction, index) => (
-              <div 
-                key={attraction.id} 
-                className={`bg-white/80 backdrop-blur-sm border border-wedding-pink/10 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-wedding-pink/30 ${
-                  index === attractions.length - 1 ? 'md:col-span-2' : ''
-                }`}
+              <div
+                key={attraction.id}
+                className={
+                  index === attractions.length - 1 ? "md:col-span-2" : ""
+                }
               >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-wedding-pink text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                    {attraction.id}
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-lg font-semibold text-gray-800">
-                        {attraction.name}
-                      </h4>
-                      {attraction.mapUrl && (
-                        <a
-                          href={attraction.mapUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-wedding-pink/90 hover:bg-wedding-pink text-white w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ml-3 flex-shrink-0"
-                          title={t.openInGoogleMaps}
-                        >
-                          <i className="fas fa-map-marker-alt text-xs"></i>
-                        </a>
-                      )}
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {attraction.description}
-                    </p>
-                  </div>
-                </div>
+                <AccordionCard
+                  id={attraction.id}
+                  name={attraction.name}
+                  description={attraction.description}
+                  mapUrl={attraction.mapUrl}
+                  isOpen={openCards.has(`attraction-${attraction.id}`)}
+                  onToggle={() => toggleCard(`attraction-${attraction.id}`)}
+                  openInGoogleMapsText={t.openInGoogleMaps}
+                />
               </div>
             ))}
           </div>
@@ -174,25 +249,20 @@ export default function ThingsToDoSarajevo({ language = 'sv' }: ThingsToDoSaraje
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {restaurants.map((restaurant, index) => (
-              <div 
-                key={restaurant.id} 
-                className={`bg-white/80 backdrop-blur-sm border border-wedding-pink/10 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-wedding-pink/30 ${
-                  index === restaurants.length - 1 ? 'md:col-span-2' : ''
-                }`}
+              <div
+                key={restaurant.id}
+                className={
+                  index === restaurants.length - 1 ? "md:col-span-2" : ""
+                }
               >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-wedding-pink text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                    {restaurant.id}
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-800 mb-2">
-                      {restaurant.name}
-                    </h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {restaurant.description}
-                    </p>
-                  </div>
-                </div>
+                <AccordionCard
+                  id={restaurant.id}
+                  name={restaurant.name}
+                  description={restaurant.description}
+                  isOpen={openCards.has(`restaurant-${restaurant.id}`)}
+                  onToggle={() => toggleCard(`restaurant-${restaurant.id}`)}
+                  openInGoogleMapsText={t.openInGoogleMaps}
+                />
               </div>
             ))}
           </div>
@@ -206,36 +276,20 @@ export default function ThingsToDoSarajevo({ language = 'sv' }: ThingsToDoSaraje
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {shoppingCenters.map((center) => (
-              <div key={center.id} className="bg-white/80 backdrop-blur-sm border border-wedding-pink/10 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-wedding-pink/30">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-wedding-pink text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                    {center.id}
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-lg font-semibold text-gray-800">
-                        {center.name}
-                      </h4>
-                      <a
-                        href={center.mapUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-wedding-pink/90 hover:bg-wedding-pink text-white w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ml-3 flex-shrink-0"
-                        title="Öppna i Google Maps"
-                      >
-                        <i className="fas fa-map-marker-alt text-xs"></i>
-                      </a>
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {center.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <AccordionCard
+                key={center.id}
+                id={center.id}
+                name={center.name}
+                description={center.description}
+                mapUrl={center.mapUrl}
+                isOpen={openCards.has(`shopping-${center.id}`)}
+                onToggle={() => toggleCard(`shopping-${center.id}`)}
+                openInGoogleMapsText="Öppna i Google Maps"
+              />
             ))}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
