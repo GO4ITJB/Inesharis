@@ -1,7 +1,7 @@
 export const translations = {
   sv: {
     // Hero Section
-    saveTheDate: "Spara Datumet",
+    saveTheDate: "Save the Date",
     weAreGettingMarried: "Vi Ska Gifta Oss!",
     weddingDate: "Lördagen, 25 Juli 2026",
     rsvpNow: "OSA NU",
@@ -148,12 +148,12 @@ export const translations = {
       transport: {
         question: "Hur tar jag mig runt i Sarajevo?",
         answer:
-          "Taxi är billigt och absolut smidigast pga. trafiken. Spårvagnar och buss finns likaså. Zuti taxi är bäst, därefter crveni taxi. Be om pris innan eller taxameter.",
+          "Taxi är billigt och absolut smidigast pga. trafiken. Spårvagnar och buss finns likaså. Zuti taxi är bäst, därefter Crveni taxi. Be om pris innan eller taxameter.",
       },
       dressCode: {
         question: "Klädkod?",
         answer:
-          "Klänning för damer och finbyxor, skjorta och kavaj för herrar. Kostym om möjligt. Vi kommer att ha ljusrosa tema, så vill du göra oss extra glada så spexa gärna till det med rosa outfit eller detaljer, men absolut inget måste.",
+          "Klänning för damer och finbyxor, skjorta och kavaj för herrar. Kostym om möjligt. Vi kommer att ha ljusrosa tema, så vill ni göra oss extra glada så spexa gärna till det med rosa outfit eller detaljer, men absolut inget måste.",
       },
       gifts: {
         question: "Hur funkar det med presenter/gåvor?",
@@ -211,7 +211,7 @@ export const translations = {
       movenpick:
         "Ligger strax efter Swissôtel. Förstklassigt läge med exceptionell service.",
       hills:
-        "Där bröllopet kommer vara. Ligger 20 min utanför stadskärnan, men bo gärna där under bröllopsnatten.",
+        "Där vårt bröllop äger rum. Hotellet ligger cirka 20 minuter utanför stadskärnan och vi rekommenderar varmt att bo här under bröllopsnatten för en extra minnesvärd upplevelse.",
       malak:
         "En bit utanför stan ut mot bröllopet. Bekvämt läge nära bröllopslokalen.",
     },

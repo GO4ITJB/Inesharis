@@ -12,6 +12,7 @@ interface Attraction {
 interface Restaurant {
   id: number;
   key: string;
+  mapUrl?: string;
 }
 
 interface ShoppingCenter {
@@ -52,22 +53,27 @@ const restaurantsStructure: Restaurant[] = [
   {
     id: 1,
     key: "zeljo",
+    mapUrl: "https://maps.google.com/?q=Željo+Ćevapi,Sarajevo",
   },
   {
     id: 2,
     key: "burek",
+    mapUrl: "https://maps.google.com/?q=Buregdžinica+Bosna,Sarajevo",
   },
   {
     id: 3,
     key: "baklava",
+    mapUrl: "https://maps.google.com/?q=Slastičarna+Sarajbosna,Sarajevo",
   },
   {
     id: 4,
     key: "badem",
+    mapUrl: "https://maps.google.com/?q=Slastičarna+Badem,Baščaršija,Sarajevo",
   },
   {
     id: 5,
     key: "coffee",
+    mapUrl: "https://maps.google.com/?q=Bosnian+coffee+Baščaršija,Sarajevo",
   },
 ];
 
@@ -108,23 +114,23 @@ const AccordionCard = ({
 }) => {
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
-      <button
-        onClick={onToggle}
-        className="w-full p-6 text-left focus:outline-none md:pointer-events-none flex-shrink-0"
-      >
+      <div className="w-full p-6 flex-shrink-0">
         <div className="flex items-center justify-center gap-4 md:justify-start">
           <div className="flex-shrink-0 w-8 h-8 bg-wedding-pink text-white rounded-full flex items-center justify-center text-sm font-semibold">
             {id}
           </div>
           <div className="flex-grow md:flex-grow-0 md:flex md:items-center md:justify-between md:w-full">
-            <div className="flex items-center justify-between md:flex-grow">
+            <button
+              onClick={onToggle}
+              className="flex items-center justify-between md:flex-grow focus:outline-none"
+            >
               <h4 className="text-lg font-semibold text-gray-800">{name}</h4>
               <i
                 className={`fas ${
                   isOpen ? "fa-chevron-up" : "fa-chevron-down"
                 } text-wedding-pink text-sm transition-transform duration-300 ml-4 block md:!hidden`}
               ></i>
-            </div>
+            </button>
             {mapUrl && (
               <a
                 href={mapUrl}
@@ -138,7 +144,7 @@ const AccordionCard = ({
             )}
           </div>
         </div>
-      </button>
+      </div>
 
       <div
         className={`transition-all duration-300 flex-grow flex flex-col ${
@@ -204,6 +210,7 @@ export default function ThingsToDoSarajevo({
     name: t.restaurantsData[item.key as keyof typeof t.restaurantsData].name,
     description:
       t.restaurantsData[item.key as keyof typeof t.restaurantsData].description,
+    mapUrl: item.mapUrl,
   }));
 
   // Generate shopping centers data from translations
@@ -276,6 +283,7 @@ export default function ThingsToDoSarajevo({
                   id={restaurant.id}
                   name={restaurant.name}
                   description={restaurant.description}
+                  mapUrl={restaurant.mapUrl}
                   isOpen={openCards.has(`restaurant-${restaurant.id}`)}
                   onToggle={() => toggleCard(`restaurant-${restaurant.id}`)}
                   openInGoogleMapsText={t.openInGoogleMaps}
