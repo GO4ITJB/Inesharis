@@ -16,8 +16,7 @@ interface Restaurant {
 
 interface ShoppingCenter {
   id: number;
-  name: string;
-  description: string;
+  key: string;
   mapUrl: string;
 }
 
@@ -72,20 +71,16 @@ const restaurantsStructure: Restaurant[] = [
   },
 ];
 
-const shoppingCenters: ShoppingCenter[] = [
+const shoppingCentersStructure: ShoppingCenter[] = [
   {
     id: 1,
-    name: "BBI Centar (Aria Centar)",
-    description:
-      "Sarajevos största och modernaste köpcentrum med över 130 butiker fördelade på 6 våningar. Här hittar du internationella märken som H&M, Zara, Reserved samt lokala butiker. Centrumet har också restauranger, kaféer och en biograf. Ligger centralt och är lätt att nå med kollektivtrafik.",
-    mapUrl: "https://maps.google.com/?q=BBI+Centar,Sarajevo",
+    key: "alta",
+    mapUrl: "https://maps.google.com/?q=Alta+Shopping+Centar,Sarajevo",
   },
   {
     id: 2,
-    name: "SCC Sarajevo (Sarajevo City Center)",
-    description:
-      "Ett populärt köpcentrum med bra utbud av mode, elektronik och vardagsvaror. Mindre än BBI men fortfarande mycket välutrustat med kända märken och en bra matavdelning. Har även kafé och restauranger. Bra parkeringsmöjligheter och centralt beläget.",
-    mapUrl: "https://maps.google.com/?q=SCC+Sarajevo,Sarajevo",
+    key: "importanne",
+    mapUrl: "https://maps.google.com/?q=Importanne+Shopping+Centar,Sarajevo",
   },
 ];
 
@@ -112,50 +107,63 @@ const AccordionCard = ({
   openInGoogleMapsText: string;
 }) => {
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden h-full flex flex-col">
       <button
         onClick={onToggle}
-        className="w-full p-6 text-left focus:outline-none md:pointer-events-none"
+        className="w-full p-6 text-left focus:outline-none md:pointer-events-none flex-shrink-0"
       >
         <div className="flex items-center justify-center gap-4 md:justify-start">
           <div className="flex-shrink-0 w-8 h-8 bg-wedding-pink text-white rounded-full flex items-center justify-center text-sm font-semibold">
             {id}
           </div>
-          <div className="flex-grow md:flex-grow-0">
-            <div className="flex items-center justify-between">
+          <div className="flex-grow md:flex-grow-0 md:flex md:items-center md:justify-between md:w-full">
+            <div className="flex items-center justify-between md:flex-grow">
               <h4 className="text-lg font-semibold text-gray-800">{name}</h4>
               <i
                 className={`fas ${
                   isOpen ? "fa-chevron-up" : "fa-chevron-down"
-                } text-wedding-pink text-sm md:hidden transition-transform duration-300 ml-4`}
+                } text-wedding-pink text-sm transition-transform duration-300 ml-4 block md:!hidden`}
               ></i>
             </div>
+            {mapUrl && (
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-flex items-center justify-center w-8 h-8 bg-wedding-pink hover:bg-wedding-pink/90 text-white rounded-full transition-all duration-300 ml-4"
+                title={openInGoogleMapsText}
+              >
+                <i className="fas fa-map-marker-alt text-xs"></i>
+              </a>
+            )}
           </div>
         </div>
       </button>
 
       <div
-        className={`transition-all duration-300 ${
+        className={`transition-all duration-300 flex-grow flex flex-col ${
           isOpen
             ? "px-6 pb-6 max-h-96 opacity-100"
             : "max-h-0 opacity-0 overflow-hidden md:px-6 md:pb-6 md:max-h-none md:opacity-100 md:overflow-visible"
         }`}
       >
-        <div className="text-center md:ml-12 md:text-left">
-          <p className="text-gray-600 text-sm leading-relaxed mb-3">
+        <div className="text-center md:ml-12 md:text-left flex-grow flex flex-col justify-between">
+          <p className="text-gray-600 text-sm leading-relaxed mb-3 flex-grow">
             {description}
           </p>
           {mapUrl && (
-            <a
-              href={mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
-              title={openInGoogleMapsText}
-            >
-              <i className="fas fa-map-marker-alt text-xs"></i>
-              {openInGoogleMapsText}
-            </a>
+            <div className="flex-shrink-0">
+              <a
+                href={mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 md:hidden"
+                title={openInGoogleMapsText}
+              >
+                <i className="fas fa-map-marker-alt text-xs"></i>
+                <span>{openInGoogleMapsText}</span>
+              </a>
+            </div>
           )}
         </div>
       </div>
@@ -196,6 +204,15 @@ export default function ThingsToDoSarajevo({
     name: t.restaurantsData[item.key as keyof typeof t.restaurantsData].name,
     description:
       t.restaurantsData[item.key as keyof typeof t.restaurantsData].description,
+  }));
+
+  // Generate shopping centers data from translations
+  const shoppingCenters = shoppingCentersStructure.map((item) => ({
+    id: item.id,
+    name: t.attractionsData[item.key as keyof typeof t.attractionsData].name,
+    description:
+      t.attractionsData[item.key as keyof typeof t.attractionsData].description,
+    mapUrl: item.mapUrl,
   }));
   return (
     <section
@@ -284,7 +301,7 @@ export default function ThingsToDoSarajevo({
                 mapUrl={center.mapUrl}
                 isOpen={openCards.has(`shopping-${center.id}`)}
                 onToggle={() => toggleCard(`shopping-${center.id}`)}
-                openInGoogleMapsText="Öppna i Google Maps"
+                openInGoogleMapsText={t.openInGoogleMaps}
               />
             ))}
           </div>

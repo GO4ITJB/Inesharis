@@ -8,7 +8,7 @@ export const translations = {
     bookHotel: "BOKA HOTELL",
 
     // Navigation
-    ourStory: "Vår Agenda",
+    ourStory: "Agenda",
     programNav: "Program",
     venueAccommodation: "Boende",
     questionsAnswers: "FAQ",
@@ -86,6 +86,23 @@ export const translations = {
     // Attendance
     attendanceDetails: "Närvaroinformation",
     attendanceQuestion: "Vilka delar av vår bröllopsdag kan du delta i?",
+    comeToWedding: "Kommer du?",
+    hopeYouCanJoin: "Vi hoppas verkligen att du kan vara med på vår stora dag",
+    weddingReceptionQuestion: "Kommer du på bröllopet 18:00 på Hills?",
+    yesImComing: "Ja, jag kommer!",
+    noSorry: "Nej tyvärr",
+    cantAttend: "Kan inte delta",
+    ceremonyQuestion: "Kommer du till vigseln i Vijecnica 14:00?",
+    justWedding: "Bara bröllopet",
+    comingToHills: "Kommer till Hills",
+    hotelBookingQuestion:
+      "Önskar ni att vi bokar er ett dubbelrum på Hotel Hills bröllopsnatten 25/7?",
+    hotelDiscountInfo:
+      "20% rabatt när vi bokar åt gästerna. Önskar ni fler nätter, kontakta oss.",
+    yesPleaseBook: "Ja tack!",
+    bookDoubleRoom: "Boka dubbelrum 25/7",
+    noThanksHotel: "Nej tack",
+    arrangeMyself: "Ordnar själva",
     ceremony: "VIGSEL",
     reception: "MOTTAGNING",
     attend: "DELTAR",
@@ -158,6 +175,7 @@ export const translations = {
       "Allt du behöver veta om vår plats och var du kan bo i vackra Sarajevo.",
     weddingVenue: "Bröllopslokalen",
     ceremonyVenue: "Vigsellokal",
+    hotelAndWeddingVenue: "Hotell & Bröllopslokal",
     hotel: "Hotell",
     recommendedHotels: "Rekommenderade Hotell",
     transportation: "Transport",
@@ -169,8 +187,16 @@ export const translations = {
     travelTips: "Resetips",
     parking: "Parkering",
     travelTime: "Restid",
-    parkingInfo:
-      "Vigsellokalen: Begränsad parkering, parkera gärna i närheten då det är centralt. Bröllopslokalen: Fri parkering för bröllopsgäster precis utanför hotellet. Lämna biljetten i receptionen.",
+    parkingInfo: [
+      {
+        label: "Vigsellokalen:",
+        text: " Begränsad parkering, parkera gärna i närheten då det är centralt.",
+      },
+      {
+        label: "Bröllopslokalen:",
+        text: " Fri parkering för bröllopsgäster precis utanför hotellet. Lämna biljetten i receptionen.",
+      },
+    ],
     travelTimeInfo:
       "Från vigsellokalen till bröllopslokalen är det drygt 20 minuter med bil/taxi.",
 
@@ -227,6 +253,16 @@ export const translations = {
         description:
           "Ortodox katedral som ligger mitt i gamla stan och byggdes 1889. Byggd av en ungrare som fick sin inspiration från Notre Damme. Ligger en ärkesbiskop begravd från 1820. Utanför en staty av dåvarande biskop den andre som 1997 besökte Sarajevo efter krigets slut.",
       },
+      alta: {
+        name: "BBI Centar (Aria Centar)",
+        description:
+          "Sarajevos största och modernaste köpcentrum med över 130 butiker fördelade på 6 våningar. Här hittar du internationella märken som H&M, Zara, Reserved samt lokala butiker. Centrumet har också restauranger, kaféer och en biograf. Ligger centralt och är lätt att nå med kollektivtrafik.",
+      },
+      importanne: {
+        name: "SCC Sarajevo (Sarajevo City Center)",
+        description:
+          "Ett populärt köpcentrum med bra utbud av mode, elektronik och vardagsvaror. Mindre än BBI men fortfarande mycket välutrustat med kända märken och en bra matavdelning. Har även kafé och restauranger. Bra parkeringsmöjligheter och centralt beläget.",
+      },
     },
 
     // Restaurants
@@ -277,17 +313,17 @@ export const translations = {
   ba: {
     // Hero Section
     saveTheDate: "Zapamti Datum",
-    weAreGettingMarried: "Vjencajemo  Se!",
+    weAreGettingMarried: "Vjenčajemo Se!",
     weddingDate: "Subota, 25. juli 2026",
     rsvpNow: "POTVRDI DOLAZAK",
     bookHotel: "REZERVIŠI HOTEL",
 
     // Navigation
-    ourStory: "Naša Priča",
+    ourStory: "Program",
     programNav: "Program",
-    venueAccommodation: "Hoteli i smještaj",
-    questionsAnswers: "Često postavljana pitanja",
-    thingsToDoSarajevo: "Šta da radite u Sarajevu",
+    venueAccommodation: "Smještaj",
+    questionsAnswers: "Pitanja",
+    thingsToDoSarajevo: "Sarajevo",
     rsvp: "POTVRDI",
 
     // Our Story
@@ -297,24 +333,28 @@ export const translations = {
 
     // Run of Show
     programTitle: "Program",
-    programDescription: "Raspored za dan subotu 25. juli 2026",
+    programDescription: "Rasporeda dana: Subotu, 25. juli 2026",
     dressCodeDescription:
-      "Haljina za dame, elegantne pantalone, košulja i sako za muškarce.",
+      "Poželjno; haljina za dame, elegantne hlače, košulja i sako ili odijelo za muškarce.",
+    dressCodeNote:
+      "Ako želite, slobodno dodajte koji detalj u svijetlo roza u sklopu sa svadbenom tema-boji.",
 
     // Wedding Schedule
     schedule: {
       ceremony: {
         title: "VJENČANJE",
-        description: "14:00-15:00 – Vjenčani obred u Sarajevskoj vijećnici",
+        description:
+          "14:00-15:00 – Vjenčana ceremonija u gradskoj vijećnici, Sarajevo. Molimo vas, budite na vrijeme.",
       },
       freeTime: {
         title: "SLOBODNO VRIJEME",
-        description: "15:00-18:00 – Slobodno vrijeme, priprema za večer",
+        description:
+          "15:00-18:00 – Slobodno vrijeme za večernji događaj. Idealno vrijeme za check-in smještaja, pripreme itd.",
       },
       welcome: {
         title: "DOBRODOŠLICA",
         description:
-          "18:00 – Dobrodošlica na vjenčanoj lokaciji – Hotel Hills Sarajevo, prvi sprat",
+          "18:00 – Dobrodošlica na vjenčanoj lokaciji – Hotel Hills Sarajevo, prvi sprat. Molimo vas, budite na vrijeme.",
       },
       celebration: {
         title: "SLAVLJE I PROSLAVA",
@@ -325,9 +365,9 @@ export const translations = {
 
     // Time units
     months: "MJESECI",
-    days: "DANI",
-    hours: "SATI",
-    minutes: "MINUTI",
+    days: "DANA",
+    hours: "SATA",
+    minutes: "MINUTA",
     seconds: "SEKUNDI",
 
     // RSVP Form
@@ -359,6 +399,23 @@ export const translations = {
     attendanceDetails: "Detalji prisustva",
     attendanceQuestion:
       "Kojim dijelovima našeg vjenčanja možete prisustvovati?",
+    comeToWedding: "Hoćete li doći?",
+    hopeYouCanJoin: "Nadamo se da možete biti s nama na našem velikom danu",
+    weddingReceptionQuestion: "Hoćete li doći na svadbu u 18:00 u Hills?",
+    yesImComing: "Da, dolazim!",
+    noSorry: "Ne, na žalost",
+    cantAttend: "Ne mogu doći",
+    ceremonyQuestion: "Hoćete li doći na vjenčanje u Vijećnicu u 14:00?",
+    justWedding: "Samo svadba",
+    comingToHills: "Dolazim u Hills",
+    hotelBookingQuestion:
+      "Želite li da vam rezervišemo dvokrevetnu sobu u Hotel Hills za vjenčanu noć 25/7?",
+    hotelDiscountInfo:
+      "20% popusta kada rezervišemo za goste. Ako želite više noći, kontaktirajte nas.",
+    yesPleaseBook: "Da, hvala!",
+    bookDoubleRoom: "Rezerviši dvokrevetnu sobu 25/7",
+    noThanksHotel: "Ne, hvala",
+    arrangeMyself: "Riješavam sam",
     ceremony: "VJENČANJE",
     reception: "SVADBA",
     attend: "PRISUSTVUJEM",
@@ -397,9 +454,9 @@ export const translations = {
           "Sarajevski aerodrom je blizu Hotel Hills-a i najlakše je uzeti direktan let s Ryanair ili Wizzair iz bilo kojeg švedskog grada. Letovi su nekoliko puta nedeljno, ali i pet-ned ili pet-pon. Pokušajte rezervirati na vrijeme za najbolju cijenu.",
       },
       accommodation: {
-        question: "Gdje da se odsjeti u Sarajevu?",
+        question: "Gdje da se prenoći u Sarajevu?",
         answer:
-          "Za vjenčanu noć preporučujemo da se odsjete u Hotel Hills za potpunu udobnost, ali nije obavezno.",
+          "Za vjenčanu noć preporučujemo da se prenoći u Hotel Hills za potpunu udobnost, ali nije obavezno. Ako želite da vam mi rezervišemo sobu u Hotel Hills-u, imate 20% popusta kao gosti. Dodajte u prijavi ili kontaktirajte nas.",
       },
       transport: {
         question: "Kako da se krećem po Sarajevu?",
@@ -407,19 +464,18 @@ export const translations = {
           "Taksi je jeftin i najlakši zbog prometa. Postoje i tramvaji i autobusi. Žuti taksi je najbolji, a zatim crveni taksi. Pitajte za cijenu unaprijed ili taksimetar.",
       },
       dressCode: {
-        question: "Dress kod?",
+        question: "Dres kod?",
         answer:
-          "Haljina za dame i elegantne pantalone, košulja i sako za muškarce. Odijelo ako je moguće. Imat ćemo rozu temu, pa ako nas želite usrećiti, obucite rozu odjeću ili detalje, ali nije obavezno.",
+          "Haljina za dame i elegantne hlače, košulja i sako za muškarce. Odijelo ako je moguće. Imat ćemo svijetlo roza temu, pa ako nas želite usrećiti, obucite roza detalje, ali nije obavezno.",
       },
       gifts: {
         question: "Kako je s poklonima/darivanjem?",
         answer:
-          "Običaj je da se mladencima da proizvoljnu sumu u koverti s napisanim željama i ostavlja se tokom večeri u označenoj kutiji. Ovo kao čestitka za njihovu zajedničku budućnost.",
+          "Drago nam je što prisustvujete i to nam je najlepši poklon. Ali ako ipak želite da nam nešto poklonite, biće predviđen box darivanja jer nemamo mogućnosti da poklone nosimo avionom za Švedsku.",
       },
       corsage: {
-        question: "Hoće li biti ceremonijalnih ukrasa ili corsage?",
-        answer:
-          "Da, na ulazu će svaki gost dobiti corsage i običaj je da se da manja simbolična suma za ukrašavanje.",
+        question: "Hoće li biti ceremonijalnih ukrasa ili kićenje?",
+        answer: "Da, na ulazu će svaki gost dobiti kićenje.",
       },
     },
     clickHereForMoreInfo: "Kliknite ovdje za više informacija",
@@ -428,9 +484,10 @@ export const translations = {
     // Venue & Accommodations
     venueTitle: "Lokacija i Smještaj",
     venueDescription:
-      "Sve što trebate znati o našoj lokaciji i gdje se možete odsjesti u prekrasnom Sarajevu.",
+      "Sve što trebate znati o našoj lokaciji i gdje se možete prenoćiti.",
     weddingVenue: "Vjenčano Mjesto",
     ceremonyVenue: "Vjenčano Mjesto",
+    hotelAndWeddingVenue: "Hotel & Vjenčano Mjesto",
     hotel: "Hotel",
     recommendedHotels: "Preporučeni Hoteli",
     transportation: "Transport",
@@ -442,27 +499,30 @@ export const translations = {
     travelTips: "Putni savjeti",
     parking: "Parking",
     travelTime: "Vrijeme putovanja",
-    parkingInfo:
-      "Ograničeno parkiranje blizu lokacije. Preporučujemo korišćenje taksija.",
+    parkingInfo: [
+      {
+        label: "Vijećnica:",
+        text: " Pošto je u gradu, najlakše vam je parkirati u okolini, pješke ili taksijem doći.",
+      },
+      {
+        label: "Hills:",
+        text: " Parking pred hotelom je besplatan za goste svadbe. Pri izlasku predajte papir recepciji.",
+      },
+    ],
     travelTimeInfo:
-      "Putovanje od hotela do lokacije je otprilike 10-15 minuta automobilom.",
+      "Od vijecnice do svadbenog hotela je oprilike 20 minuta autom ili taksijem.",
 
     // Hotel descriptions (Bosnian)
     hotelDescriptions: {
       vijecnica:
         "Historijska gradska vijećnica gdje će se održati naš vjenčani obred. Prekrasan simbol ljubavi i kulturnog naslijeda.",
-      europe:
-        "Centralno smješten u samom srcu grada. Elegantni smještaj u centru grada.",
-      president:
-        "Centralno i dobar hotel u centru grada. Moderni komfor u srcu grada.",
-      courtyard:
-        "5-6 minuta vožnje od centra grada. Međunarodni standard s izvrsnim uslugama.",
-      swissotel:
-        "7 minuta od centra grada. Luksuzni hotel s prvoklasnima uslugama i servisom.",
-      movenpick:
-        "Nalazi se odmah nakon Swissôtel-a. Vrhunska lokacija s izuzetnim servisom.",
+      europe: "Centralno smješten u samom srcu grada.",
+      president: "Centralno i dobar hotel u centru grada.",
+      courtyard: "5-6 minuta vožnje od centra grada.",
+      swissotel: "7 minuta od centra grada.",
+      movenpick: "Nalazi se odmah nakon Swissôtel-a.",
       hills:
-        "Gdje će se održati vjenčanje. Nalazi se 20 minuta van centra grada, ali preporučujemo da se tu odsjete tokom vjenčane noći.",
+        "Gdje će se održati vjenčanje. Nalazi se 20 minuta van centra grada, ali preporučujemo da se tu prenoci tokom vjenčane noći.",
       malak:
         "Malo van grada prema vjenčanju. Pogodna lokacija blizu vjenčane lokacije.",
     },
@@ -470,7 +530,7 @@ export const translations = {
     // Things to Do in Sarajevo
     thingsToDoTitle: "Šta Da Radite u Sarajevu",
     thingsToDoDescription:
-      "Znamenitosti u gradu koji se ponekad naziva Jerusalim Evrope. Tu se nalaze džamije, crkve, katedrale i sinagoge jedna pored druge.",
+      "Gradu koji se ponekad naziva Jerusalim Evrope. Tu se nalaze džamije, crkve, katedrale i sinagoge jedna pored druge.",
     attractions: "Znamenitosti",
     restaurants: "Klasična mjesta za jelo",
     shopping: "Tržni centri",
@@ -504,19 +564,29 @@ export const translations = {
         description:
           "Pravoslavna katedrala koja se nalazi u centru starog grada i izgrađena je 1889. Izgradio ju je Mađar koji je inspiraciju dobio od Notre Dame. Tu je pokopan nadbiskup iz 1820. Ispred katedrale stoji kip ondašnjeg biskupa drugog koji je 1997. posjetio Sarajevo nakon završetka rata.",
       },
+      alta: {
+        name: "Alta Shopping Centar",
+        description:
+          "Najveći i najmoderniji tržni centar u Sarajevu sa više od 130 prodavnica raspoređenih na 6 spratova. Ovdje ćete pronaći međunarodne brendove poput H&M, Zara, Reserved, kao i lokalne prodavnice. Centar ima i restorane, kafiće i kino. Nalazi se u centru grada i lako je dostupan javnim prevozom.",
+      },
+      importanne: {
+        name: "Importanne Shopping Centar",
+        description:
+          "Popularan tržni centar sa odličnim izborom mode, elektronike i svakodnevnih potrepština. Manji od BBI-ja, ali i dalje veoma dobro opremljen sa poznatim brendovima i odličnim odjelom za hranu. Ima i kafić i restorane. Dobre mogućnosti za parking i centralna lokacija.",
+      },
     },
 
     // Restaurants
     restaurantsData: {
       zeljo: {
-        name: "Kod Zelje",
+        name: "Kod Želje",
         description:
-          "Najbolji ćevapi u gradu koji postoje oduvijek. Od 3 restorana, birajte najbolje Željo 1 ili 2. Tražite kajmak uz jelo.",
+          "Najbolji ćevapi u gradu koji postoje oduvijek. Od 3 restorana, birajte Željo 1 ili 2. Tražite kajmak uz jelo.",
       },
       burek: {
         name: "Buregdžinica Bosna",
         description:
-          "Najbolji burek/pita u gradu poznata po tradicionalnim okusima. Ne čuva se već se pravi stalno svježe u kamenog peću s vatrom. Tražite pavlaku ako je želite.",
+          "Najbolji bureci/pite u gradu poznati po tradicionalnim okusima. Pravi se stalno svježe u kamenog peću s vatrom. Tražite pavlaku ako je želite.",
       },
       baklava: {
         name: "Slastičarna Sarajbosna",
@@ -531,7 +601,7 @@ export const translations = {
       coffee: {
         name: "Bosanska kafa",
         description:
-          "Sjednite u neki od okolnih kafića i naručite 'bosansku kafu' i moći ćete uživati u klasičnoj bosanskoj kafi u malim šoljama napravljenim od porcelana i bakra na tradicionalan način. Kafa se pije polako jer se talog spušta na dno i ne smije se popiti do kraja. Tražite tradicionalne niske sofas u uzorkovanoj tkanini.",
+          "Sjednite u neki od okolnih kafića i naručite 'bosansku kafu' i moći ćete uživati u klasičnoj bosanskoj kafi u malim šoljama napravljenim od porcelana i bakra na tradicionalan način. Kafa se pije polako jer se talog spušta na dno i ne smije se popiti do kraja.",
       },
     },
 

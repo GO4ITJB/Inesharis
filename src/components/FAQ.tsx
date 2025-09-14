@@ -1,25 +1,23 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react'
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import { translations, Language } from '@/lib/translations'
+import React, { useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { translations, Language } from "@/lib/translations";
 
 interface FAQItem {
-  question: string
-  answer: string
-  hasClickableLink?: boolean
-  linkText?: string
-  linkHref?: string
+  question: string;
+  answer: string;
+  hasClickableLink?: boolean;
+  linkText?: string;
+  linkHref?: string;
 }
 
 interface FAQProps {
-  language?: Language
+  language?: Language;
 }
 
-
-
 const FAQItem = ({ item }: { item: FAQItem }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="border-b border-wedding-pink/20 last:border-b-0">
@@ -38,19 +36,20 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
           )}
         </div>
       </button>
-      
+
       {isOpen && (
         <div className="pb-8 mt-2">
           <div className="text-wedding-brown/80 leading-relaxed">
             {item.hasClickableLink ? (
               <>
-                {item.answer}{' '}
-                <a 
-                  href={item.linkHref} 
+                {item.answer}{" "}
+                <a
+                  href={item.linkHref}
                   className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
                 >
                   {item.linkText}
-                </a>.
+                </a>
+                .
               </>
             ) : (
               item.answer
@@ -59,61 +58,63 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default function FAQ({ language = 'sv' }: FAQProps) {
-  const t = translations[language]
-  
+export default function FAQ({ language = "sv" }: FAQProps) {
+  const t = translations[language];
+
   const faqData: FAQItem[] = [
     {
       question: t.faqQuestions.travel.question,
-      answer: t.faqQuestions.travel.answer
+      answer: t.faqQuestions.travel.answer,
     },
     {
       question: t.faqQuestions.accommodation.question,
       answer: t.faqQuestions.accommodation.answer,
       hasClickableLink: true,
       linkText: t.clickHereForMoreInfo,
-      linkHref: "#rekommenderade-hotell"
+      linkHref: "#rekommenderade-hotell",
     },
     {
       question: t.faqQuestions.transport.question,
       answer: t.faqQuestions.transport.answer,
       hasClickableLink: true,
       linkText: t.seeTransportInfo,
-      linkHref: "#transport"
+      linkHref: "#transport",
     },
     {
       question: t.faqQuestions.dressCode.question,
-      answer: t.faqQuestions.dressCode.answer
+      answer: t.faqQuestions.dressCode.answer,
     },
     {
       question: t.faqQuestions.gifts.question,
-      answer: t.faqQuestions.gifts.answer
+      answer: t.faqQuestions.gifts.answer,
     },
     {
       question: t.faqQuestions.corsage.question,
-      answer: t.faqQuestions.corsage.answer
-    }
-  ]
+      answer: t.faqQuestions.corsage.answer,
+    },
+  ];
   return (
-    <section id="faq" className="relative z-[5] py-20 bg-white text-wedding-dark">
+    <section
+      id="faq"
+      className="relative z-[5] py-20 bg-white text-wedding-dark"
+    >
       <div className="container mx-auto px-6 relative z-10">
-        
         {/* Couple Image */}
         <div className="flex justify-center mb-20">
           <div className="relative">
             <div className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-wedding-pink/30 shadow-2xl relative">
-              <img 
-                src="/couple-image-optimized.jpg"
+              <img
+                src="/IMG_6287.JPG.jpeg"
                 alt="Ines & Haris"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-wedding-pink/10 rounded-full"></div>
             </div>
-            
+
             {/* Decorative hearts around image */}
             <div className="absolute top-4 -left-8 w-8 h-8 opacity-60 animate-pulse">
               <i className="fas fa-heart text-wedding-pink/70 text-lg"></i>
@@ -139,7 +140,7 @@ export default function FAQ({ language = 'sv' }: FAQProps) {
             </h2>
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-wedding-pink to-transparent mx-auto"></div>
           </div>
-          
+
           <p className="text-lg md:text-xl text-wedding-brown/70 font-light max-w-2xl mx-auto leading-relaxed mt-8">
             {t.faqDescription}
           </p>
@@ -156,11 +157,9 @@ export default function FAQ({ language = 'sv' }: FAQProps) {
 
         {/* Additional Note */}
         <div className="text-center mt-12">
-          <p className="text-wedding-brown/60 font-light italic">
-            {t.faqNote}
-          </p>
+          <p className="text-wedding-brown/60 font-light italic">{t.faqNote}</p>
         </div>
       </div>
     </section>
-  )
+  );
 }
