@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // Helper function to create ICS calendar content
 function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendingCeremony: boolean, attendingReception: boolean) {
-  const ceremonyDate = new Date('2026-07-25T15:00:00+02:00') // 3 PM Sarajevo time
-  const ceremonyEndDate = new Date('2026-07-25T16:30:00+02:00') // 4:30 PM Sarajevo time
-  const receptionDate = new Date('2026-07-25T17:00:00+02:00') // 5 PM Sarajevo time
-  const receptionEndDate = new Date('2026-07-25T23:00:00+02:00') // 11 PM Sarajevo time
+  const ceremonyDate = new Date('2026-07-25T14:00:00+02:00') // 3 PM Sarajevo time
+  const ceremonyEndDate = new Date('2026-07-25T15:00:00+02:00') // 4:30 PM Sarajevo time
+  const receptionDate = new Date('2026-07-25T18:00:00+02:00') // 5 PM Sarajevo time
+  const receptionEndDate = new Date('2026-07-26T02:00:00+02:00') // 11 PM Sarajevo time
   
   const events = []
 
@@ -32,7 +32,8 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       `DTEND:${ceremonyEndDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `SUMMARY:${ceremonyTitle}`,
       `DESCRIPTION:${ceremonyDescription.replace(/\n/g, '\\n')}`,
-      `LOCATION:Vijecnica, Obala Kulina bana bb, 71000 Sarajevo, Bosnia and Herzegovina`,
+      `LOCATION:Vijecnica\\, Obala Kulina bana bb\\, 71000 Sarajevo\\, Bosnia and Herzegovina`,
+      'GEO:43.8591;18.4339',
       'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
       `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${guestName}`,
       'BEGIN:VALARM',
@@ -73,7 +74,8 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       `DTEND:${receptionEndDate.toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
       `SUMMARY:${receptionTitle}`,
       `DESCRIPTION:${receptionDescription.replace(/\n/g, '\\n')}`,
-      `LOCATION:Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnia and Herzegovina`,
+      `LOCATION:Hotel Hills Sarajevo\\, Butmirska cesta 18\\, Ilidža 71000 Sarajevo\\, Bosnia and Herzegovina`,
+      'GEO:43.8267;18.3135',
       'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
       `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${guestName}`,
       'BEGIN:VALARM',

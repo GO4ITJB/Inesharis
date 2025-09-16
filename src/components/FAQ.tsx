@@ -84,6 +84,10 @@ export default function FAQ({ language = "sv" }: FAQProps) {
       linkHref: "#transport",
     },
     {
+      question: t.faqQuestions.payment.question,
+      answer: t.faqQuestions.payment.answer,
+    },
+    {
       question: t.faqQuestions.dressCode.question,
       answer: t.faqQuestions.dressCode.answer,
     },
@@ -107,12 +111,12 @@ export default function FAQ({ language = "sv" }: FAQProps) {
           <div className="relative">
             <div className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-wedding-pink/30 shadow-2xl relative">
               <img
-                src="/IMG_6287.JPG.jpeg"
+                src="/IMG_6184.JPG"
                 alt="Ines & Haris"
                 className="w-full h-full object-cover"
-                loading="lazy"
+                loading="eager"
               />
-              <div className="absolute inset-0 bg-wedding-pink/10 rounded-full"></div>
+              <div className="absolute inset-0 bg-wedding-pink/20 rounded-full"></div>
             </div>
 
             {/* Decorative hearts around image */}

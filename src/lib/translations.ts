@@ -132,7 +132,7 @@ export const translations = {
     // FAQ
     faqTitle: "Vanliga Frågor",
     faqDescription:
-      "Här hittar du svar på de vanligaste frågorna om vårt bröllop",
+      "Här hittar du svar på de vanligaste frågorna inför vårt bröllop",
     faqNote: "Har du fler frågor? Tveka inte att kontakta oss!",
     faqQuestions: {
       travel: {
@@ -143,12 +143,17 @@ export const translations = {
       accommodation: {
         question: "Vart bör jag bo i Sarajevo?",
         answer:
-          "Under bröllopsnatten så rekommenderar vi att ni checkar in på Hotel Hills för optimal komfort, men absolut inget måste.",
+          "Under bröllopsnatten så rekommenderar vi att ni checkar in på Hotel Hills för optimal komfort, men absolut inget måste. Klicka här för mer info. Väljer ni AirBnB som alternativ så sök efter \"Bascarsija\", det är gamla stan och själva kärnan i staden. Där får ni gångavstånd till det mesta. Vi hjälper er mer än gärna med ert boende!",
       },
       transport: {
         question: "Hur tar jag mig runt i Sarajevo?",
         answer:
           "Taxi är billigt och absolut smidigast pga. trafiken. Spårvagnar och buss finns likaså. Zuti taxi är bäst, därefter Crveni taxi. Be om pris innan eller taxameter.",
+      },
+      payment: {
+        question: "Betalsätt i Bosnien?",
+        answer:
+          "Kontanter är det vanligaste betalsättet i Bosnien. Kort kan du betala med i stora butiker, köpcentrum, restauranger och dyl. Ta gärna ut lite kontanter på plats i Bosnien för taxi, småbutiker och mindre snabbmatsställen.",
       },
       dressCode: {
         question: "Klädkod?",
@@ -209,7 +214,7 @@ export const translations = {
       courtyard: "5-6 min bilfärd från stadskärnan.",
       swissotel: "7 min från stadskärnan.",
       movenpick:
-        "Ligger strax efter Swissôtel. Förstklassigt läge med exceptionell service.",
+        "Ligger strax efter Swissôtel.",
       hills:
         "Där vårt bröllop äger rum. Hotellet ligger cirka 20 minuter utanför stadskärnan och vi rekommenderar varmt att bo här under bröllopsnatten för en extra minnesvärd upplevelse.",
       malak:
@@ -462,6 +467,11 @@ export const translations = {
         question: "Kako da se krećem po Sarajevu?",
         answer:
           "Taksi je jeftin i najlakši zbog prometa. Postoje i tramvaji i autobusi. Žuti taksi je najbolji, a zatim crveni taksi. Pitajte za cijenu unaprijed ili taksimetar.",
+      },
+      payment: {
+        question: "Načini plaćanja u Bosni?",
+        answer:
+          "Gotovina je najčešći način plaćanja u Bosni. Kartice možete koristiti u velikim prodavnicama, tržnim centrima, restoranima i slično. Preporučujemo da podignete nešto gotovine na licu mjesta u Bosni za taksi, male prodavnice i manje fast food mjesta.",
       },
       dressCode: {
         question: "Dres kod?",

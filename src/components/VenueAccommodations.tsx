@@ -393,15 +393,12 @@ export default function VenueAccommodations({
         </div>
 
         {/* Venue Cards Grid */}
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex justify-center mb-16">
-            <div className="w-full lg:w-1/2">
-              <VenueCard venue={weddingVenue} language={language} />
-            </div>
-          </div>
 
+        <div className="max-w-6xl mx-auto px-6">
+          {/* Venue Cards Grid - Same width as hotel cards */}
           <div className="flex justify-center mb-16">
-            <div className="w-full lg:w-1/2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+              <VenueCard venue={weddingVenue} language={language} />
               <VenueCard venue={receptionVenue} language={language} />
             </div>
           </div>
@@ -427,7 +424,7 @@ export default function VenueAccommodations({
             </h3>
             <p className="text-wedding-brown/70 max-w-2xl mx-auto">
               {language === "sv"
-                ? "Se alla våra rekommenderade hotell, bröllopslokaler och ceremoniplats på en karta"
+                ? "Se alla våra rekommenderade hotell, bröllopslokalen och vigselplatsen på samma karta"
                 : "Pogledajte sve naše preporučene hotele, wedding lokacije i ceremonijalno mjesto na mapi"}
             </p>
           </div>
