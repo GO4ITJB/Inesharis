@@ -137,6 +137,7 @@ Number of Guests: ${formData.numberOfGuests} additional guest${formData.numberOf
 Guest Names: ${guestList}
 Attending Ceremony: ${formData.attendingCeremony ? 'Yes' : 'No'}
 Attending Reception: ${formData.attendingReception ? 'Yes' : 'No'}
+Hotel Room Booking: ${formData.wantsHotelRoom === true ? 'Yes - wants booking' : formData.wantsHotelRoom === false ? 'No - will arrange themselves' : 'Not specified'}
 
 === ADDITIONAL DETAILS ===
 ${formData.songRequests?.filter(Boolean).length > 0 
@@ -170,6 +171,7 @@ ${formData.numberOfGuests > 0 ? `Gäster: ${guestList}` : ''}
 Närvaro:
 • Vigsel: ${formData.attendingCeremony ? 'Ja' : 'Nej'}
 • Mottagning: ${formData.attendingReception ? 'Ja' : 'Nej'}
+• Hotellrum på Hills: ${formData.wantsHotelRoom === true ? 'Ja - vill att vi bokar' : formData.wantsHotelRoom === false ? 'Nej - ordnar själva' : 'Ej specificerat'}
 
 ${formData.songRequests?.filter(Boolean).length > 0 
   ? `Musikönskemål: ${formData.songRequests.filter(Boolean).join(', ')}` 
@@ -202,6 +204,7 @@ ${formData.numberOfGuests > 0 ? `Gosti: ${guestList}` : ''}
 Prisustvo:
 • Vjenčanje: ${formData.attendingCeremony ? 'Da' : 'Ne'}
 • Svadba: ${formData.attendingReception ? 'Da' : 'Ne'}
+• Hotelska soba u Hills: ${formData.wantsHotelRoom === true ? 'Da - želimo da rezervišete' : formData.wantsHotelRoom === false ? 'Ne - riješavamo sami' : 'Nije specificirano'}
 
 ${formData.songRequests?.filter(Boolean).length > 0 
   ? `Muzičke želje: ${formData.songRequests.filter(Boolean).join(', ')}` 
