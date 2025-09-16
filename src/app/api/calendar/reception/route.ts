@@ -26,13 +26,8 @@ function generateIcsContent(title: string, description: string, location: string
     `SUMMARY:${escapeIcsString(title)}`,
     `DESCRIPTION:${escapeIcsString(description)}`,
     `LOCATION:${escapeIcsString(location)}`,
-    `GEO:${geoCoordinates}`,
-    `X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-APPLE-MAPKIT-HANDLE=${Buffer.from(JSON.stringify({
-      "name": "Hotel Hills Sarajevo",
-      "address": "Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnia and Herzegovina",
-      "latitude": 43.8267,
-      "longitude": 18.3135
-    })).toString('base64')}:geo:${geoCoordinates}`,
+    ...(geoCoordinates ? [`GEO:${geoCoordinates}`] : []),
+    ...(geoCoordinates ? [`X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-TITLE=${escapeIcsString(location)}:geo:${geoCoordinates}`] : []),
     'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
     'STATUS:CONFIRMED',
     'BEGIN:VALARM',
