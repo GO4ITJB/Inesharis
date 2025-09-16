@@ -7,6 +7,7 @@ export interface CalendarEvent {
   startDate: Date
   endDate: Date
   address: string
+  geoCoordinates?: string
 }
 
 export function generateCalendarEvents(language: Language, attendingCeremony: boolean, attendingReception: boolean): CalendarEvent[] {
@@ -22,7 +23,8 @@ export function generateCalendarEvents(language: Language, attendingCeremony: bo
       location: 'Vijecnica, Obala Kulina bana bb, 71000 Sarajevo, Bosnia and Herzegovina',
       startDate: new Date('2026-07-25T14:00:00+02:00'),
       endDate: new Date('2026-07-25T15:00:00+02:00'),
-      address: 'Obala Kulina bana bb, 71000 Sarajevo, Bosnia and Herzegovina'
+      address: 'Obala Kulina bana bb, 71000 Sarajevo, Bosnia and Herzegovina',
+      geoCoordinates: '43.8591,18.4339'
     }
     events.push(ceremonyEvent)
   }
@@ -34,10 +36,11 @@ export function generateCalendarEvents(language: Language, attendingCeremony: bo
       description: language === 'sv' 
         ? 'Välkommen till Ines & Haris mottagning! Vi ser fram emot att fira med dig! 💕'
         : 'Dobrodošli na Ines & Haris svadbu! Radujemo se proslavi s vama! 💕',
-      location: 'Hotel Hills Sarajevo, Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnia and Herzegovina',
+      location: 'Butmirska cesta 18, 71210 Ilidža, Bosnia and Herzegovina',
       startDate: new Date('2026-07-25T18:00:00+02:00'),
       endDate: new Date('2026-07-26T02:00:00+02:00'),
-      address: 'Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnia and Herzegovina'
+      address: 'Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnia and Herzegovina',
+      geoCoordinates: '43.8267,18.3135'
     }
     events.push(receptionEvent)
   }
@@ -79,26 +82,37 @@ export function generateOutlookUrl(event: CalendarEvent): string {
 export function generateIcsContent(event: CalendarEvent): string {
   const formatDate = (date: Date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
   
+  // Escape special characters in ICS format
+  const escapeIcsString = (str: string) => {
+    return str.replace(/\\/g, '\\\\')
+              .replace(/;/g, '\\;')
+              .replace(/,/g, '\\,')
+              .replace(/\n/g, '\\n')
+              .replace(/\r/g, '\\r')
+  }
+  
   const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Ines & Haris Wedding//Wedding Event//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    `UID:${Date.now()}-${event.title.replace(/\s/g, '')}-wedding@inesharis.se`,
-    `DTSTAMP:${formatDate(new Date())}`,
-    `DTSTART:${formatDate(event.startDate)}`,
-    `DTEND:${formatDate(event.endDate)}`,
-    `SUMMARY:${event.title}`,
-    `DESCRIPTION:${event.description.replace(/\n/g, '\\n')}`,
-    `LOCATION:${event.location}`,
-    'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
-    'STATUS:CONFIRMED',
+  'BEGIN:VCALENDAR',
+  'VERSION:2.0',
+  'PRODID:-//Ines & Haris Wedding//Wedding Event//EN',
+  'CALSCALE:GREGORIAN',
+  'METHOD:PUBLISH',
+  'BEGIN:VEVENT',
+  `UID:${Date.now()}-${event.title.replace(/\s/g, '')}-wedding@inesharis.se`,
+  `DTSTAMP:${formatDate(new Date())}`,
+  `DTSTART:${formatDate(event.startDate)}`,
+  `DTEND:${formatDate(event.endDate)}`,
+  `SUMMARY:${escapeIcsString(event.title)}`,
+  `DESCRIPTION:${escapeIcsString(event.description)}`,
+  `LOCATION:${escapeIcsString(event.location)}`,
+  ...(event.geoCoordinates ? [`GEO:${event.geoCoordinates}`] : []),
+  ...(event.geoCoordinates ? [`X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-TITLE=${escapeIcsString(event.location)}:geo:${event.geoCoordinates}`] : []),
+  'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
+  'STATUS:CONFIRMED',
     'BEGIN:VALARM',
     'TRIGGER:-PT1H',
     'ACTION:DISPLAY',
-    `DESCRIPTION:${event.title}`,
+    `DESCRIPTION:${escapeIcsString(event.title)}`,
     'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR'

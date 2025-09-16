@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaCalendarAlt, FaGoogle, FaWindows, FaApple } from 'react-icons/fa'
-import { CalendarEvent, generateGoogleCalendarUrl, generateOutlookUrl, downloadIcsFile } from '../lib/calendarUtils'
+import { CalendarEvent, generateGoogleCalendarUrl, generateOutlookUrl, downloadIcsFile, generateIcsContent } from '../lib/calendarUtils'
 import { Language } from '../lib/translations'
 
 interface CalendarButtonsProps {
@@ -31,6 +31,20 @@ export default function CalendarButtons({ events, language, className = '' }: Ca
   }
 
   const labels = getLabels()
+
+  const handleMobileAppleCalendar = (event: CalendarEvent, index: number) => {
+    // For mobile Safari, create a data URL that will prompt to open in Calendar app
+    const icsContent = generateIcsContent(event)
+    const dataUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsContent)}`
+    
+    // Try to open in Calendar app, fallback to download
+    const link = document.createElement('a')
+    link.href = dataUrl
+    link.download = `wedding-${event.title.toLowerCase().replace(/\s/g, '-')}-${index + 1}.ics`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
 
   const handleAppleCalendar = (event: CalendarEvent, index: number) => {
     const filename = `wedding-${event.title.toLowerCase().replace(/\s/g, '-')}-${index + 1}.ics`

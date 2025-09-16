@@ -122,7 +122,7 @@ export default function ConfirmationStep({
           
           {/* Calendar Buttons Section */}
           {calendarEvents.length > 0 && (
-            <div className="max-w-2xl mx-auto">
+            <div className="max-w-full sm:max-w-2xl mx-auto px-4 sm:px-0">
               <CalendarButtons 
                 events={calendarEvents} 
                 language={language} 
@@ -189,12 +189,12 @@ export default function ConfirmationStep({
           <h3 className="font-medium text-wedding-dark mb-4">
             {language === 'sv' ? 'Närvaro' : 'Prisustvo'}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="flex items-center">
-              <span className="text-gray-600">
+          <div className="space-y-3 sm:space-y-0 sm:grid sm:grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center">
+              <span className="text-gray-600 mb-1 sm:mb-0">
                 {language === 'sv' ? 'Bröllop (Hills 18:00):' : 'Svadba (Hills 18:00):'}
               </span>
-              <span className={`ml-2 px-2 py-1 rounded-full text-xs ${
+              <span className={`sm:ml-2 px-2 py-1 rounded-full text-xs w-fit ${
                 formData.attendingReception 
                   ? 'bg-green-100 text-green-800' 
                   : 'bg-gray-100 text-gray-600'
@@ -205,11 +205,11 @@ export default function ConfirmationStep({
                 }
               </span>
             </div>
-            <div className="flex items-center">
-              <span className="text-gray-600">
+            <div className="flex flex-col sm:flex-row sm:items-center">
+              <span className="text-gray-600 mb-1 sm:mb-0">
                 {language === 'sv' ? 'Vigsel (Vijecnica 14:00):' : 'Vjenčanje (Vijecnica 14:00):'}
               </span>
-              <span className={`ml-2 px-2 py-1 rounded-full text-xs ${
+              <span className={`sm:ml-2 px-2 py-1 rounded-full text-xs w-fit ${
                 formData.attendingCeremony 
                   ? 'bg-green-100 text-green-800' 
                   : 'bg-gray-100 text-gray-600'
@@ -221,11 +221,11 @@ export default function ConfirmationStep({
               </span>
             </div>
             {formData.attendingReception && (
-              <div className="flex items-center col-span-2">
-                <span className="text-gray-600">
+              <div className="flex flex-col sm:flex-row sm:items-center col-span-1 md:col-span-2">
+                <span className="text-gray-600 mb-1 sm:mb-0">
                   {language === 'sv' ? 'Hotellrum på Hills:' : 'Hotelska soba u Hills:'}
                 </span>
-                <span className={`ml-2 px-2 py-1 rounded-full text-xs ${
+                <span className={`sm:ml-2 px-2 py-1 rounded-full text-xs w-fit ${
                   formData.wantsHotelRoom === true
                     ? 'bg-blue-100 text-blue-800'
                     : formData.wantsHotelRoom === false 

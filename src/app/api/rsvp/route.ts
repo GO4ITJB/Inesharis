@@ -32,6 +32,37 @@ function generateOutlookUrl(title: string, description: string, location: string
   return `https://outlook.live.com/calendar/0/deeplink/compose?${params.toString()}`
 }
 
+function generateIcsContent(title: string, description: string, location: string, startDate: Date, endDate: Date): string {
+  const formatDate = (date: Date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+  
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Ines & Haris Wedding//Wedding Event//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:${Date.now()}-${title.replace(/\s/g, '')}-wedding@inesharis.se`,
+    `DTSTAMP:${formatDate(new Date())}`,
+    `DTSTART:${formatDate(startDate)}`,
+    `DTEND:${formatDate(endDate)}`,
+    `SUMMARY:${title}`,
+    `DESCRIPTION:${description.replace(/\n/g, '\\n')}`,
+    `LOCATION:${location}`,
+    'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
+    'STATUS:CONFIRMED',
+    'BEGIN:VALARM',
+    'TRIGGER:-PT1H',
+    'ACTION:DISPLAY',
+    `DESCRIPTION:${title}`,
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n')
+
+  return ics
+}
+
 function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: boolean, attendingReception: boolean): string {
   const events = []
   
@@ -47,6 +78,10 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
     
     events.push({
       title: ceremonyTitle,
+      description: ceremonyDescription,
+      location: ceremonyLocation,
+      startDate: ceremonyStart,
+      endDate: ceremonyEnd,
       googleUrl: generateGoogleCalendarUrl(ceremonyTitle, ceremonyDescription, ceremonyLocation, ceremonyStart, ceremonyEnd),
       outlookUrl: generateOutlookUrl(ceremonyTitle, ceremonyDescription, ceremonyLocation, ceremonyStart, ceremonyEnd)
     })
@@ -64,6 +99,10 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
     
     events.push({
       title: receptionTitle,
+      description: receptionDescription,
+      location: receptionLocation,
+      startDate: receptionStart,
+      endDate: receptionEnd,
       googleUrl: generateGoogleCalendarUrl(receptionTitle, receptionDescription, receptionLocation, receptionStart, receptionEnd),
       outlookUrl: generateOutlookUrl(receptionTitle, receptionDescription, receptionLocation, receptionStart, receptionEnd)
     })
@@ -72,15 +111,16 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
   if (events.length === 0) return ''
   
   const labels = language === 'sv' 
-    ? { title: 'Lägg till i kalender', google: 'Google Kalender', outlook: 'Outlook' }
-    : { title: 'Dodaj u kalendar', google: 'Google Kalendar', outlook: 'Outlook' }
+    ? { title: 'Lägg till i kalender', google: 'Google Kalender', outlook: 'Outlook', apple: 'Apple Kalender' }
+    : { title: 'Dodaj u kalendar', google: 'Google Kalendar', outlook: 'Outlook', apple: 'Apple Kalendar' }
   
   const buttonsHTML = events.map(event => `
     <div style="margin: 20px 0; padding: 15px; border: 1px solid #e5e5e5; border-radius: 8px; background-color: #f9f9f9;">
       <h4 style="margin: 0 0 15px 0; color: #333; font-size: 16px;">${event.title}</h4>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <a href="${event.googleUrl}" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #4285f4; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">${labels.google}</a>
-        <a href="${event.outlookUrl}" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #0078d4; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">${labels.outlook}</a>
+        <a href="${event.googleUrl}" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #4285f4; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; margin-bottom: 8px;">${labels.google}</a>
+        <a href="${event.outlookUrl}" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #0078d4; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; margin-bottom: 8px;">${labels.outlook}</a>
+        <a href="data:text/calendar;charset=utf8,${encodeURIComponent(generateIcsContent(event.title, event.description, event.location, event.startDate, event.endDate))}" download="wedding-${event.title.toLowerCase().replace(/\s/g, '-')}.ics" style="display: inline-block; padding: 8px 16px; background-color: #333; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; margin-bottom: 8px;">${labels.apple}</a>
       </div>
     </div>
   `).join('')
