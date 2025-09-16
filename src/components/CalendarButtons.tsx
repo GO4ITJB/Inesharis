@@ -32,23 +32,19 @@ export default function CalendarButtons({ events, language, className = '' }: Ca
 
   const labels = getLabels()
 
-  const handleMobileAppleCalendar = (event: CalendarEvent, index: number) => {
-    // For mobile Safari, create a data URL that will prompt to open in Calendar app
-    const icsContent = generateIcsContent(event)
-    const dataUrl = `data:text/calendar;charset=utf8,${encodeURIComponent(icsContent)}`
+  const handleAppleCalendar = (event: CalendarEvent, index: number) => {
+    // Use the API endpoint instead of generating ICS content directly
+    const language = document.documentElement.lang || 'sv'
+    const eventType = event.title.includes('Vigsel') || event.title.includes('Vjenčanje') ? 'ceremony' : 'reception'
+    const apiUrl = `/api/calendar/${eventType}?lang=${language}`
     
-    // Try to open in Calendar app, fallback to download
+    // Create a temporary link to trigger download
     const link = document.createElement('a')
-    link.href = dataUrl
-    link.download = `wedding-${event.title.toLowerCase().replace(/\s/g, '-')}-${index + 1}.ics`
+    link.href = apiUrl
+    link.download = `wedding-${event.title.toLowerCase().replace(/\s/g, '-')}.ics`
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
-  }
-
-  const handleAppleCalendar = (event: CalendarEvent, index: number) => {
-    const filename = `wedding-${event.title.toLowerCase().replace(/\s/g, '-')}-${index + 1}.ics`
-    downloadIcsFile(event, filename)
   }
 
   return (

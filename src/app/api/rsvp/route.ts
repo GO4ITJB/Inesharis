@@ -83,7 +83,8 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
       startDate: ceremonyStart,
       endDate: ceremonyEnd,
       googleUrl: generateGoogleCalendarUrl(ceremonyTitle, ceremonyDescription, ceremonyLocation, ceremonyStart, ceremonyEnd),
-      outlookUrl: generateOutlookUrl(ceremonyTitle, ceremonyDescription, ceremonyLocation, ceremonyStart, ceremonyEnd)
+      outlookUrl: generateOutlookUrl(ceremonyTitle, ceremonyDescription, ceremonyLocation, ceremonyStart, ceremonyEnd),
+      appleUrl: `/api/calendar/ceremony?lang=${language}`
     })
   }
   
@@ -104,7 +105,8 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
       startDate: receptionStart,
       endDate: receptionEnd,
       googleUrl: generateGoogleCalendarUrl(receptionTitle, receptionDescription, receptionLocation, receptionStart, receptionEnd),
-      outlookUrl: generateOutlookUrl(receptionTitle, receptionDescription, receptionLocation, receptionStart, receptionEnd)
+      outlookUrl: generateOutlookUrl(receptionTitle, receptionDescription, receptionLocation, receptionStart, receptionEnd),
+      appleUrl: `/api/calendar/reception?lang=${language}`
     })
   }
   
@@ -115,12 +117,12 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
     : { title: 'Dodaj u kalendar', google: 'Google Kalendar', outlook: 'Outlook', apple: 'Apple Kalendar' }
   
   const buttonsHTML = events.map(event => `
-    <div style="margin: 20px 0; padding: 15px; border: 1px solid #e5e5e5; border-radius: 8px; background-color: #f9f9f9;">
-      <h4 style="margin: 0 0 15px 0; color: #333; font-size: 16px;">${event.title}</h4>
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <a href="${event.googleUrl}" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #4285f4; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; margin-bottom: 8px;">${labels.google}</a>
-        <a href="${event.outlookUrl}" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #0078d4; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; margin-bottom: 8px;">${labels.outlook}</a>
-        <a href="data:text/calendar;charset=utf8,${encodeURIComponent(generateIcsContent(event.title, event.description, event.location, event.startDate, event.endDate))}" download="wedding-${event.title.toLowerCase().replace(/\s/g, '-')}.ics" style="display: inline-block; padding: 8px 16px; background-color: #333; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; margin-bottom: 8px;">${labels.apple}</a>
+    <div style="margin: 20px 0; padding: 20px; border: 1px solid #e5e5e5; border-radius: 8px; background-color: #f9f9f9; font-family: Arial, sans-serif;">
+      <h4 style="margin: 0 0 15px 0; color: #333; font-size: 16px; font-weight: bold;">${event.title}</h4>
+      <div style="display: block;">
+        <a href="${event.googleUrl}" target="_blank" style="display: inline-block; padding: 12px 20px; background-color: #4285f4; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; margin: 5px 8px 5px 0; font-weight: 500;">${labels.google}</a>
+        <a href="${event.outlookUrl}" target="_blank" style="display: inline-block; padding: 12px 20px; background-color: #0078d4; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; margin: 5px 8px 5px 0; font-weight: 500;">${labels.outlook}</a>
+        <a href="${event.appleUrl}" style="display: inline-block; padding: 12px 20px; background-color: #333; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; margin: 5px 8px 5px 0; font-weight: 500;">${labels.apple}</a>
       </div>
     </div>
   `).join('')
