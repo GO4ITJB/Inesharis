@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { FormData } from '../RSVPForm'
 import { translations, Language } from '@/lib/translations'
+import { generateCalendarEvents } from '@/lib/calendarUtils'
+import CalendarButtons from '../CalendarButtons'
 
 interface ConfirmationStepProps {
   formData: FormData
@@ -86,6 +88,8 @@ export default function ConfirmationStep({
   }
 
   if (isSubmitted) {
+    const calendarEvents = generateCalendarEvents(language, formData.attendingCeremony, formData.attendingReception)
+    
     return (
       <div className="text-center p-12">
         <div className="mb-8">
@@ -109,12 +113,23 @@ export default function ConfirmationStep({
               : 'Uskoro ćete dobiti potvrdu na e-mail.'
             }
           </p>
-          <p className="text-lg text-wedding-pink font-medium">
+          <p className="text-lg text-wedding-pink font-medium mb-8">
             {language === 'sv' 
               ? 'Vi ser fram emot att fira med dig! 🎉'
               : 'Radujemo se proslavi s vama! 🎉'
             }
           </p>
+          
+          {/* Calendar Buttons Section */}
+          {calendarEvents.length > 0 && (
+            <div className="max-w-2xl mx-auto">
+              <CalendarButtons 
+                events={calendarEvents} 
+                language={language} 
+                className="text-left"
+              />
+            </div>
+          )}
         </div>
       </div>
     )
@@ -205,6 +220,27 @@ export default function ConfirmationStep({
                 }
               </span>
             </div>
+            {formData.attendingReception && (
+              <div className="flex items-center col-span-2">
+                <span className="text-gray-600">
+                  {language === 'sv' ? 'Hotellrum på Hills:' : 'Hotelska soba u Hills:'}
+                </span>
+                <span className={`ml-2 px-2 py-1 rounded-full text-xs ${
+                  formData.wantsHotelRoom === true
+                    ? 'bg-blue-100 text-blue-800'
+                    : formData.wantsHotelRoom === false 
+                    ? 'bg-yellow-100 text-yellow-800'
+                    : 'bg-gray-100 text-gray-600'
+                }`}>
+                  {formData.wantsHotelRoom === true
+                    ? (language === 'sv' ? '✓ Ja tack, boka åt oss' : '✓ Da, rezervišite za nas')
+                    : formData.wantsHotelRoom === false
+                    ? (language === 'sv' ? '○ Nej tack, ordnar själva' : '○ Ne hvala, riješavamo sami')
+                    : (language === 'sv' ? '? Ej specificerat' : '? Nije navedeno')
+                  }
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
