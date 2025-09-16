@@ -24,7 +24,7 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       'VERSION:2.0',
       'PRODID:-//Ines & Haris Wedding//Wedding Ceremony//EN',
       'CALSCALE:GREGORIAN',
-      'METHOD:REQUEST',
+      'METHOD:PUBLISH',
       'BEGIN:VEVENT',
       `UID:${Date.now()}-ceremony@inesharis.se`,
       `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
@@ -35,7 +35,7 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       `LOCATION:Vijecnica\\, Obala Kulina bana bb\\, 71000 Sarajevo\\, Bosnia and Herzegovina`,
       'GEO:43.8591;18.4339',
       'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
-      `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${guestName}`,
+      'STATUS:CONFIRMED',
       'BEGIN:VALARM',
       'TRIGGER:-PT1H',
       'ACTION:DISPLAY',
@@ -47,18 +47,20 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
 
     events.push({
       filename: language === 'sv' ? 'Ines-Haris-Vigsel.ics' : 'Ines-Haris-Vjencanje.ics',
-      content: Buffer.from(ceremonyIcs).toString('base64')
+      content: Buffer.from(ceremonyIcs).toString('base64'),
+      type: 'text/calendar',
+      disposition: 'attachment'
     })
   }
 
   // Reception event (if attending)
   if (attendingReception) {
     const receptionTitle = language === 'sv' 
-      ? 'Ines & Haris - Mottagning' 
+      ? 'Ines & Haris - Bröllop' 
       : 'Ines & Haris - Svadba'
     
     const receptionDescription = language === 'sv' 
-      ? `Välkommen till Ines & Haris mottagning!\n\nPlats: Butmirska cesta 18, Ilidža\nAdress: Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnien\n\nVi ser fram emot att fira med dig! 💕`
+      ? `Välkommen till Ines & Haris bröllop!\n\nPlats: Butmirska cesta 18, Ilidža\nAdress: Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosnien\n\nVi ser fram emot att fira med dig! 💕`
       : `Dobrodošli na Ines & Haris svadbu!\n\nMjesto: Butmirska cesta 18, Ilidža\nAdresa: Butmirska cesta 18, Ilidža 71000 Sarajevo, Bosna i Hercegovina\n\nRadujemo se proslavi s vama! 💕`
 
     const receptionIcs = [
@@ -66,7 +68,7 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       'VERSION:2.0',
       'PRODID:-//Ines & Haris Wedding//Wedding Reception//EN',
       'CALSCALE:GREGORIAN',
-      'METHOD:REQUEST',
+      'METHOD:PUBLISH',
       'BEGIN:VEVENT',
       `UID:${Date.now()}-reception@inesharis.se`,
       `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
@@ -77,7 +79,7 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
       `LOCATION:Hotel Hills Sarajevo\\, Butmirska cesta 18\\, Ilidža 71000 Sarajevo\\, Bosnia and Herzegovina`,
       'GEO:43.8267;18.3135',
       'ORGANIZER;CN=Ines & Haris:mailto:noreply@inesharis.se',
-      `ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=TRUE:mailto:${guestName}`,
+      'STATUS:CONFIRMED',
       'BEGIN:VALARM',
       'TRIGGER:-PT1H',
       'ACTION:DISPLAY',
@@ -89,7 +91,9 @@ function createCalendarInvite(language: 'sv' | 'ba', guestName: string, attendin
 
     events.push({
       filename: language === 'sv' ? 'Ines-Haris-Mottagning.ics' : 'Ines-Haris-Svadba.ics',
-      content: Buffer.from(receptionIcs).toString('base64')
+      content: Buffer.from(receptionIcs).toString('base64'),
+      type: 'text/calendar',
+      disposition: 'attachment'
     })
   }
 
