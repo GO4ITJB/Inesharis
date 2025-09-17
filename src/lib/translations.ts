@@ -143,7 +143,7 @@ export const translations = {
       accommodation: {
         question: "Vart bör jag bo i Sarajevo?",
         answer:
-          "Under bröllopsnatten så rekommenderar vi att ni checkar in på Hotel Hills för optimal komfort, men absolut inget måste. Klicka här för mer info. Väljer ni AirBnB som alternativ så sök efter \"Bascarsija\", det är gamla stan och själva kärnan i staden. Där får ni gångavstånd till det mesta. Vi hjälper er mer än gärna med ert boende!",
+          "Under bröllopsnatten så rekommenderar vi att ni checkar in på Hotel Hills för optimal komfort, men absolut inget måste. Vill ni att vi bokar ett hotellrum på Hills åt er så får ni 20% rabatt som gäster. Lägg gärna till det när ni osar eller kontakta oss för mer info.\n\nVäljer ni AirBnB som alternativ så sök efter \"Bascarsija\", det är gamla stan och själva kärnan i staden. Där får ni gångavstånd till det mesta.\n\nVi hjälper er mer än gärna med ert boende!",
       },
       transport: {
         question: "Hur tar jag mig runt i Sarajevo?",
@@ -338,7 +338,7 @@ export const translations = {
 
     // Run of Show
     programTitle: "Program",
-    programDescription: "Rasporeda dana: Subotu, 25. juli 2026",
+    programDescription: "Rasporeda dana:",
     dressCodeDescription:
       "Poželjno; haljina za dame, elegantne hlače, košulja i sako ili odijelo za muškarce.",
     dressCodeNote:
@@ -481,7 +481,7 @@ export const translations = {
       gifts: {
         question: "Kako je s poklonima/darivanjem?",
         answer:
-          "Drago nam je što prisustvujete i to nam je najlepši poklon. Ali ako ipak želite da nam nešto poklonite, biće predviđen box darivanja jer nemamo mogućnosti da poklone nosimo avionom za Švedsku.",
+          "Drago nam je što prisustvujete i to nam je najljepši poklon. Ali ako ipak želite da nam nešto poklonite, biće predviđen box darivanja jer nemamo mogućnosti da poklone nosimo avionom za Švedsku.",
       },
       corsage: {
         question: "Hoće li biti ceremonijalnih ukrasa ili kićenje?",
@@ -575,12 +575,12 @@ export const translations = {
           "Pravoslavna katedrala koja se nalazi u centru starog grada i izgrađena je 1889. Izgradio ju je Mađar koji je inspiraciju dobio od Notre Dame. Tu je pokopan nadbiskup iz 1820. Ispred katedrale stoji kip ondašnjeg biskupa drugog koji je 1997. posjetio Sarajevo nakon završetka rata.",
       },
       alta: {
-        name: "Alta Shopping Centar",
+        name: "BBI Centar (Aria Centar)",
         description:
           "Najveći i najmoderniji tržni centar u Sarajevu sa više od 130 prodavnica raspoređenih na 6 spratova. Ovdje ćete pronaći međunarodne brendove poput H&M, Zara, Reserved, kao i lokalne prodavnice. Centar ima i restorane, kafiće i kino. Nalazi se u centru grada i lako je dostupan javnim prevozom.",
       },
       importanne: {
-        name: "Importanne Shopping Centar",
+        name: "SCC Sarajevo (Sarajevo City Center)",
         description:
           "Popularan tržni centar sa odličnim izborom mode, elektronike i svakodnevnih potrepština. Manji od BBI-ja, ali i dalje veoma dobro opremljen sa poznatim brendovima i odličnim odjelom za hranu. Ima i kafić i restorane. Dobre mogućnosti za parking i centralna lokacija.",
       },
@@ -596,7 +596,7 @@ export const translations = {
       burek: {
         name: "Buregdžinica Bosna",
         description:
-          "Najbolji bureci/pite u gradu poznati po tradicionalnim okusima. Pravi se stalno svježe u kamenog peću s vatrom. Tražite pavlaku ako je želite.",
+          "Najbolji bureci/pite u gradu poznati po tradicionalnim okusima. Pravi se stalno svježe u saču nad vatrom. Tražite pavlaku ako je želite.",
       },
       baklava: {
         name: "Slastičarna Sarajbosna",
@@ -623,7 +623,7 @@ export const translations = {
     faqLink: "Pitanja i odgovori",
     hotellLink: "Hoteli",
     transportLink: "Transport",
-    weddingDateFooter: "Datum Vjenčanja",
+    weddingDateFooter: "Dan Vjenčanja",
     weddingDateText: "Subota, 25. Juli 2026",
     weddingLocation: "Sarajevo, Bosna i Hercegovina",
     copyrightText: "© 2026 Ines & Haris. S ljubavlju iz Sarajeva.",

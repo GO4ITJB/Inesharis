@@ -41,16 +41,38 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
         <div className="pb-8 mt-2">
           <div className="text-wedding-brown/80 leading-relaxed">
             {item.hasClickableLink ? (
-              <>
-                {item.answer}{" "}
-                <a
-                  href={item.linkHref}
-                  className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
-                >
-                  {item.linkText}
-                </a>
-                .
-              </>
+              item.question.includes("Vart bör jag bo") ? (
+                <>
+                  {item.answer.split('\n\n').map((paragraph, index) => (
+                    <div key={index}>
+                      {paragraph}
+                      {index === 0 && (
+                        <>
+                          <br />
+                          <a
+                            href={item.linkHref}
+                            className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
+                          >
+                            {item.linkText}
+                          </a>
+                          <br /><br />
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {item.answer}{" "}
+                  <a
+                    href={item.linkHref}
+                    className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
+                  >
+                    {item.linkText}
+                  </a>
+                  .
+                </>
+              )
             ) : (
               item.answer
             )}

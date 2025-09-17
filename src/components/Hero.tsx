@@ -10,7 +10,7 @@ interface HeroProps {
 }
 
 export default function Hero({ language = "sv" }: HeroProps) {
-  const weddingDate = new Date("2026-07-25T15:00:00");
+  const weddingDate = new Date("2026-07-25T14:00:00");
   const t = translations[language];
 
   return (

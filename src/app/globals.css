@@ -214,6 +214,16 @@
       transform: translateY(0);
     }
   }
+
+  /* Force overflow-x-hidden to override WordPress CSS */
+  .force-overflow-hidden {
+    overflow-x: hidden !important;
+  }
+
+  /* Direct CSS rule for RunOfShow section */
+  #run-of-show {
+    overflow-x: hidden !important;
+  }
 } 
 
 .c-schedule__item.c-schedule__item--repeating-2 .c-schedule__item__svg {

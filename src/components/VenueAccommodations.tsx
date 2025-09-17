@@ -175,7 +175,7 @@ const recommendedHotels: VenueInfo[] = [
     image: "https://www.ahstatic.com/photos/b1f7_ho_02_p_1024x768.jpg",
   },
   {
-    name: "Malak Regency",
+    name: "Malak Regency Hotel",
     address: "Butmirska Cesta 18",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "malak",
@@ -348,7 +348,7 @@ export default function VenueAccommodations({
   // Set responsive zoom based on screen size
   React.useEffect(() => {
     const updateZoom = () => {
-      setZoom(window.innerWidth >= 768 ? 13 : 12); // 13 for desktop, 11 for mobile
+      setZoom(window.innerWidth >= 768 ? 13 : 11); // 13 for desktop, 11 for mobile
     };
 
     updateZoom();
@@ -425,7 +425,7 @@ export default function VenueAccommodations({
             <p className="text-wedding-brown/70 max-w-2xl mx-auto">
               {language === "sv"
                 ? "Se alla våra rekommenderade hotell, bröllopslokalen och vigselplatsen på samma karta"
-                : "Pogledajte sve naše preporučene hotele, wedding lokacije i ceremonijalno mjesto na mapi"}
+                : "Pogledajte sve naše preporučene hotele, svadbene lokacije i ceremonijalno mjesto na mapi"}
             </p>
           </div>
 
@@ -501,7 +501,7 @@ export default function VenueAccommodations({
                               : selectedMarker.type === "reception"
                               ? language === "sv"
                                 ? "Bröllopslokal"
-                                : "Recepcija"
+                                : "Svadbena proslava"
                               : language === "sv"
                               ? "Hotell"
                               : "Hotel"}
@@ -522,7 +522,7 @@ export default function VenueAccommodations({
                             }
 
                             return venueDetails ? (
-                              <div className="flex items-center justify-between">
+                              <div className="space-y-2">
                                 <p className="text-xs text-wedding-brown/80 flex items-center">
                                   <i className="fas fa-map-marker-alt text-wedding-pink mr-1"></i>
                                   {venueDetails.address}
@@ -531,7 +531,7 @@ export default function VenueAccommodations({
                                   href={venueDetails.directionsUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center text-xs bg-wedding-pink hover:bg-wedding-pink/90 text-white px-2 py-1 rounded transition-all duration-300 ml-2"
+                                  className="inline-flex items-center text-xs bg-wedding-pink hover:bg-wedding-pink/90 text-white px-2 py-1 rounded transition-all duration-300"
                                 >
                                   <i className="fas fa-directions text-xs mr-1"></i>
                                   {language === "sv" ? "Väg" : "Upute"}
@@ -568,7 +568,7 @@ export default function VenueAccommodations({
               <div className="flex items-center space-x-2">
                 <span className="text-lg">🥂</span>
                 <span className="text-wedding-brown/80">
-                  {language === "sv" ? "Bröllopslokal" : "Recepcija"}
+                  {language === "sv" ? "Bröllopslokal" : "Svadbena proslava"}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
