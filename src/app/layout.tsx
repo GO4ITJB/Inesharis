@@ -10,8 +10,8 @@ const dancingScript = Dancing_Script({
 })
 
 export const metadata: Metadata = {
-  title: 'Ines & Haris - Wedding',
-  description: 'Join us for our special day - September 21, 2024',
+  title: 'Ines & Haris - Bröllop',
+  description: 'Save the Date - Lördagen, 25 Juli 2026"',
 }
 
 export default function RootLayout({
