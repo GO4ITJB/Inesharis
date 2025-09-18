@@ -37,14 +37,14 @@ export default function Hero({ language = "sv" }: HeroProps) {
           ></iframe>
         </div>
 
-        {/* Mobile YouTube Video */}
+        {/* Mobile Sarajevo Video */}
         <div className="md:hidden absolute inset-0 overflow-hidden">
-          <iframe
-            src="https://www.youtube.com/embed/jEcnNoHbnMQ?autoplay=1&mute=1&loop=1&playlist=jEcnNoHbnMQ&start=3&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1"
-            title="Wedding Video Mobile"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            allowFullScreen
+          <video
+            src="/sarajevo.MOV"
+            autoPlay
+            loop
+            muted
+            playsInline
             className="absolute w-full h-full object-cover"
             style={{
               pointerEvents: "none",
@@ -54,7 +54,7 @@ export default function Hero({ language = "sv" }: HeroProps) {
               transformOrigin: "center center",
               objectFit: "cover",
             }}
-          ></iframe>
+          />
         </div>
       </div>
 
