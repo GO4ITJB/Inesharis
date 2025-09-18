@@ -3,6 +3,11 @@
 import React, { useEffect } from 'react'
 import Hero from '@/components/Hero'
 import Header from '@/components/Header'
+import AnimatedTravelSchedule from '@/components/OurStory'
+import FAQ from '@/components/FAQ'
+import VenueAccommodations from '@/components/VenueAccommodations'
+import ThingsToDoSarajevo from '@/components/ThingsToDoSarajevo'
+import Footer from '@/components/BackToTop'
 import { saveLanguagePreference } from '@/lib/languageDetection'
 
 export default function BosnianHome() {
@@ -16,8 +21,12 @@ export default function BosnianHome() {
       <Header language="ba" />
       <main>
         <Hero language="ba" />
-        {/* Other components will be added with language support soon */}
+        <AnimatedTravelSchedule language="ba" />
+        <FAQ language="ba" />
+        <VenueAccommodations language="ba" />
+        <ThingsToDoSarajevo language="ba" />
       </main>
+              <Footer language="ba" />
     </>
   )
 } 

@@ -1,18 +1,127 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  GoogleMap,
-  InfoWindow,
-  Marker,
-  useJsApiLoader,
-} from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { translations, Language } from "@/lib/translations";
 
 interface VenueInfo {
   name: string;
   address: string;
   city: string;
+  descriptionKey: string;
+  mapUrl: string;
+  directionsUrl: string;
+  website: string;
+  image: string;
+  description: string;
+}
+
+// Venue data with coordinates
+const venues = [
+  {
+    name: "Vijecnica",
+    position: { lat: 43.8591, lng: 18.4311 },
+    type: "ceremony"
+  },
+  {
+    name: "Hotel Hills",
+    position: { lat: 43.8563, lng: 18.4311 },
+    type: "reception"  
+  },
+  {
+    name: "Hotel Swissotel",
+    position: { lat: 43.8563, lng: 18.4131 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel Europe",
+    position: { lat: 43.8591, lng: 18.4131 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel President",
+    position: { lat: 43.8470, lng: 18.4131 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel Festival",
+    position: { lat: 43.8563, lng: 18.4250 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel Old Town",
+    position: { lat: 43.8591, lng: 18.4250 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel Center",
+    position: { lat: 43.8500, lng: 18.4200 },
+    type: "hotel"
+  }
+];
+
+const mapContainerStyle = {
+  width: '100%',
+  height: '400px'
+};
+
+const center = {
+  lat: 43.8563,
+  lng: 18.4200
+};
+
+const mapOptions = {
+  disableDefaultUI: false,
+  zoomControl: true,
+  streetViewControl: false,
+  mapTypeControl: false,
+  fullscreenControl: true,
+};
+
+interface VenueAccommodationsProps {
+  language: Language;
+}
+    position: { lat: 43.8470, lng: 18.4131 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel Festival",
+    position: { lat: 43.8563, lng: 18.4250 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel Old Town",
+    position: { lat: 43.8591, lng: 18.4250 },
+    type: "hotel"
+  },
+  {
+    name: "Hotel Center",
+    position: { lat: 43.8500, lng: 18.4200 },
+    type: "hotel"
+  }
+];
+
+const mapContainerStyle = {
+  width: '100%',
+  height: '400px'
+};
+
+const center = {
+  lat: 43.8563,
+  lng: 18.4200
+};
+
+const mapOptions = {
+  disableDefaultUI: false,
+  zoomControl: true,
+  streetViewControl: false,
+  mapTypeControl: false,
+  fullscreenControl: true,
+};
+
+interface VenueAccommodationsProps {
+  language: Language;
+} city: string;
   descriptionKey: string;
   mapUrl: string;
   directionsUrl: string;
@@ -27,68 +136,6 @@ interface TaxiCompany {
   description: string;
 }
 
-// Venue data with coordinates for Google Maps
-const venues = [
-  {
-    name: "Vijecnica",
-    position: { lat: 43.8591, lng: 18.4339 }, // Plus code: VC5M+MC
-    type: "ceremony",
-  },
-  {
-    name: "Hotel Hills",
-    position: { lat: 43.8267, lng: 18.3135 }, // Plus code: R8G7+QC
-    type: "reception",
-  },
-  {
-    name: "Hotel Europe Sarajevo",
-    position: { lat: 43.8583, lng: 18.4274 }, // Plus code: VC5G+8X
-    type: "hotel",
-  },
-  {
-    name: "Hotel President",
-    position: { lat: 43.858, lng: 18.4305 }, // Plus code: VC5J+83
-    type: "hotel",
-  },
-  {
-    name: "Courtyard by Marriott Sarajevo",
-    position: { lat: 43.8558, lng: 18.4156 }, // Plus code: VC48+73
-    type: "hotel",
-  },
-  {
-    name: "Swissôtel Sarajevo",
-    position: { lat: 43.8558, lng: 18.4082 }, // Plus code: VC45+56
-    type: "hotel",
-  },
-  {
-    name: "Mövenpick Hotel Sarajevo",
-    position: { lat: 43.8575, lng: 18.4196 }, // Plus code: V93Q+4V
-    type: "hotel",
-  },
-  {
-    name: "Malak Regency Hotel",
-    position: { lat: 43.8231, lng: 18.3086 }, // Plus code: R8F5+7G
-    type: "hotel",
-  },
-];
-
-const mapContainerStyle = {
-  width: "100%",
-  height: "400px",
-};
-
-const center = {
-  lat: 43.843,
-  lng: 18.368,
-};
-
-const mapOptions = {
-  disableDefaultUI: false,
-  zoomControl: true,
-  streetViewControl: false,
-  mapTypeControl: false,
-  fullscreenControl: true,
-};
-
 const weddingVenue: VenueInfo = {
   name: "Vijecnica",
   address: "Obala Kulina bana bb",
@@ -101,15 +148,15 @@ const weddingVenue: VenueInfo = {
     "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npjFpKweuDrWMXOALLOJsbLXni6ZEshC5Jv7H4niKzuDOpA5zYGOpSHpS-Uy4UoojFBi6arGDOzij6JVjY09X4APosAZNy03ZL94JJfogbnh4Rw2iSgpm__I0W4IKjU_02Y2KPT=s294-w294-h220-n-k-no",
 };
 
-const receptionVenue: VenueInfo = {
-  name: "Hotel Hills",
-  address: "Butmirska cesta 18",
+const hillsVenue: VenueInfo = {
+  name: "Hotel Hills Sarajevo",
+  address: "Butmirska Cesta bb",
   city: "71000 Sarajevo, Bosnia and Herzegovina",
   descriptionKey: "hills",
   mapUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sHotel+Hills+Sarajevo!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
   directionsUrl: "https://maps.google.com/?q=Hotel+Hills+Sarajevo",
-  website: "https://www.hotelhills.ba/",
+  website: "https://hotelhills.ba/",
   image: "/nocna-hotel-hills-1920x1080-1.jpg",
 };
 
@@ -175,7 +222,7 @@ const recommendedHotels: VenueInfo[] = [
     image: "https://www.ahstatic.com/photos/b1f7_ho_02_p_1024x768.jpg",
   },
   {
-    name: "Malak Regency Hotel",
+    name: "Malak Regency",
     address: "Butmirska Cesta 18",
     city: "71000 Sarajevo, Bosnia and Herzegovina",
     descriptionKey: "malak",
@@ -236,8 +283,8 @@ const VenueCard = ({
           <span className="bg-wedding-pink/90 text-white text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm">
             {venue.name === "Vijecnica"
               ? t.ceremonyVenue
-              : venue.name === "Hotel Hills"
-              ? t.hotelAndWeddingVenue
+              : venue.name === "Hotel Hills Sarajevo"
+              ? "Bröllopslokal & Hotel"
               : t.hotel}
           </span>
         </div>
@@ -283,9 +330,9 @@ const VenueCard = ({
         </p>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-2 border-t border-wedding-sand/50 mt-auto">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-0 pt-2 border-t border-wedding-sand/50 mt-auto">
           {/* Contact Info */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center justify-center md:justify-start space-x-3">
             {venue.phone && (
               <a
                 href={`tel:${venue.phone}`}
@@ -315,7 +362,7 @@ const VenueCard = ({
               href={venue.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300"
+              className="bg-wedding-pink hover:bg-wedding-pink/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 text-center"
             >
               {t.viewWebsite}
             </a>
@@ -337,24 +384,10 @@ export default function VenueAccommodations({
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = false; // Removed framer-motion useInView
   const [selectedMarker, setSelectedMarker] = useState<any>(null);
-  const [zoom, setZoom] = useState(13);
-
+  
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey:
-      process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ||
-      "AIzaSyBCd9Wmf8uE3SlvuE1pb4yjWvDE-MrIRbw",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "AIzaSyBCd9Wmf8uE3SlvuE1pb4yjWvDE-MrIRbw",
   });
-
-  // Set responsive zoom based on screen size
-  React.useEffect(() => {
-    const updateZoom = () => {
-      setZoom(window.innerWidth >= 768 ? 13 : 11); // 13 for desktop, 11 for mobile
-    };
-
-    updateZoom();
-    window.addEventListener("resize", updateZoom);
-    return () => window.removeEventListener("resize", updateZoom);
-  }, []);
 
   if (loadError) {
     console.error("Error loading Google Maps:", loadError);
@@ -393,13 +426,18 @@ export default function VenueAccommodations({
         </div>
 
         {/* Venue Cards Grid */}
-
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Venue Cards Grid - Same width as hotel cards */}
-          <div className="flex justify-center mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+        <div className="max-w-4xl mx-auto px-6">
+          {/* Ceremony Venue */}
+          <div className="flex justify-center mb-8">
+            <div className="w-full lg:w-1/2">
               <VenueCard venue={weddingVenue} language={language} />
-              <VenueCard venue={receptionVenue} language={language} />
+            </div>
+          </div>
+
+          {/* Wedding Venue & Hotel */}
+          <div className="flex justify-center mb-16">
+            <div className="w-full lg:w-1/2">
+              <VenueCard venue={hillsVenue} language={language} />
             </div>
           </div>
 
@@ -414,27 +452,30 @@ export default function VenueAccommodations({
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Interactive Map Section */}
-          <div className="text-center mb-16">
+        {/* All Venues Map Section */}
+        <div className="max-w-6xl mx-auto px-6 mb-16">
+          <div className="text-center mb-12">
             <h3 className="text-4xl lg:text-5xl font-script text-wedding-brown mb-4">
               {language === "sv"
                 ? "Karta över alla platser"
                 : "Mapa svih lokacija"}
             </h3>
+            <div className="w-16 h-px bg-wedding-pink mx-auto mb-6"></div>
             <p className="text-wedding-brown/70 max-w-2xl mx-auto">
               {language === "sv"
-                ? "Se alla våra rekommenderade hotell, bröllopslokalen och vigselplatsen på samma karta"
-                : "Pogledajte sve naše preporučene hotele, svadbene lokacije i ceremonijalno mjesto na mapi"}
+                ? "Se alla våra rekommenderade hotell, bröllopslokaler och ceremoniplats på en karta"
+                : "Pogledajte sve naše preporučene hotele, wedding lokacije i ceremonijalno mjesto na mapi"}
             </p>
           </div>
 
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-wedding-pink/10">
-            <div className="relative w-full h-96 md:h-[400px] rounded-xl overflow-hidden">
+            <div className="relative w-full h-96 md:h-[500px] rounded-xl overflow-hidden">
               {isLoaded ? (
                 <GoogleMap
                   mapContainerStyle={mapContainerStyle}
-                  zoom={zoom}
+                  zoom={13}
                   center={center}
                   options={mapOptions}
                 >
@@ -444,30 +485,15 @@ export default function VenueAccommodations({
                       position={venue.position}
                       onClick={() => setSelectedMarker(venue)}
                       icon={{
-                        url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
-                          <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="20" cy="20" r="18" fill="white" stroke="#D6A9A3" stroke-width="3"/>
-                            <text x="20" y="26" font-size="16" text-anchor="middle" font-family="Arial, sans-serif">
-                              ${
-                                venue.type === "ceremony"
-                                  ? "💒"
-                                  : venue.type === "reception"
-                                  ? "🥂"
-                                  : "🏨"
-                              }
-                            </text>
-                          </svg>
-                        `)}`,
-                        scaledSize: new window.google.maps.Size(40, 40),
-                        anchor: new window.google.maps.Point(20, 20),
+                        path: window.google.maps.SymbolPath.CIRCLE,
+                        fillColor: venue.type === 'ceremony' ? '#ef4444' : 
+                                 venue.type === 'reception' ? '#22c55e' : 
+                                 '#3b82f6',
+                        fillOpacity: 1,
+                        strokeColor: '#ffffff',
+                        strokeWeight: 2,
+                        scale: 8,
                       }}
-                      zIndex={
-                        venue.type === "ceremony"
-                          ? 3
-                          : venue.type === "reception"
-                          ? 2
-                          : 1
-                      }
                     />
                   ))}
 
@@ -476,70 +502,9 @@ export default function VenueAccommodations({
                       position={selectedMarker.position}
                       onCloseClick={() => setSelectedMarker(null)}
                     >
-                      <div className="p-2 min-w-[200px]">
-                        {/* Header row with emoji and title */}
-                        <div className="flex items-center mb-1">
-                          <span className="text-lg mr-2">
-                            {selectedMarker.type === "ceremony"
-                              ? "💒"
-                              : selectedMarker.type === "reception"
-                              ? "🥂"
-                              : "🏨"}
-                          </span>
-                          <h3 className="font-semibold text-wedding-brown text-sm">
-                            {selectedMarker.name}
-                          </h3>
-                        </div>
-
-                        {/* Content section */}
-                        <div className="mb-1">
-                          <p className="text-xs text-wedding-pink font-medium mb-1">
-                            {selectedMarker.type === "ceremony"
-                              ? language === "sv"
-                                ? "Ceremoni"
-                                : "Ceremonija"
-                              : selectedMarker.type === "reception"
-                              ? language === "sv"
-                                ? "Bröllopslokal"
-                                : "Svadbena proslava"
-                              : language === "sv"
-                              ? "Hotell"
-                              : "Hotel"}
-                          </p>
-
-                          {/* Get venue details */}
-                          {(() => {
-                            let venueDetails = null;
-                            if (selectedMarker.name === "Vijecnica") {
-                              venueDetails = weddingVenue;
-                            } else if (selectedMarker.name === "Hotel Hills") {
-                              venueDetails = receptionVenue;
-                            } else {
-                              // Find in recommendedHotels
-                              venueDetails = recommendedHotels.find(
-                                (h) => h.name === selectedMarker.name
-                              );
-                            }
-
-                            return venueDetails ? (
-                              <div className="space-y-2">
-                                <p className="text-xs text-wedding-brown/80 flex items-center">
-                                  <i className="fas fa-map-marker-alt text-wedding-pink mr-1"></i>
-                                  {venueDetails.address}
-                                </p>
-                                <a
-                                  href={venueDetails.directionsUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center text-xs bg-wedding-pink hover:bg-wedding-pink/90 text-white px-2 py-1 rounded transition-all duration-300"
-                                >
-                                  <i className="fas fa-directions text-xs mr-1"></i>
-                                  {language === "sv" ? "Väg" : "Upute"}
-                                </a>
-                              </div>
-                            ) : null;
-                          })()}
-                        </div>
+                      <div className="p-2">
+                        <h3 className="font-semibold text-wedding-brown">{selectedMarker.name}</h3>
+                        <p className="text-sm text-wedding-brown/70 capitalize">{selectedMarker.type}</p>
                       </div>
                     </InfoWindow>
                   )}
@@ -551,36 +516,39 @@ export default function VenueAccommodations({
               )}
             </div>
 
-            {/* Global styles for InfoWindow close button - moved outside */}
-            <style jsx global>{`
-              .gm-style-iw-chr {
-                height: 24px !important;
-              }
-            `}</style>
-
+            {/* Map Legend */}
             <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-              <div className="flex items-center space-x-2">
-                <span className="text-lg">💒</span>
-                <span className="text-wedding-brown/80">
-                  {language === "sv" ? "Vigsel" : "Ceremonija"}
-                </span>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                <span>Vijecnica (Ceremoni)</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-lg">🥂</span>
-                <span className="text-wedding-brown/80">
-                  {language === "sv" ? "Bröllopslokal" : "Svadbena proslava"}
-                </span>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                <span>Hotel Hills (Bröllop)</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-lg">🏨</span>
-                <span className="text-wedding-brown/80">
-                  {language === "sv" ? "Hotell" : "Hoteli"}
-                </span>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                <span>Hotel Europe</span>
               </div>
-              <div className="text-xs text-wedding-brown/60">
-                {language === "sv"
-                  ? "Klicka på markörer för info"
-                  : "Kliknite na markere za info"}
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-orange-500 rounded-full"></div>
+                <span>Hotel President</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-purple-500 rounded-full"></div>
+                <span>Courtyard Marriott</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
+                <span>Swissôtel</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-pink-500 rounded-full"></div>
+                <span>Mövenpick</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-gray-500 rounded-full"></div>
+                <span>Malak Regency</span>
               </div>
             </div>
           </div>
@@ -589,7 +557,7 @@ export default function VenueAccommodations({
         {/* Transportation Section */}
         {/* Removed framer-motion motion components */}
         <div
-          className="max-w-4xl mx-auto px-6 mt-20"
+          className="max-w-4xl mx-auto px-6"
           // Removed framer-motion motion components
         >
           {/* Transportation Header */}
@@ -650,20 +618,22 @@ export default function VenueAccommodations({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                 <div>
                   <div className="flex items-center mb-2">
-                    <i className="fas fa-car text-wedding-pink mr-3"></i>
-                    <span className="font-medium text-wedding-brown">
+                    <i className="fas fa-car text-wedding-pink mr-3 text-lg"></i>
+                    <span className="font-semibold text-lg text-wedding-brown">
                       {t.parking}
                     </span>
                   </div>
-                  <div className="text-wedding-brown/70 text-sm">
-                    {Array.isArray(t.parkingInfo)
-                      ? t.parkingInfo.map((item, idx) => (
-                          <div key={idx}>
-                            <strong>{item.label}</strong>
-                            {item.text}
-                          </div>
-                        ))
-                      : t.parkingInfo}
+                  <div className="text-wedding-brown/80 text-base leading-relaxed space-y-1">
+                    <p>
+                      <span className="font-medium">Vigsellokalen:</span>{" "}
+                      Begränsad parkering, parkera gärna i närheten då det är
+                      centralt.
+                    </p>
+                    <p>
+                      <span className="font-medium">Bröllopslokalen:</span> Fri
+                      parkering för bröllopsgäster precis utanför hotellet.
+                      Lämna biljetten i receptionen.
+                    </p>
                   </div>
                 </div>
                 <div>

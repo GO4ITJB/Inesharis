@@ -1,22 +1,20 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Link from 'next/link'
-import CountdownTimer from './CountdownTimer'
-import { translations, Language } from '@/lib/translations'
+import React from "react";
+import Link from "next/link";
+import CountdownTimer from "./CountdownTimer";
+import { translations, Language } from "@/lib/translations";
 
 interface HeroProps {
-  language?: Language
+  language?: Language;
 }
 
-export default function Hero({ language = 'sv' }: HeroProps) {
-  const weddingDate = new Date('2026-07-25T15:00:00')
-  const t = translations[language]
+export default function Hero({ language = "sv" }: HeroProps) {
+  const weddingDate = new Date("2026-07-25T14:00:00");
+  const t = translations[language];
 
   return (
-    <section 
-      className="fixed top-0 left-0 h-screen w-full z-[1] flex items-center justify-center text-white text-center"
-    >
+    <section className="fixed top-0 left-0 h-screen w-full z-[1] flex items-center justify-center text-white text-center">
       {/* Video Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Desktop YouTube Video */}
@@ -28,13 +26,13 @@ export default function Hero({ language = 'sv' }: HeroProps) {
             allow="autoplay; encrypted-media"
             allowFullScreen
             className="absolute w-full h-full object-cover"
-            style={{ 
-              pointerEvents: 'none',
-              width: '100vw',
-              height: '100vh',
-              transform: 'scale(1.2)',
-              transformOrigin: 'center center',
-              objectFit: 'cover'
+            style={{
+              pointerEvents: "none",
+              width: "100vw",
+              height: "100vh",
+              transform: "scale(1.2)",
+              transformOrigin: "center center",
+              objectFit: "cover",
             }}
           ></iframe>
         </div>
@@ -48,13 +46,13 @@ export default function Hero({ language = 'sv' }: HeroProps) {
             allow="autoplay; encrypted-media"
             allowFullScreen
             className="absolute w-full h-full object-cover"
-            style={{ 
-              pointerEvents: 'none',
-              width: '100vw',
-              height: '100vh',
-              transform: 'scale(1.3)',
-              transformOrigin: 'center center',
-              objectFit: 'cover'
+            style={{
+              pointerEvents: "none",
+              width: "100vw",
+              height: "100vh",
+              transform: "scale(1.3)",
+              transformOrigin: "center center",
+              objectFit: "cover",
             }}
           ></iframe>
         </div>
@@ -88,16 +86,16 @@ export default function Hero({ language = 'sv' }: HeroProps) {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link 
-            href={language === 'ba' ? '/ba/rsvp' : '/rsvp'}
+          <Link
+            href={language === "ba" ? "/ba/rsvp" : "/rsvp"}
             className="wedding-button-primary px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all duration-300 hover:scale-105"
           >
             {t.rsvpNow} →
           </Link>
-          
-          <a 
-            href="#venue-accommodations"
-            className="wedding-button-secondary px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all duration-300 hover:scale-105"
+
+          <a
+            href="#rekommenderade-hotell"
+            className="wedding-button-primary px-8 py-4 text-sm tracking-[0.1em] uppercase font-medium transition-all duration-300 hover:scale-105"
           >
             {t.bookHotel}
           </a>
@@ -109,5 +107,5 @@ export default function Hero({ language = 'sv' }: HeroProps) {
         <CountdownTimer targetDate={weddingDate} language={language} />
       </div>
     </section>
-  )
+  );
 }

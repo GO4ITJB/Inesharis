@@ -6,8 +6,12 @@ import Hero from '@/components/Hero'
 import Header from '@/components/Header'
 import AnimatedTravelSchedule from '@/components/OurStory'
 import RunOfShow from '@/components/RunOfShow'
+import FAQ from '@/components/FAQ'
 import VenueAccommodations from '@/components/VenueAccommodations'
+import ThingsToDoSarajevo from '@/components/ThingsToDoSarajevo'
+import Footer from '@/components/BackToTop'
 import { detectBrowserLanguage, getLanguageFromPath, saveLanguagePreference } from '@/lib/languageDetection'
+import AnimatedTravelScheduleBackup from '@/components/AnimatedTravelScheduleBackup'
 
 export default function Home() {
   const router = useRouter()
@@ -43,10 +47,13 @@ export default function Home() {
       <Header language="sv" />
       <main>
         <Hero language="sv" />
-        {/* <AnimatedTravelSchedule />
-        <RunOfShow />
-        <VenueAccommodations /> */}
+        <AnimatedTravelSchedule language="sv" />
+        <FAQ language="sv" />
+        <VenueAccommodations language="sv" />
+        <ThingsToDoSarajevo language="sv" />
+        {/* <RunOfShow /> */}
       </main>
+              <Footer language="sv" />
     </>
   )
 } 

@@ -73,10 +73,10 @@ const FontAwesomeIcon = ({ type }: { type: string }) => {
 
 export default function RunOfShow() {
   return (
-    <section id="run-of-show" className="relative z-[5] py-20 bg-wedding-sand text-wedding-dark shadow-lg">
+    <section id="run-of-show" className="relative z-[5] py-20 bg-wedding-sand text-wedding-dark shadow-lg force-overflow-hidden">
 
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10 !overflow-x-hidden">
         
         {/* Section Header */}
         <div 

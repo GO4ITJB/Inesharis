@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { saveLanguagePreference } from '@/lib/languageDetection'
+import { SE, BA } from 'country-flag-icons/react/3x2'
 
 export default function LanguageSelector() {
   const pathname = usePathname()
@@ -23,7 +24,7 @@ export default function LanguageSelector() {
         }`}
         title="Svenska"
       >
-        🇸🇪
+        <SE className="w-6 h-4" />
       </Link>
       <Link 
         href="/ba" 
@@ -33,7 +34,7 @@ export default function LanguageSelector() {
         }`}
         title="Bosanski"
       >
-        🇧🇦
+        <BA className="w-6 h-4" />
       </Link>
     </div>
   )
