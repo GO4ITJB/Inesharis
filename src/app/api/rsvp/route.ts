@@ -84,7 +84,7 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
       endDate: ceremonyEnd,
       googleUrl: generateGoogleCalendarUrl(ceremonyTitle, ceremonyDescription, ceremonyLocation, ceremonyStart, ceremonyEnd),
       outlookUrl: generateOutlookUrl(ceremonyTitle, ceremonyDescription, ceremonyLocation, ceremonyStart, ceremonyEnd),
-      appleUrl: `/api/calendar/ceremony?lang=${language}`
+      appleUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://inesharis.se'}/api/calendar/ceremony?lang=${language}`
     })
   }
   
@@ -106,7 +106,7 @@ function generateCalendarButtonsHTML(language: 'sv' | 'ba', attendingCeremony: b
       endDate: receptionEnd,
       googleUrl: generateGoogleCalendarUrl(receptionTitle, receptionDescription, receptionLocation, receptionStart, receptionEnd),
       outlookUrl: generateOutlookUrl(receptionTitle, receptionDescription, receptionLocation, receptionStart, receptionEnd),
-      appleUrl: `/api/calendar/reception?lang=${language}`
+      appleUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://inesharis.se'}/api/calendar/reception?lang=${language}`
     })
   }
   
