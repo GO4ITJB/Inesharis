@@ -342,7 +342,7 @@ export const translations = {
     dressCodeDescription:
       "Poželjno; haljina za dame, elegantne hlače, košulja i sako ili odijelo za muškarce.",
     dressCodeNote:
-      "Ako želite, slobodno dodajte koji detalj u svijetlo roza u sklopu sa svadbenom tema-boji.",
+      "Ako želite, slobodno dodajte koji detalj u svijetlo roza u sklopu sa svadbenoj tema-boji.",
 
     // Wedding Schedule
     schedule: {
