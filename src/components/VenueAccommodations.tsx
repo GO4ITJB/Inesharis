@@ -97,8 +97,7 @@ const weddingVenue: VenueInfo = {
   mapUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2873.885738659789!2d18.43408361578947!3d43.85907197911688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758c8f4c1b1a89f%3A0x5c1a9e8f4b5d6e7f!2sVijecnica!5e0!3m2!1sen!2sus!4v1625097600000!5m2!1sen!2sus",
   directionsUrl: "https://maps.google.com/?q=Vijecnica,Sarajevo",
-  image:
-    "https://lh3.googleusercontent.com/gps-cs-s/AC9h4npjFpKweuDrWMXOALLOJsbLXni6ZEshC5Jv7H4niKzuDOpA5zYGOpSHpS-Uy4UoojFBi6arGDOzij6JVjY09X4APosAZNy03ZL94JJfogbnh4Rw2iSgpm__I0W4IKjU_02Y2KPT=s294-w294-h220-n-k-no",
+  image: "/unnamed.webp",
 };
 
 const receptionVenue: VenueInfo = {
