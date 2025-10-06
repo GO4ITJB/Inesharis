@@ -9,6 +9,10 @@
     {
       "src": "/wp/(.*)",
       "dest": "https://inesharis.se/wp/$1"
+    },
+    {
+      "src": "/inbjudan",
+      "dest": "/inbjudan.html"
     }
   ]
 } 
