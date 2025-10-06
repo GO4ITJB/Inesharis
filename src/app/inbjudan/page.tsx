@@ -1,50 +1,9 @@
+"use client";
+
 export default function InbjudanPage() {
   return (
-    <div className="invitation-container">
-      <div className="invitation">
-        <div className="bevel-container">
-          <div className="content">
-            <div className="ornament">
-              <img 
-                src="/badge.svg" 
-                alt="Decorative ornament" 
-                style={{ 
-                  width: '150px', 
-                  height: 'auto', 
-                  filter: 'brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1) contrast(1)' 
-                }}
-              />
-            </div>
-            
-            <div className="names embossed-text">
-              Ines
-              &
-              Haris
-            </div>
-            
-            <div className="divider"></div>
-            
-            <div className="header embossed-text fancy">
-              "Dobro je kad u životu nekoga voliš, neko te voli."
-            </div>
-            
-            <div className="divider"></div>
-            
-            <div className="venue embossed-text">
-              Kära ni,<br />Det är med glädje och kärlek vi bjuder in er att närvara vid vår vigsel och bröllopsfest.<br />Denna dag markerar början på vårt gemensamma liv och vi skulle bli hedrade att få dela den med er.<br />Vänligen OSA senast 30 april 2026 via <a href="https://inesharis.se" style={{ color: '#c0c0c0', textDecoration: 'underline' }}>inesharis.se</a>
-              <div className="divider"></div>
-              Dragi naši,<br />Sa radošću i ljubavlju pozivamo vas da prisustvujete našem vjenčanju i svadbenom slavlju.<br />Početak našeg zajedničkog života označavamo ovog dana i bila bi nam čast da ga podijelimo upravo s vama.<br />Molimo vas da potvrdite dolazak najkasnije do 30. aprila 2026. putem <a href="https://inesharis.se" style={{ color: '#c0c0c0', textDecoration: 'underline' }}>inesharis.se</a>
-              <div className="divider"></div>
-            </div>
-            
-            <div className="footer embossed-text">
-              25. 07. 2026. <br /> Hotel Hills Sarajevo <br /> Butmirska cesta 18
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
+    <>
+      <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
         
         @font-face {
@@ -260,6 +219,51 @@ export default function InbjudanPage() {
           }
         }
       `}</style>
-    </div>
+      
+      <div className="invitation-container">
+        <div className="invitation">
+          <div className="bevel-container">
+            <div className="content">
+              <div className="ornament">
+                <img 
+                  src="/badge.svg" 
+                  alt="Decorative ornament" 
+                  style={{ 
+                    width: '150px', 
+                    height: 'auto', 
+                    filter: 'brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(1) contrast(1)' 
+                  }}
+                />
+              </div>
+              
+              <div className="names embossed-text">
+                Ines
+                &
+                Haris
+              </div>
+              
+              <div className="divider"></div>
+              
+              <div className="header embossed-text fancy">
+                "Dobro je kad u životu nekoga voliš, neko te voli."
+              </div>
+              
+              <div className="divider"></div>
+              
+              <div className="venue embossed-text">
+                Kära ni,<br />Det är med glädje och kärlek vi bjuder in er att närvara vid vår vigsel och bröllopsfest.<br />Denna dag markerar början på vårt gemensamma liv och vi skulle bli hedrade att få dela den med er.<br />Vänligen OSA senast 30 april 2026 via <a href="https://inesharis.se" style={{ color: '#c0c0c0', textDecoration: 'underline' }}>inesharis.se</a>
+                <div className="divider"></div>
+                Dragi naši,<br />Sa radošću i ljubavlju pozivamo vas da prisustvujete našem vjenčanju i svadbenom slavlju.<br />Početak našeg zajedničkog života označavamo ovog dana i bila bi nam čast da ga podijelimo upravo s vama.<br />Molimo vas da potvrdite dolazak najkasnije do 30. aprila 2026. putem <a href="https://inesharis.se" style={{ color: '#c0c0c0', textDecoration: 'underline' }}>inesharis.se</a>
+                <div className="divider"></div>
+              </div>
+              
+              <div className="footer embossed-text">
+                25. 07. 2026. <br /> Hotel Hills Sarajevo <br /> Butmirska cesta 18
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
