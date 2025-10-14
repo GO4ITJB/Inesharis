@@ -102,6 +102,18 @@ export default function Hero({ language = "sv" }: HeroProps) {
         </div>
       </div>
 
+      {/* Discrete Scroll Down Indicator */}
+      <div className="absolute scroll-indicator-container left-1/2 transform -translate-x-1/2 z-10">
+        <div className="flex flex-col items-center cursor-pointer group" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
+          <div className="scroll-indicator-oval">
+            <div className="scroll-dot-moving"></div>
+          </div>
+          <p className="scroll-text-subtle">
+            {language === 'ba' ? 'skrolujte' : 'skrolla'}
+          </p>
+        </div>
+      </div>
+
       {/* Countdown Timer */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
         <CountdownTimer targetDate={weddingDate} language={language} />

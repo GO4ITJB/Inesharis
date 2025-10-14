@@ -215,6 +215,77 @@
     }
   }
 
+  /* Oval scroll indicator with moving dot */
+  .scroll-indicator-oval {
+    width: 24px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    position: relative;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+
+  .group:hover .scroll-indicator-oval {
+    opacity: 1;
+    border-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+  }
+
+  .scroll-dot-moving {
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: dotMoveDown 2s infinite linear;
+  }
+
+  .scroll-text-subtle {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: lowercase;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .group:hover .scroll-text-subtle {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  @keyframes dotMoveDown {
+    0% {
+      top: 6px;
+      opacity: 0.2;
+    }
+    50% {
+      top: 20px;
+      opacity: 1;
+    }
+    100% {
+      top: 30px;
+      opacity: 0.2;
+    }
+  }
+
+  /* Responsive scroll indicator positioning */
+  @media (max-width: 768px) {
+    .scroll-indicator-container {
+      bottom: 6rem;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .scroll-indicator-container {
+      bottom: 9rem;
+    }
+  }
+
   /* Force overflow-x-hidden to override WordPress CSS */
   .force-overflow-hidden {
     overflow-x: hidden !important;
