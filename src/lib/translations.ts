@@ -143,7 +143,7 @@ export const translations = {
       accommodation: {
         question: "Vart bör jag bo i Sarajevo?",
         answer:
-          "Under bröllopsnatten så rekommenderar vi att ni checkar in på Hotel Hills för optimal komfort, men absolut inget måste. Vill ni att vi bokar ett hotellrum på Hills åt er så får ni 20% rabatt som gäster. Lägg gärna till det när ni osar eller kontakta oss för mer info.\n\nVäljer ni AirBnB som alternativ så sök efter \"Bascarsija\", det är gamla stan och själva kärnan i staden. Där får ni gångavstånd till det mesta.\n\nVi hjälper er mer än gärna med ert boende!",
+          "Vi rekommenderar Hotel Hills för bröllopsnatten. Bekvämt och nära festlokalen! Som vår gäst får ni 20% rabatt på dagspriset. Maila hotellet direkt på info@hotelhills.ba och ange:\nRumstyp\nNamn\nDatum\nAtt ni är gäst på vårt bröllop\n\nDe återkommer med en bokningsbekräftelse. Boka gärna så snart som möjligt!\n\nFöredrar ni Airbnb? Sök efter \"Baščaršija\", det är gamla stan och hjärtat av Sarajevo. Därifrån har ni gångavstånd till det mesta.\n\nHör gärna av er om ni behöver hjälp med boendet. Vi hjälper mer än gärna!",
       },
       transport: {
         question: "Hur tar jag mig runt i Sarajevo?",
@@ -461,7 +461,7 @@ export const translations = {
       accommodation: {
         question: "Gdje da se prenoći u Sarajevu?",
         answer:
-          "Za vjenčanu noć preporučujemo da se prenoći u Hotel Hills za potpunu udobnost, ali nije obavezno. Ako želite da vam mi rezervišemo sobu u Hotel Hills-u, imate 20% popusta kao gosti. Dodajte u prijavi ili kontaktirajte nas.",
+          "Preporučujemo Hotel Hills za veče svadbe. Udobno i blizu lokacije! Kao naš gost imate 20% popusta na dnevnu cijenu. Pošaljite mail direktno hotelu na info@hotelhills.ba i navedite:\nTip sobe\nIme i prezime\nDatum\nDa ste gost na našoj svadbi\n\nHotel će vam poslati potvrdu rezervacije. Rezervišite što prije!\n\nPreferirate Airbnb? Ukucaj te \"Baščaršija\", to je stari grad i srce Sarajeva. Odatle vam je sve na pješačkoj udaljenosti.\n\nJavite nam se ako vam treba pomoć sa smještajem. Rado ćemo pomoći!",
       },
       transport: {
         question: "Kako da se krećem po Sarajevu?",

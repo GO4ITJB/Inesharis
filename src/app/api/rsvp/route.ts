@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { translations } from '@/lib/translations'
 
 // Helper functions for generating calendar URLs
 function generateGoogleCalendarUrl(title: string, description: string, location: string, startDate: Date, endDate: Date): string {
@@ -172,7 +173,6 @@ Number of Guests: ${formData.numberOfGuests} additional guest${formData.numberOf
 Guest Names: ${guestList}
 Attending Ceremony: ${formData.attendingCeremony ? 'Yes' : 'No'}
 Attending Reception: ${formData.attendingReception ? 'Yes' : 'No'}
-Hotel Room Booking: ${formData.wantsHotelRoom === true ? 'Yes - wants booking' : formData.wantsHotelRoom === false ? 'No - will arrange themselves' : 'Not specified'}
 
 === ADDITIONAL DETAILS ===
 ${formData.songRequests?.filter(Boolean).length > 0 
@@ -188,7 +188,15 @@ ${formData.messageToCouple ? `Message to Couple: ${formData.messageToCouple}` : 
 
     // Confirmation email content for the guest (in their language) with calendar buttons
     const calendarButtonsHTML = generateCalendarButtonsHTML(language, formData.attendingCeremony, formData.attendingReception)
-    
+    const accommodationFull = language === 'sv'
+      ? translations.sv.faqQuestions.accommodation.answer
+      : translations.ba.faqQuestions.accommodation.answer
+    const airbnbMarker = language === 'sv' ? 'Föredrar ni Airbnb?' : 'Preferirate Airbnb?'
+    const accommodationText = accommodationFull.includes(airbnbMarker)
+      ? accommodationFull.split(airbnbMarker)[0].trim()
+      : accommodationFull
+    const accommodationTitle = language === 'sv' ? 'Boende' : 'Smještaj'
+
     const confirmationContent = language === 'sv' ? `
 Hej ${formData.name}!
 
@@ -208,13 +216,15 @@ ${formData.numberOfGuests > 0 ? `Gäster: ${guestList}` : ''}
 Närvaro:
 • Vigsel: ${formData.attendingCeremony ? 'Ja' : 'Nej'}
 • Mottagning: ${formData.attendingReception ? 'Ja' : 'Nej'}
-• Hotellrum på Hills: ${formData.wantsHotelRoom === true ? 'Ja - vill att vi bokar' : formData.wantsHotelRoom === false ? 'Nej - ordnar själva' : 'Ej specificerat'}
 
 ${formData.songRequests?.filter(Boolean).length > 0 
   ? `Musikönskemål: ${formData.songRequests.filter(Boolean).join(', ')}` 
   : ''}
 ${formData.dietaryRequirements ? `Kostpreferenser: ${formData.dietaryRequirements}` : ''}
 ${formData.messageToCouple ? `Ditt meddelande: ${formData.messageToCouple}` : ''}
+
+=== ${accommodationTitle.toUpperCase()} ===
+${accommodationText}
 
 Vi ser fram emot att fira med dig!
 
@@ -239,13 +249,15 @@ ${formData.numberOfGuests > 0 ? `Gosti: ${guestList}` : ''}
 Prisustvo:
 • Vjenčanje: ${formData.attendingCeremony ? 'Da' : 'Ne'}
 • Svadba: ${formData.attendingReception ? 'Da' : 'Ne'}
-• Hotelska soba u Hills: ${formData.wantsHotelRoom === true ? 'Da - želimo da rezervišete' : formData.wantsHotelRoom === false ? 'Ne - riješavamo sami' : 'Nije specificirano'}
 
 ${formData.songRequests?.filter(Boolean).length > 0 
   ? `Muzičke želje: ${formData.songRequests.filter(Boolean).join(', ')}` 
   : ''}
 ${formData.dietaryRequirements ? `Dijetetske potrebe: ${formData.dietaryRequirements}` : ''}
 ${formData.messageToCouple ? `Vaša poruka: ${formData.messageToCouple}` : ''}
+
+=== ${accommodationTitle.toUpperCase()} ===
+${accommodationText}
 
 Radujemo se proslavi s vama!
 

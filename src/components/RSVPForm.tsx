@@ -20,9 +20,6 @@ export interface FormData {
   attendingReception: boolean;
   attendingCeremony: boolean;
 
-  // Hotel booking
-  wantsHotelRoom: boolean | undefined;
-
   // Celebration Details
   songRequests: string[];
   dietaryRequirements: string;
@@ -43,7 +40,6 @@ export default function RSVPForm({ language = "sv" }: RSVPFormProps) {
     guestNames: [],
     attendingReception: true,
     attendingCeremony: true,
-    wantsHotelRoom: undefined,
     songRequests: ["", "", ""],
     dietaryRequirements: "",
     messageToCouple: "",
@@ -83,7 +79,6 @@ export default function RSVPForm({ language = "sv" }: RSVPFormProps) {
       guestNames: [],
       attendingReception: true,
       attendingCeremony: true,
-      wantsHotelRoom: undefined,
       songRequests: ["", "", ""],
       dietaryRequirements: "",
       messageToCouple: "",

@@ -12,6 +12,7 @@ const dancingScript = Dancing_Script({
 export const metadata: Metadata = {
   title: 'Ines & Haris - Bröllop',
   description: 'Save the Date - Lördagen, 25 Juli 2026"',
+  robots: { index: false, follow: false },
 }
 
 export default function RootLayout({
