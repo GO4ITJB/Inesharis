@@ -461,7 +461,7 @@ export const translations = {
       accommodation: {
         question: "Gdje da se prenoći u Sarajevu?",
         answer:
-          "Preporučujemo Hotel Hills za veče svadbe. Udobno i blizu lokacije! Kao naš gost ostvarujete 20% popusta na dnevnu cijenu. Pošaljite mail direktno hotelu na info@hotelhills.ba i navedite:\nTip sobe\nIme i prezime\nDatum\nDa ste gost na našoj svadbi\n\nHotel će vam poslati potvrdu rezervacije. Rezervišite što prije!\n\nPreferirate Airbnb? Pretražite \"Baščaršija\", to je stari grad i srce Sarajeva. Odatle vam je sve na pješačkoj udaljenosti.\n\nJavite nam se ako vam treba pomoć sa smještajem. Rado ćemo pomoći!",
+          "Preporučujemo Hotel Hills za veče svadbe. Udobno i blizu lokacije! Kao naš gost imate 20% popusta na dnevnu cijenu. Pošaljite mail direktno hotelu na info@hotelhills.ba i navedite:\nTip sobe\nIme i prezime\nDatum\nDa ste gost na našoj svadbi\n\nHotel će vam poslati potvrdu rezervacije. Rezervišite što prije!\n\nPreferirate Airbnb? Ukucaj te \"Baščaršija\", to je stari grad i srce Sarajeva. Odatle vam je sve na pješačkoj udaljenosti.\n\nJavite nam se ako vam treba pomoć sa smještajem. Rado ćemo pomoći!",
       },
       transport: {
         question: "Kako da se krećem po Sarajevu?",
