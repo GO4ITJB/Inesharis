@@ -188,15 +188,14 @@ ${formData.messageToCouple ? `Message to Couple: ${formData.messageToCouple}` : 
 
     // Confirmation email content for the guest (in their language) with calendar buttons
     const calendarButtonsHTML = generateCalendarButtonsHTML(language, formData.attendingCeremony, formData.attendingReception)
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://inesharis.se'
-    const accommodationText = language === 'sv'
+    const accommodationFull = language === 'sv'
       ? translations.sv.faqQuestions.accommodation.answer
       : translations.ba.faqQuestions.accommodation.answer
+    const airbnbMarker = language === 'sv' ? 'Föredrar ni Airbnb?' : 'Preferirate Airbnb?'
+    const accommodationText = accommodationFull.includes(airbnbMarker)
+      ? accommodationFull.split(airbnbMarker)[0].trim()
+      : accommodationFull
     const accommodationTitle = language === 'sv' ? 'Boende' : 'Smještaj'
-    const clickHereForMoreInfo = language === 'sv'
-      ? translations.sv.clickHereForMoreInfo
-      : translations.ba.clickHereForMoreInfo
-    const moreInfoUrl = `${baseUrl}${language === 'ba' ? '/ba' : ''}#rekommenderade-hotell`
 
     const confirmationContent = language === 'sv' ? `
 Hej ${formData.name}!
@@ -226,8 +225,6 @@ ${formData.messageToCouple ? `Ditt meddelande: ${formData.messageToCouple}` : ''
 
 === ${accommodationTitle.toUpperCase()} ===
 ${accommodationText}
-
-${clickHereForMoreInfo}: ${moreInfoUrl}
 
 Vi ser fram emot att fira med dig!
 
@@ -261,8 +258,6 @@ ${formData.messageToCouple ? `Vaša poruka: ${formData.messageToCouple}` : ''}
 
 === ${accommodationTitle.toUpperCase()} ===
 ${accommodationText}
-
-${clickHereForMoreInfo}: ${moreInfoUrl}
 
 Radujemo se proslavi s vama!
 
