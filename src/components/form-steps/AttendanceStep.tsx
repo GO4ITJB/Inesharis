@@ -121,44 +121,6 @@ export default function AttendanceStep({
           </div>
         )}
 
-        {/* Hotel Booking Question (Conditional) */}
-        {formData.attendingReception && (
-          <div className="animate-fadeIn">
-            <h3 className="text-xl font-medium text-wedding-dark mb-4 text-center">
-              {t.hotelBookingQuestion}
-            </h3>
-            <p className="text-sm text-gray-600 text-center mb-4">
-              {t.hotelDiscountInfo}
-            </p>
-            <div className="flex space-x-4">
-              <button
-                type="button"
-                onClick={() => updateFormData({ wantsHotelRoom: true })}
-                className={`flex-1 py-4 px-6 rounded-lg border transition-all text-center ${
-                  formData.wantsHotelRoom === true
-                    ? "bg-wedding-pink text-white border-wedding-pink shadow-lg transform scale-105"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-wedding-pink hover:bg-wedding-sand/20"
-                }`}
-              >
-                <div className="text-lg font-medium">{t.yesPleaseBook}</div>
-                <div className="text-sm opacity-75">{t.bookDoubleRoom}</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => updateFormData({ wantsHotelRoom: false })}
-                className={`flex-1 py-4 px-6 rounded-lg border transition-all text-center ${
-                  formData.wantsHotelRoom === false
-                    ? "bg-wedding-greige text-white border-wedding-greige shadow-lg transform scale-105"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-wedding-greige hover:bg-wedding-sand/20"
-                }`}
-              >
-                <div className="text-lg font-medium">{t.noThanksHotel}</div>
-                <div className="text-sm opacity-75">{t.arrangeMyself}</div>
-              </button>
-            </div>
-          </div>
-        )}
-
         {/* Thank you message for non-attendees */}
         {!formData.attendingReception && (
           <div className="text-center p-6 bg-wedding-sand/50 rounded-xl border border-wedding-greige/30">

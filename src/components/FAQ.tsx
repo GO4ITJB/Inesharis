@@ -16,6 +16,80 @@ interface FAQProps {
   language?: Language;
 }
 
+const EMAIL = "info@hotelhills.ba";
+const isAccommodationQuestion = (q: string) =>
+  q.includes("Vart bör jag bo") || q.includes("Gdje da se prenoći");
+
+function renderWithEmailLink(text: string) {
+  const parts = text.split(/(info@hotelhills\.ba)/g);
+  return parts.map((part, i) =>
+    part === EMAIL ? (
+      <a
+        key={i}
+        href="mailto:info@hotelhills.ba"
+        className="text-wedding-pink hover:text-wedding-pink/80 underline font-medium transition-all duration-200"
+      >
+        {EMAIL}
+      </a>
+    ) : (
+      part
+    )
+  );
+}
+
+function renderAccommodationAnswer(
+  answer: string,
+  linkText?: string,
+  linkHref?: string
+) {
+  const paragraphs = answer.split("\n\n");
+  return (
+    <>
+      {paragraphs.map((paragraph, i) => {
+        // Lista efter "och ange:" (sv) eller "i navedite:" (bs) – inga bindestreck i texten
+        const sepAnge = " och ange:\n";
+        const sepNavedite = " i navedite:\n";
+        const idxAnge = paragraph.indexOf(sepAnge);
+        const idxNavedite = paragraph.indexOf(sepNavedite);
+        const hasList = idxAnge >= 0 || idxNavedite >= 0;
+        if (hasList) {
+          const sep = idxAnge >= 0 ? sepAnge : sepNavedite;
+          const [intro, listBlock] = paragraph.split(sep);
+          const listItems = (listBlock ?? "")
+            .split("\n")
+            .map((s) => s.trim())
+            .filter(Boolean);
+          return (
+            <div key={i} className={i > 0 ? "mt-4" : ""}>
+              <p>{renderWithEmailLink(intro.trim() + (idxAnge >= 0 ? " och ange:" : " i navedite:"))}</p>
+              <ul className="list-disc pl-6 mt-2 space-y-1">
+                {listItems.map((item, j) => (
+                  <li key={j}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+        return (
+          <p key={i} className={i > 0 ? "mt-4" : ""}>
+            {renderWithEmailLink(paragraph)}
+          </p>
+        );
+      })}
+      {linkText && linkHref && (
+        <p className="mt-4">
+          <a
+            href={linkHref}
+            className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
+          >
+            {linkText}
+          </a>
+        </p>
+      )}
+    </>
+  );
+}
+
 const FAQItem = ({ item }: { item: FAQItem }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,29 +115,16 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
         <div className="pb-8 mt-2">
           <div className="text-wedding-brown/80 leading-relaxed">
             {item.hasClickableLink ? (
-              item.question.includes("Vart bör jag bo") ? (
-                <>
-                  {item.answer.split('\n\n').map((paragraph, index) => (
-                    <div key={index}>
-                      {paragraph}
-                      {index === 0 && (
-                        <>
-                          <br />
-                          <a
-                            href={item.linkHref}
-                            className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
-                          >
-                            {item.linkText}
-                          </a>
-                          <br /><br />
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </>
+              isAccommodationQuestion(item.question) ? (
+                renderAccommodationAnswer(
+                  item.answer,
+                  item.linkText,
+                  item.linkHref
+                )
               ) : (
                 <>
-                  {item.answer}{" "}
+                  <span className="whitespace-pre-line">{item.answer}</span>
+                  {" "}
                   <a
                     href={item.linkHref}
                     className="text-wedding-pink hover:text-wedding-pink/80 underline font-semibold transition-all duration-200"
@@ -74,7 +135,7 @@ const FAQItem = ({ item }: { item: FAQItem }) => {
                 </>
               )
             ) : (
-              item.answer
+              <span className="whitespace-pre-line">{item.answer}</span>
             )}
           </div>
         </div>

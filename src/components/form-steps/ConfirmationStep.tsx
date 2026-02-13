@@ -220,27 +220,6 @@ export default function ConfirmationStep({
                 }
               </span>
             </div>
-            {formData.attendingReception && (
-              <div className="flex flex-col sm:flex-row sm:items-center col-span-1 md:col-span-2">
-                <span className="text-gray-600 mb-1 sm:mb-0">
-                  {language === 'sv' ? 'Hotellrum på Hills:' : 'Hotelska soba u Hills:'}
-                </span>
-                <span className={`sm:ml-2 px-2 py-1 rounded-full text-xs w-fit ${
-                  formData.wantsHotelRoom === true
-                    ? 'bg-blue-100 text-blue-800'
-                    : formData.wantsHotelRoom === false 
-                    ? 'bg-yellow-100 text-yellow-800'
-                    : 'bg-gray-100 text-gray-600'
-                }`}>
-                  {formData.wantsHotelRoom === true
-                    ? (language === 'sv' ? '✓ Ja tack, boka åt oss' : '✓ Da, rezervišite za nas')
-                    : formData.wantsHotelRoom === false
-                    ? (language === 'sv' ? '○ Nej tack, ordnar själva' : '○ Ne hvala, riješavamo sami')
-                    : (language === 'sv' ? '? Ej specificerat' : '? Nije navedeno')
-                  }
-                </span>
-              </div>
-            )}
           </div>
         </div>
 
