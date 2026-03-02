@@ -296,6 +296,34 @@ Ines & Haris 💍
     //   formData.attendingReception
     // )
 
+    // Save to Supabase
+    try {
+      await fetch(`https://vezmwxttomnywakotgwy.supabase.co/rest/v1/rsvp_submissions`, {
+        method: 'POST',
+        headers: {
+          'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY!,
+          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          language: language,
+          number_of_guests: formData.numberOfGuests,
+          guest_names: formData.guestNames.filter((n: string) => n.trim()),
+          attending_ceremony: formData.attendingCeremony,
+          attending_reception: formData.attendingReception,
+          song_requests: formData.songRequests.filter(Boolean),
+          dietary_requirements: formData.dietaryRequirements || null,
+          message_to_couple: formData.messageToCouple || null,
+        }),
+      })
+    } catch (dbError) {
+      // Silent fail — email still goes out as backup
+    }
+
     // Send RSVP notification to couple via Resend
     try {
       const coupleResponse = await fetch('https://api.resend.com/emails', {
